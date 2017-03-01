@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinGame : Powerup {
+public class WinGame : Popup {
     protected short pageCountToWin;
 
 	// Use this for initialization
