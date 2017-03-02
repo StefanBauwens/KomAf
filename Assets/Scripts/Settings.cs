@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Settings : MonoBehaviour {
+public class Settings : Popup {
     protected bool musicOn;
     protected bool soundOn;
 
