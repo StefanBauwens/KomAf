@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Settings : Popup {
-    protected bool musicOn;
-    protected bool soundOn;
+public class Pause : Popup {
 
 	// Use this for initialization
 	void Start () {
