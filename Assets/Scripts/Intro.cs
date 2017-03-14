@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingHindrance : Hindrance {
-    public Vector2 firstPosition;
-    public Vector2 nextPosition;
+public class Intro : Popup {
+
 	// Use this for initialization
 	void Start () {
 		
