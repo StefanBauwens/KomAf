@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Navigator : MonoBehaviour {
 
+    // player in Antwerp map
+
 	// Use this for initialization
 	void Start () {
 		
