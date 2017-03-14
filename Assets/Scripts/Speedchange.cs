@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedChange : Powerup {
-    public float speedModifier;
+public class SpeedChange : Powerup{
 
 	// Use this for initialization
 	void Start () {
