@@ -8,7 +8,7 @@ public class Page : InteractiveItem{
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        winScript.collectedPage = true;
+        winScript.ChangePageSprite();
         Destroy(gameObject);
     }
 

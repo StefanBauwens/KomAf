@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WinGame : Popup {
-    
-	// Use this for initialization
-	void Start () {
+public class WinGame : Popup{
+
+    protected short pageCountToWin;
+    public Sprite pageFound;
+    public Sprite pageNotFound;
+    public Image pageImage;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -16,5 +21,10 @@ public class WinGame : Popup {
         
 	}
 
-    
+
+    public void ChangePageSprite()
+    {
+            pageImage.GetComponent<Image>().sprite = pageFound;
+    }
+
 }
