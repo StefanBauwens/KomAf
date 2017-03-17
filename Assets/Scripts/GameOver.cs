@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class GameOver : Popup {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public bool isDead = false;
+    public GameObject gameOver;
+
+    void GameOverPopup()
+    {
+        if (isDead)
+        {
+            gameOver.SetActive(true);
+        }
+    }
+
 }
