@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e410fa797da8c4ac6ba54ba6a2b4b370
+timeCreated: 1489765907
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Antwerpen Tall
+  fontNames:
+  - Antwerpen Tall
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

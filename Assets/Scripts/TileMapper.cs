@@ -9,14 +9,13 @@ public class TileMapper : MonoBehaviour {
 	public Texture2D Map;
 
 	protected GameObject tempObject;
-	//protected const int SPRITEWIDTH = 16;
 	protected Color RED = new Color (1f, 0, 0);
 	protected Color GREEN = new Color (0, 1f, 0);
 	protected Color[] colorArray;
 
 	// Use this for initialization
 	void Start () {
-		colorArray = Map.GetPixels (); //faster than getpixel
+		colorArray = Map.GetPixels(); //faster than getpixel
 		for (int height = 0; height < Map.height; height++) {
 			for (int width = 0; width < Map.width; width++) {
 				
@@ -29,13 +28,7 @@ public class TileMapper : MonoBehaviour {
 				}
 
 				Instantiate(tempObject, new Vector2(width, height), Quaternion.identity);
-				Debug.Log (colorArray[width+ (height*Map.width)]);
 			}
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }
