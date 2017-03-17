@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 52866f0453a73400bb1b5bea6b77be05
+timeCreated: 1489765907
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Antwerpen SmallCaps
+  fontNames:
+  - Antwerpen SmallCaps
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
