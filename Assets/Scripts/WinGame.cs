@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WinGame : Popup {
-    protected short pageCountToWin;
-
+    
 	// Use this for initialization
 	void Start () {
 		
@@ -13,5 +13,8 @@ public class WinGame : Popup {
 	// Update is called once per frame
 	void Update () {
 		//Check to see if total ammount of A's are collected
+        
 	}
+
+    
 }

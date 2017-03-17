@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Page : InteractiveItem {
+public class Page : InteractiveItem{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public WinGame winScript;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        winScript.collectedPage = true;
+        Destroy(gameObject);
+    }
+
 }
