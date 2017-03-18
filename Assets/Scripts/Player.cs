@@ -43,11 +43,11 @@ public class Player : MonoBehaviour {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundSprite); // detect if player collides with ground
         anim.SetBool("isGrounded", isGrounded);
 
-        if (Input.GetTouch(0).phase == TouchPhase.Began && isGrounded) //(Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && isGrounded) //(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
         }
-        else if (Input.GetTouch(0).phase == TouchPhase.Began && !isGrounded && !doubleJumped)
+        else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !isGrounded && !doubleJumped)
         {
             Jump();
             doubleJumped = true;
