@@ -8,7 +8,7 @@ public class ObstacleCheck : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        if(collision.CompareTag("Obstacle"))
         {
             player.isAgainstWall = true;
             Debug.Log("Is against wall");
