@@ -15,14 +15,14 @@ public class Popup : MonoBehaviour {
 
     public void WinPopup()
     {
-        winObject.SetActive(false);
-        gameOverObject.SetActive(true);
+        Time.timeScale = 0;
+        winObject.SetActive(true);
     }
 
     public void GameOverPopUp()
     {
-        gameOverObject.SetActive(false);
-        winObject.gameObject.SetActive(true);
+        Time.timeScale = 0;
+        gameOverObject.SetActive(true);
     }
     
 

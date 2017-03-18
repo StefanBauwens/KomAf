@@ -43,7 +43,15 @@ public class Player : MonoBehaviour {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundSprite); // detect if player collides with ground
         anim.SetBool("isGrounded", isGrounded);
 
-        CheckJump();
+        if (Input.GetTouch(0).phase == TouchPhase.Began && isGrounded) //(Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            Jump();
+        }
+        else if (Input.GetTouch(0).phase == TouchPhase.Began && !isGrounded && !doubleJumped)
+        {
+            Jump();
+            doubleJumped = true;
+        }
 
         if (isGrounded)
         {
@@ -63,24 +71,11 @@ public class Player : MonoBehaviour {
         rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
     }
 
-    private void CheckJump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded || Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            Jump();
-        }
-        else if (Input.GetKeyDown(KeyCode.Space) && !isGrounded && !doubleJumped)
-        {
-            Jump();
-            doubleJumped = true;
-        }
-    }
 
-    /* don't know how it works
     void OnBecameInvisible()
     {
         popUp.GameOverPopUp();
         Debug.Log("invisible");
     }
-    */
+    
 }
