@@ -8,7 +8,6 @@ public class Player : MonoBehaviour {
     protected float jumpHeight = 5;
     protected short totalACount;
     protected short totalPageCount;
-    protected bool isPaused;
 
     protected Rigidbody2D rb;
     protected Animator anim;
@@ -16,6 +15,7 @@ public class Player : MonoBehaviour {
     public bool isGrounded;
     public bool doubleJumped;
     public bool isAgainstWall;
+    public bool isPaused;
 
     public Transform groundCheck;
     public float groundCheckRadius; 
@@ -64,11 +64,11 @@ public class Player : MonoBehaviour {
 
     void CheckJump()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && isGrounded) //(Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && isGrounded && !isPaused) //(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
         }
-        else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !isGrounded && !doubleJumped)
+        else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !isGrounded && !doubleJumped && !isPaused)
         {
             Jump();
             doubleJumped = true;
