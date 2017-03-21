@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-    private GameObject player;
+    public GameObject player;
     private Player playerScript;
     private Vector2 velocity;
 
@@ -16,7 +16,6 @@ public class CameraController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<Player>();
     }
 

@@ -47,7 +47,6 @@ public class Player : MonoBehaviour {
         CheckIsGrounded();
         CheckJump();
         CheckAgainstObject();
-        Debug.Log("jumpheight: " + jumpHeight);
     }
 
     void Jump()
