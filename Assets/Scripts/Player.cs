@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    protected float moveSpeed = 5;
-    protected float jumpHeight = 5;
+
     protected short totalACount;
     protected short totalPageCount;
 
@@ -13,11 +12,15 @@ public class Player : MonoBehaviour {
     protected Animator anim;
     protected SpriteRenderer spriteR;
 
+    public float jumpHeight = 5;
+    public float moveSpeed = 5;
+
     public bool isGrounded;
     public bool doubleJumped;
     public bool isAgainstObject;
     public bool isPaused;
-    public bool inReverseDirection = false;
+    public bool inReverseDirection;
+    public bool jumpHigher;
 
     public Transform groundCheck;
     public float groundCheckRadius; 
@@ -34,11 +37,6 @@ public class Player : MonoBehaviour {
         anim = gameObject.GetComponent<Animator>();
         spriteR = gameObject.GetComponent<SpriteRenderer>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void FixedUpdate()
     {
@@ -49,7 +47,7 @@ public class Player : MonoBehaviour {
         CheckIsGrounded();
         CheckJump();
         CheckAgainstObject();
-        
+        Debug.Log("jumpheight: " + jumpHeight);
     }
 
     void Jump()
