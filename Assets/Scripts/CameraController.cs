@@ -22,19 +22,29 @@ public class CameraController : MonoBehaviour {
 
     void FixedUpdate()
     {
+        
         float posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x + addToX, ref velocity.x, smoothTimeX);
         float posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y + addToY, ref velocity.y, smoothTimeY);
 
         transform.position = new Vector3(posX, posY, -11);
 
-        if (playerScript.isAgainstWall)
+        if (playerScript.isAgainstObject)
         {
-            addToX += 0.05f;
+            if(playerScript.inReverseDirection)
+            {
+                addToX -= 0.05f;
+            }
+            else
+            {
+                addToX += 0.05f;
+            }
         }
         else
         {
             addToY = Mathf.Lerp(addToY, 0, 0.5f * Time.deltaTime);
             addToX = Mathf.Lerp(addToX, 0, 0.5f * Time.deltaTime);
         }
+        
     }
+
 }

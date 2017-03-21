@@ -10,14 +10,12 @@ public class ObstacleCheck : MonoBehaviour {
     {
         if(collision.CompareTag("Obstacle"))
         {
-            player.isAgainstWall = true;
-            Debug.Log("Is against wall");
+            player.isAgainstObject = true;
         }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        player.isAgainstWall = false;
-        Debug.Log("Not against wall!");
+        player.isAgainstObject = false;
     }
 }

@@ -11,17 +11,19 @@ public class Player : MonoBehaviour {
 
     protected Rigidbody2D rb;
     protected Animator anim;
+    protected SpriteRenderer spriteR;
 
     public bool isGrounded;
     public bool doubleJumped;
-    public bool isAgainstWall;
+    public bool isAgainstObject;
     public bool isPaused;
+    public bool inReverseDirection = false;
 
     public Transform groundCheck;
     public float groundCheckRadius; 
     public LayerMask groundSprite;
 
-    public Popup popUp;
+    public PopupManager popUpM;
 
 
 
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour {
 
         rb = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
+        spriteR = gameObject.GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -39,20 +42,28 @@ public class Player : MonoBehaviour {
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+        ChangeDirection();
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundSprite); // detect if player collides with ground
         anim.SetBool("isGrounded", isGrounded);
 
         CheckIsGrounded();
         CheckJump();
-        CheckAgainstWall();
-
+        CheckAgainstObject();
+        
     }
 
     void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+        if (inReverseDirection)
+        {
+            rb.velocity = new Vector2(-rb.velocity.x, jumpHeight);
+        }
+        else
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+        }  
     }
+
 
     void CheckIsGrounded()
     {
@@ -75,19 +86,32 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void CheckAgainstWall()
+    void CheckAgainstObject()
     {
-        if (isAgainstWall && !isGrounded)
+        if (isAgainstObject && !isGrounded)
         {
             doubleJumped = false;
             rb.velocity = Vector2.up * 2f;
         }
     }
 
+    void ChangeDirection()
+    {
+        if (inReverseDirection)
+        {
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            transform.localScale = new Vector3(-1,1,1); // flip player in reverse direction
+        }
+        else
+        {
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+            transform.localScale = Vector3.one;
+        }
+    }
 
     void OnBecameInvisible()
     {
-        popUp.GameOverPopUp();
+        popUpM.GameOverPopUp();
     }
     
 }

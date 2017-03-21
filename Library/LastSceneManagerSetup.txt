@@ -1,4 +1,4 @@
 sceneSetups:
-- path: D:/Cindy Ho/Documents/MT 2/Bootcamp/Geeko/Assets/Scenes/Main Game.unity
+- path: Assets/Scenes/scene.unity
   isLoaded: 1
   isActive: 1

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndOfLevel : Popup {
+public class EndOfLevel : PopupManager {
     protected byte aCount;
     protected int highscore;
 
