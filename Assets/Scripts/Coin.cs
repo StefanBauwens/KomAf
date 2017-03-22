@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : InteractiveItem {
+public class Coin : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameMaster gmScript;
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        gmScript.score += 1;
+        Destroy(gameObject);
+    }
+
 }

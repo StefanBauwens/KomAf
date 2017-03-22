@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameOver : Popup {
+public class GameOver{
 
 
-    
+    public void GameOverPopup()
+    {
+
+    }
 
 }

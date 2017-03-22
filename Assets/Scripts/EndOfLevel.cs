@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndOfLevel : Popup {
+public class EndOfLevel : PopupManager {
     protected byte aCount;
     protected int highscore;
 
@@ -15,4 +15,9 @@ public class EndOfLevel : Popup {
 	void Update () {
 		
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        WinPopup();
+    }
 }

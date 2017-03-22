@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BeginLevel : Popup {
+public class BeginLevel : PopupManager {
 	// Use this for initialization
 	void Start () {
 		
