@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-
-    protected short totalACount;
-    protected short totalPageCount;
-
     protected Rigidbody2D rb;
     protected Animator anim;
     protected SpriteRenderer spriteR;
