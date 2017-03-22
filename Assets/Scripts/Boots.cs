@@ -14,6 +14,7 @@ public class Boots : Powerup {
 	void Start () {
         renderer = GetComponent<Renderer>();
         collider = GetComponent<Collider2D>();
+		playerScript = GameObject.Find("Player").GetComponent<Player>();
     }
 	
 	// Update is called once per frame

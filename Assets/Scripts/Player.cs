@@ -68,15 +68,17 @@ public class Player : MonoBehaviour {
 
     void CheckJump()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && isGrounded && !isPaused) //(Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            Jump();
-        }
-        else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !isGrounded && !doubleJumped && !isPaused)
-        {
-            Jump();
-            doubleJumped = true;
-        }
+		if (!isPaused) {
+			if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space)) && isGrounded) //(Input.GetKeyDown(KeyCode.Space) && isGrounded)
+			{
+				Jump();
+			}
+			if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space)) && !isGrounded && !doubleJumped)
+			{
+				Jump();
+				doubleJumped = true;
+			}
+		}
     }
 
     void CheckAgainstObject()
