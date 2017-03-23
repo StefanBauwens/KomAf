@@ -25,7 +25,7 @@ public class WinGame :MonoBehaviour{
     public short CountAPoints()
     {
         short ACount = 0;
-        if (gmScript)
+        if (gmScript) // clear error
         {
             if (gmScript.score >= minimumA1)
             {
