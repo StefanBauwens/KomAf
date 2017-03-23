@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour {
 
@@ -10,6 +9,7 @@ public class GameMaster : MonoBehaviour {
     public int score;
     public short totalPageCount;
     public short totalACount;
+    public bool levelCompleted;
 
     public Text scoreText;
     public Text pauseHighScore;
@@ -17,10 +17,14 @@ public class GameMaster : MonoBehaviour {
     public Text winScore;
     public WinGame winScript;
     public Page pageScript;
- 
 
-	// Use this for initialization
-	void Start ()
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+    // Use this for initialization
+    void Start ()
     {
         Time.timeScale = 1;
         highScore = PlayerPrefs.GetInt("highScore", 0);
@@ -49,6 +53,11 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
+    //public void SaveUnlockedLevel()
+    //{
+
+    //}
+
     void UpdateHighScoreText()
     {
         if(highScore > 0)
@@ -56,12 +65,9 @@ public class GameMaster : MonoBehaviour {
             pauseHighScore.text = highScore.ToString();
             gameOverHighscore.text.ToString();
         }
-        
     }
 
     
-    public void RestartLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    
+    
 }

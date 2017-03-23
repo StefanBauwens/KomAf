@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Settings : PopupManager {
+public class Settings : PopupController {
     protected bool musicOn;
     protected bool soundOn;
 

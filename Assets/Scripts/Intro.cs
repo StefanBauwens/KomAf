@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Intro : PopupManager {
+public class Intro : PopupController {
 
 	// Use this for initialization
 	void Start () {

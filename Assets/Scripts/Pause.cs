@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pause : PopupManager {
+public class Pause : PopupController {
 
 	// Use this for initialization
 	void Start () {

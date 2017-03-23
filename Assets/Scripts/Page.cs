@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Page : MonoBehaviour {
 
+    public enum LevelOfPage
+    {
+        MAS, ChinaTown, Kathedraal
+    };
+    public LevelOfPage levelOfPage;
     WinGame winScript;
     GameMaster gmScript;
+    public LevelPoint levelPScript;
     protected bool pageFound;
 
     void Start()
@@ -26,6 +32,7 @@ public class Page : MonoBehaviour {
         if (pageFound)
         {
             gmScript.totalPageCount += 1;
+            levelPScript.PageFoundLevel(levelOfPage);
             pageFound = false;
         }
     }

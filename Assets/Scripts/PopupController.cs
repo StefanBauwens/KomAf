@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopupManager : MonoBehaviour {
+public class PopupController : MonoBehaviour {
 
     public GameObject gameOverObject;
     public GameObject winObject;

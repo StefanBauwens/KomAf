@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
     public float groundCheckRadius; 
     public LayerMask groundSprite;
 
-    public PopupManager popUpM;
+    public PopupController popupC;
 
 
 
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour {
 
     void OnBecameInvisible()
     {
-        popUpM.GameOverPopUp();
+        popupC.GameOverPopUp();
     }
     
 }
