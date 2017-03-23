@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boots : Powerup {
 
-    public Player playerScript;
+    Player playerScript;
     public float newJumpHeight = 8f;
     protected float extraJumpTime = 5f;
     protected Renderer renderer;
@@ -14,7 +14,7 @@ public class Boots : Powerup {
 	void Start () {
         renderer = GetComponent<Renderer>();
         collider = GetComponent<Collider2D>();
-		playerScript = GameObject.Find("Player").GetComponent<Player>();
+		playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 	
 	// Update is called once per frame

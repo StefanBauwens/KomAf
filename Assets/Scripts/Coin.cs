@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour {
 
-    public GameMaster gmScript;
+    GameMaster gmScript;
 
 	void Start()
 	{
-		gmScript = GameObject.Find("GameMaster").GetComponent<GameMaster>();
+        gmScript = GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
 	}
 
     void OnTriggerEnter2D(Collider2D collision)

@@ -36,6 +36,7 @@ public class GameMaster : MonoBehaviour {
     public void SaveScore()
     {
         winScore.text = score.ToString();
+        
         totalACount += winScript.CountAPoints();
         pageScript.UpdatePageCount();
 

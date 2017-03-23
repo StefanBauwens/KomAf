@@ -22,7 +22,7 @@ public class PopupManager : MonoBehaviour {
     {
         Time.timeScale = 0;
         gmScript.SaveScore();
-        if(gameOverObject != null) // clear missing reference error
+        if (gameOverObject) // clear error
         {
             gameOverObject.SetActive(true);
         }

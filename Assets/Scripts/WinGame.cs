@@ -15,27 +15,35 @@ public class WinGame :MonoBehaviour{
     public Image A1Image;
     public Image A2Image;
     public Image A3Image;
-    public GameMaster gmScript;
+    GameMaster gmScript;
 
+    void Start()
+    {
+        gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+    }
 
     public short CountAPoints()
     {
         short ACount = 0;
-        if (gmScript.score >= minimumA1)
+        if (gmScript)
         {
-            ChangeASprite(A1Image);
-            ACount += 1;
+            if (gmScript.score >= minimumA1)
+            {
+                ChangeASprite(A1Image);
+                ACount += 1;
+            }
+            if (gmScript.score >= minimumA2)
+            {
+                ChangeASprite(A2Image);
+                ACount += 1;
+            }
+            if (gmScript.score >= minimumA3)
+            {
+                ChangeASprite(A3Image);
+                ACount += 1;
+            }
         }
-        if (gmScript.score >= minimumA2)
-        {
-            ChangeASprite(A2Image);
-            ACount += 1;
-        }
-        if (gmScript.score >= minimumA3)
-        {
-            ChangeASprite(A3Image);
-            ACount += 1;
-        }
+        
         return ACount;
     }
 

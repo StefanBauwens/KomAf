@@ -6,11 +6,11 @@ public class DirectionChanger : MonoBehaviour {
 
     public enum Direction { Reverse, Normal};
     public Direction currentDirection;
-    public Player playerScript;
+    Player playerScript;
 
 	void Start()
 	{
-		playerScript = GameObject.Find("Player").GetComponent<Player>();
+		playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
 	}
 
     void OnCollisionEnter2D(Collision2D collision)
