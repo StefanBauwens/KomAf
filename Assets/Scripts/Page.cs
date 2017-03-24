@@ -11,8 +11,7 @@ public class Page : MonoBehaviour {
     public LevelOfPage levelOfPage;
     WinGame winScript;
     GameMaster gmScript;
-    public LevelPoint levelPScript;
-    protected bool pageFound;
+    public LevelController levelConScript;
 
     void Start()
     {
@@ -22,19 +21,9 @@ public class Page : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        winScript.ChangePageSprite();
-        pageFound = true;
+        gmScript.UpdatePageCount(levelOfPage.ToString());
         Destroy(gameObject);
     }
 
-    public void UpdatePageCount()
-    {
-        if (pageFound)
-        {
-            gmScript.totalPageCount += 1;
-            levelPScript.PageFoundLevel(levelOfPage);
-            pageFound = false;
-        }
-    }
 
 }

@@ -10,6 +10,7 @@ public class GameMaster : MonoBehaviour {
     public short totalPageCount;
     public short totalACount;
     public bool levelCompleted;
+    public bool playingLevel;
 
     public Text scoreText;
     public Text pauseHighScore;
@@ -17,24 +18,31 @@ public class GameMaster : MonoBehaviour {
     public Text winScore;
     public WinGame winScript;
     public Page pageScript;
+    public LevelController levelConScript;
 
 
-    private void Awake()
+    void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
+        //levelConScript.CheckLevelUnlocked();
+        //GetSavedHighScore();
+        //GetSavedTotalPageCount();
+        //GetSavedTotalACount();
     }
     // Use this for initialization
     void Start ()
     {
         Time.timeScale = 1;
-        highScore = PlayerPrefs.GetInt("highScore", 0);
-        UpdateHighScoreText();
+        //UpdateHighScoreText();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        scoreText.text = score.ToString();
+        if (playingLevel)
+        {
+            scoreText.text = score.ToString();
+        }
 	}
 
     public void SaveScore()
@@ -42,7 +50,6 @@ public class GameMaster : MonoBehaviour {
         winScore.text = score.ToString();
         
         totalACount += winScript.CountAPoints();
-        pageScript.UpdatePageCount();
 
         if(score > highScore)
         {
@@ -53,10 +60,38 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
-    //public void SaveUnlockedLevel()
-    //{
+    public void SavePageCount()
+    {
+        PlayerPrefs.SetInt("totalPageCount", totalPageCount);
+        PlayerPrefs.Save();
+    }
 
-    //}
+    public void SaveACount()
+    {
+        PlayerPrefs.SetInt("totalACount", totalACount);
+        PlayerPrefs.Save();
+    }
+
+    public void SaveUnlockedLevel(LevelPoint.CurrentLevel currentLevel)
+    {
+        PlayerPrefs.SetString(currentLevel.ToString(), "unlocked");
+        PlayerPrefs.Save();
+    }
+
+    public void GetSavedHighScore()
+    {
+        highScore = PlayerPrefs.GetInt("highScore", 0);
+    }
+
+    public void GetSavedTotalPageCount()
+    {
+        totalPageCount = (short)PlayerPrefs.GetInt("totalPageCount", 0);
+    }
+
+    public void GetSavedTotalACount()
+    {
+        totalACount = (short)PlayerPrefs.GetInt("totalACount", 0);
+    }
 
     void UpdateHighScoreText()
     {
@@ -67,7 +102,13 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
-    
-    
-    
+    public void UpdatePageCount(string levelOfPage)
+    {
+        totalPageCount += 1;
+        //levelConScript.PageFoundLevel(levelOfPage);
+    }
+
+
+
+
 }

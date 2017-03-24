@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelPoint : StopPoint {
     public enum CurrentLevel
@@ -16,27 +17,30 @@ public class LevelPoint : StopPoint {
     public NextLevel nextLevel;
     public bool levelUnlocked;
     public bool nextLevelUnlocked;
+    public short levelACount;
+    public int levelScore;
     protected int maxHighscore;
-    LevelController levelConScript;
+    Button levelButton;
+    SceneController sceneConScript;
 
 	// Use this for initialization
 	void Start () {
-        levelConScript = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
 
-	}
-
-    public void PageFoundLevel(Page.LevelOfPage levelOfPage)
-    {
-        if(currentLevel.ToString() == levelOfPage.ToString())
-        {
-            nextLevelUnlocked = true;
-            levelConScript.UnlockNextLevel(nextLevel);
-        }
+        levelButton = GetComponent<Button>(); 
+        levelButton.onClick.AddListener(() => sceneConScript.OpenLocationPopup(gameObject.name));
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
