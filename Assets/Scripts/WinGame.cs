@@ -16,10 +16,17 @@ public class WinGame :MonoBehaviour{
     public Image A2Image;
     public Image A3Image;
     GameMaster gmScript;
+    public Button menuButton;
+    public Button restartButton;
+    SceneController sceneConScript;
 
     void Start()
     {
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
+
+        menuButton.onClick.AddListener(()=> sceneConScript.LoadAntwerpMap());
+        restartButton.onClick.AddListener(()=> sceneConScript.RestartLevel());
     }
 
     public short CountAPoints()

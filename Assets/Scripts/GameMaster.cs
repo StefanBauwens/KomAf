@@ -41,7 +41,7 @@ public class GameMaster : MonoBehaviour {
     {
         if (playingLevel)
         {
-            scoreText.text = score.ToString();
+            //scoreText.text = score.ToString();
         }
 	}
 
@@ -102,11 +102,10 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
-    public void UpdatePageCount(string levelOfPage)
-    {
-        totalPageCount += 1;
-        //levelConScript.PageFoundLevel(levelOfPage);
-    }
+    //public void UpdatePageCount(string levelOfPage)
+    //{
+    //    totalPageCount += 1;
+    //}
 
 
 

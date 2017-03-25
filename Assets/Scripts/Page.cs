@@ -9,19 +9,17 @@ public class Page : MonoBehaviour {
         MAS, ChinaTown, Kathedraal
     };
     public LevelOfPage levelOfPage;
-    WinGame winScript;
     GameMaster gmScript;
     public LevelController levelConScript;
 
     void Start()
     {
-        winScript = GameObject.Find("Canvas").GetComponentInChildren<WinGame>();
         gmScript = GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        gmScript.UpdatePageCount(levelOfPage.ToString());
+        //gmScript.UpdatePageCount(levelOfPage.ToString());
         Destroy(gameObject);
     }
 

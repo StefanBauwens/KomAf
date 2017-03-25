@@ -16,10 +16,8 @@ public class LevelPoint : StopPoint {
     public CurrentLevel currentLevel;
     public NextLevel nextLevel;
     public bool levelUnlocked;
-    public bool nextLevelUnlocked;
     public short levelACount;
     public int levelScore;
-    protected int maxHighscore;
     Button levelButton;
     SceneController sceneConScript;
 
