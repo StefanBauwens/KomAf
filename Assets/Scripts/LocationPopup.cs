@@ -8,7 +8,7 @@ public class LocationPopup : MonoBehaviour {
     public string locationName;
     //public Text infoText;
     public Text locationText;
-    public Text highScoreText;
+    public Text coinsCollectedText;
     Button resumeButton;
     SceneController sceneConScript;
 
@@ -19,9 +19,6 @@ public class LocationPopup : MonoBehaviour {
         resumeButton = GetComponentInChildren<Button>();
         resumeButton.onClick.AddListener(() => sceneConScript.LoadLevelByName(locationName)); // register button event and pass parameter with lambda
     }
-    void Update()
-    {
-        locationText.text = locationName;
-    }
+
 
 }

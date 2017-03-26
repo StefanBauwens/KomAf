@@ -22,13 +22,13 @@ public class Player : MonoBehaviour {
     public float groundCheckRadius; 
     public LayerMask groundSprite;
 
-    public PopupController popupC;
+    public PopupController popupConScript;
 
 
 
     // Use this for initialization
     void Start () {
-
+        Time.timeScale = 1;
         rb = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         spriteR = gameObject.GetComponent<SpriteRenderer>();
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
 
         CheckIsGrounded();
         CheckJump();
-        CheckAgainstObject();
+        CheckAgainstObject(); 
     }
 
     void Jump()
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour {
 
     void OnBecameInvisible()
     {
-        popupC.GameOverPopUp();
+        popupConScript.GameOverPopUp();
     }
     
 }

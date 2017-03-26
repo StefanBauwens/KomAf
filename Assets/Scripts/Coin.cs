@@ -13,7 +13,7 @@ public class Coin : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        gmScript.score += 1;
+        gmScript.coinsCollectedInLevel += 1;
         Destroy(gameObject);
     }
 

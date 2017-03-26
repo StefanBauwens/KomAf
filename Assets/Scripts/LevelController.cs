@@ -9,13 +9,10 @@ public class LevelController : MonoBehaviour {
     private static LevelController instanceRef;
     protected Image[] levelImages;
     public Sprite unlockSprite;
-    public int levelScore;
-    public int levelHighScore;
+
     GameMaster gmScript;
-    public bool playingLevel;
     LevelKeeper levelKeeper;
     public LevelPoint[] levels;
-    public bool finishedLevel;
 
     void Awake()
     {
@@ -36,18 +33,19 @@ public class LevelController : MonoBehaviour {
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
     }
 
-    //public void CheckLevelUnlocked()
-    //{
-    //    for (int i = 1; i <= levels.Length; i++)
-    //    {
-    //        if (PlayerPrefs.GetString(levels[i].currentLevel.ToString(), "locked") == "unlocked")
-    //        {
-    //            levels[i].levelUnlocked = true;
-    //            levels[i].GetComponent<Image>().sprite = unlockSprite;
-    //            levels[i].GetComponent<Button>().interactable = true;
-    //        }
-    //    }
-    //}
+    public void CheckLevelUnlocked()
+    {
+        for (int i = 1; i <= levels.Length; i++)
+        {
+            if (PlayerPrefs.GetString("locked/unlocked" + levels[i].currentLevel.ToString(), "locked") == "unlocked")
+            {
+                Debug.Log("get level from save file that is unlocked: " + levels[i].currentLevel.ToString());
+                levels[i].levelUnlocked = true;
+                levels[i].GetComponent<Image>().sprite = unlockSprite;
+                levels[i].GetComponent<Button>().interactable = true;
+            }
+        }
+    }
 
     public void UnlockNextLevel(LevelPoint.NextLevel nextLevelToUnlock)
     {
@@ -55,10 +53,8 @@ public class LevelController : MonoBehaviour {
         {
             if (nextLevelToUnlock.ToString() == levels[i].currentLevel.ToString())
             {
-                //gmScript.SaveUnlockedLevel(levels[i].currentLevel);
-                
                     levels[i].levelUnlocked = true;
-                
+                    gmScript.SaveUnlockedLevel(levels[i].currentLevel);
                     levels[i].GetComponent<Image>().sprite = unlockSprite;
                     levels[i].GetComponent<Button>().interactable = true;         
             }
@@ -68,10 +64,10 @@ public class LevelController : MonoBehaviour {
     public void GetLevelUnlocker(EndOfLevel.CurrentLevel currentLevel)
     {
         for (int i = 0; i < levels.Length; i++)
-        {
+        { 
             if (currentLevel.ToString() == levels[i].currentLevel.ToString())
             {
-                UnlockNextLevel(levels[i].nextLevel);
+                UnlockNextLevel(levels[i].nextLevel);           
             }
         }
     }
@@ -111,14 +107,5 @@ public class LevelController : MonoBehaviour {
     {
         levelKeeper = GameObject.FindGameObjectWithTag("LevelKeeper").GetComponent<LevelKeeper>();
         levels = levelKeeper.levels;
-    }
-
-    public void SetLevelsAsNull()
-    {
-        for(int i = 0; i < levels.Length; i++)
-        {
-            levels[i] = null;
-        }
-        
     }
 }

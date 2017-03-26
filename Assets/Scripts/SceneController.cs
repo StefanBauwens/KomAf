@@ -30,6 +30,7 @@ public class SceneController : MonoBehaviour {
     void Start()
     {
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        levelConScript = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
     }
 
 
@@ -42,7 +43,6 @@ public class SceneController : MonoBehaviour {
     {
         gmScript.playingLevel = false;
         SceneManager.LoadScene("AntwerpMap"); 
-        //levelController.CheckLevelUnlocked();
     }
 
 
@@ -55,7 +55,11 @@ public class SceneController : MonoBehaviour {
 
     public void OpenLocationPopup(string locationName)
     {
+        Debug.Log("open location popup");
+
         locationPopupScript.locationName = locationName;
+        locationPopupScript.locationText.text = locationName;
+        locationPopupScript.coinsCollectedText.text = gmScript.GetCoinsCollectedInLevel(locationName).ToString();
         SetLocationPopupCanvasVisible(true);      
     }
 
@@ -80,25 +84,18 @@ public class SceneController : MonoBehaviour {
         if (activeScene.name != "AntwerpMap")
         {
             endOfLevel = GameObject.Find("EndOfLevel").GetComponent<EndOfLevel>();
-            levelConScript.SetLevelsAsNull();
+            gmScript.GetGameObjectsFromScene();
+            gmScript.SetCoinsCollectedInLevel();
         }
         else if (activeScene.name == "AntwerpMap")
         { 
-            levelConScript = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
             locationPopupCanvas = GameObject.FindGameObjectWithTag("LocationPopupCanvas").GetComponent<CanvasGroup>();
             locationPopupScript = GameObject.FindGameObjectWithTag("LocationPopup").GetComponent<LocationPopup>();
-
-            endOfLevel = null;
-
-            SetLocationPopupCanvasVisible(false);
-
+            //DEBUG after second level, no level detected!
+            levelConScript.CheckLevelUnlocked();
             levelConScript.SetLevelsFromArray();
-
-            if(levelConScript.finishedLevel)
-            {
-                levelConScript.GetLevelUnlocker(tempLevel);
-                levelConScript.finishedLevel = false;
-            }
+            levelConScript.GetLevelUnlocker(tempLevel); // all level related code only in AntwerpMap!
+         
         }
     }
 

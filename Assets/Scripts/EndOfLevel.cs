@@ -12,19 +12,24 @@ public class EndOfLevel : MonoBehaviour {
     PopupController popupConScript;
     SceneController sceneConScript;
     LevelController levelConScript;
+    GameMaster gmScript;
 
     // Use this for initialization
     void Start () {
         levelConScript = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
         popupConScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
         sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
+        gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
     }
 
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        levelConScript.finishedLevel = true;
         sceneConScript.SendCurrentLevel(currentLevel);
+        
+        gmScript.SaveProgress(currentLevel.ToString());
+        gmScript.UpdateWinCoinText();
         popupConScript.WinPopup();
+
     }
 }

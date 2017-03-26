@@ -29,35 +29,35 @@ public class WinGame :MonoBehaviour{
         restartButton.onClick.AddListener(()=> sceneConScript.RestartLevel());
     }
 
-    public short CountAPoints()
-    {
-        short ACount = 0;
-        if (gmScript) // clear error
-        {
-            if (gmScript.score >= minimumA1)
-            {
-                ChangeASprite(A1Image);
-                ACount += 1;
-            }
-            if (gmScript.score >= minimumA2)
-            {
-                ChangeASprite(A2Image);
-                ACount += 1;
-            }
-            if (gmScript.score >= minimumA3)
-            {
-                ChangeASprite(A3Image);
-                ACount += 1;
-            }
-        }
+    //public short CountAPoints()
+    //{
+    //    short ACount = 0;
+    //    if (gmScript) // clear error
+    //    {
+    //        if (gmScript.coins >= minimumA1)
+    //        {
+    //            ChangeASprite(A1Image);
+    //            ACount += 1;
+    //        }
+    //        if (gmScript.coins >= minimumA2)
+    //        {
+    //            ChangeASprite(A2Image);
+    //            ACount += 1;
+    //        }
+    //        if (gmScript.coins >= minimumA3)
+    //        {
+    //            ChangeASprite(A3Image);
+    //            ACount += 1;
+    //        }
+    //    }
         
-        return ACount;
-    }
+    //    return ACount;
+    //}
 
-    void ChangeASprite(Image AImage)
-    {
-        AImage.GetComponent<Image>().sprite = redAImage;
-    }
+    //void ChangeASprite(Image AImage)
+    //{
+    //    AImage.GetComponent<Image>().sprite = redAImage;
+    //}
 
     public void ChangePageSprite()
     {

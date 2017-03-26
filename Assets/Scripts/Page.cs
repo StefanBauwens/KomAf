@@ -10,7 +10,6 @@ public class Page : MonoBehaviour {
     };
     public LevelOfPage levelOfPage;
     GameMaster gmScript;
-    public LevelController levelConScript;
 
     void Start()
     {
@@ -19,7 +18,7 @@ public class Page : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //gmScript.UpdatePageCount(levelOfPage.ToString());
+        gmScript.UpdatePageCount(levelOfPage.ToString());
         Destroy(gameObject);
     }
 

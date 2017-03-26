@@ -5,52 +5,66 @@ using UnityEngine.UI;
 
 public class PopupController : MonoBehaviour {
 
-    public GameObject gameOverObject;
-    public GameObject winObject;
-    WinGame winScript;
-    public GameObject pauseObject;
+    public Canvas gameOverCanvas;
+    public Canvas winCanvas;
+    private GameMaster gmScript;
+    public Canvas pauseCanvas;
+    private CanvasGroup tempCanvasGroup;
     public Player playerScript;
-    public GameMaster gmScript;
 
     void Start()
     {
-        winScript = winObject.GetComponent<WinGame>();
+        gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
     }
 
     public void WinPopup()
     {
         Time.timeScale = 0;
-        gmScript.SaveScore();
-        winScript.ChangePageSprite();
-        winObject.SetActive(true);
+        gmScript.UpdateWinCoinText();
+        //winScript.ChangePageSprite();
+        SetPopupVisible(winCanvas, true);
     }
 
     public void GameOverPopUp()
     {
         Time.timeScale = 0;
-        gmScript.SaveScore();
-        if (gameOverObject) // clear error
+        if (gameOverCanvas) // clear error
         {
-            gameOverObject.SetActive(true);
+            SetPopupVisible(gameOverCanvas, true);
         }
-        
     }
 
     public void PausePopup()
     {
         playerScript.isPaused = true;
         Time.timeScale = 0;
-        gmScript.SaveScore();
-        pauseObject.SetActive(true);
+        SetPopupVisible(pauseCanvas, true);
     }
 
     public void Resume()
     {
-        pauseObject.SetActive(false);
+        SetPopupVisible(pauseCanvas, false);
         Time.timeScale = 1;
         playerScript.isPaused = false;
     }
 
+    void SetPopupVisible(Canvas popup, bool setVisible)
+    {
+        tempCanvasGroup = popup.GetComponent<CanvasGroup>();
+
+        if (setVisible)
+        { 
+            tempCanvasGroup.alpha = 1;
+            tempCanvasGroup.interactable = true;
+            tempCanvasGroup.blocksRaycasts = true;
+        }
+        else
+        {
+            tempCanvasGroup.alpha = 0;
+            tempCanvasGroup.interactable = false;
+            tempCanvasGroup.blocksRaycasts = false;
+        }
+    }
 
 
 }
