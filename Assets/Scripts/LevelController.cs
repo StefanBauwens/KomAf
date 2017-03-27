@@ -10,8 +10,8 @@ public class LevelController : MonoBehaviour {
     protected Image[] levelImages;
     public Sprite unlockSprite;
 
-    GameMaster gmScript;
-    LevelKeeper levelKeeper;
+    public GameMaster gmScript;
+    private LevelKeeper levelKeeper;
     public LevelPoint[] levels;
 
     void Awake()
@@ -26,23 +26,29 @@ public class LevelController : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        
     }
 
-    void Start()
+
+    void Update()
     {
-        gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            PlayerPrefs.DeleteAll();
+            Debug.Log("deleted playerprefs");
+            Debug.Log("deleted playerprefs");
+        }
     }
 
     public void CheckLevelUnlocked()
     {
-        for (int i = 1; i <= levels.Length; i++)
-        {
-            if (PlayerPrefs.GetString("locked/unlocked" + levels[i].currentLevel.ToString(), "locked") == "unlocked")
+        for (int i = 1; i < levels.Length; i++) // index = 1 --> MAS always unlocked
+        {      
+            if (PlayerPrefs.GetString("locked/unlocked" + levels[i].ToString(), "locked") == "unlocked")
             {
-                Debug.Log("get level from save file that is unlocked: " + levels[i].currentLevel.ToString());
                 levels[i].levelUnlocked = true;
-                levels[i].GetComponent<Image>().sprite = unlockSprite;
-                levels[i].GetComponent<Button>().interactable = true;
+                MakeLevelButtonInteractable(levels[i]);
             }
         }
     }
@@ -53,10 +59,20 @@ public class LevelController : MonoBehaviour {
         {
             if (nextLevelToUnlock.ToString() == levels[i].currentLevel.ToString())
             {
+                if (levels[i].levelUnlocked)
+                {
+                    Debug.Log("Already saved");
+                }
+                else
+                {
                     levels[i].levelUnlocked = true;
-                    gmScript.SaveUnlockedLevel(levels[i].currentLevel);
-                    levels[i].GetComponent<Image>().sprite = unlockSprite;
-                    levels[i].GetComponent<Button>().interactable = true;         
+
+                    if (levels[i].levelUnlocked)
+                    {
+                        MakeLevelButtonInteractable(levels[i]);
+                        gmScript.SaveUnlockedLevel(levels[i]);
+                    }
+                }    
             }
         }
     }
@@ -67,10 +83,24 @@ public class LevelController : MonoBehaviour {
         { 
             if (currentLevel.ToString() == levels[i].currentLevel.ToString())
             {
-                UnlockNextLevel(levels[i].nextLevel);           
+                UnlockNextLevel(levels[i].nextLevel);       
             }
         }
     }
+
+    public void MakeLevelButtonInteractable(LevelPoint level)
+    {
+        level.GetComponent<Image>().sprite = unlockSprite;
+        level.GetComponent<Button>().interactable = true;
+    }
+
+    public void SetLevelsFromArray()
+    {
+        
+        levelKeeper = GameObject.FindGameObjectWithTag("LevelKeeper").GetComponent<LevelKeeper>();
+        levels = levelKeeper.levels;
+    }
+
     //  FUNCTION TO CHECK SCENECHANGE ONLY 1 IN ALL SCRIPTS!!! GODVERDOMME
 
     //void OnEnable()
@@ -102,10 +132,4 @@ public class LevelController : MonoBehaviour {
     //        }        
     //    }     
     //}
-
-    public void SetLevelsFromArray()
-    {
-        levelKeeper = GameObject.FindGameObjectWithTag("LevelKeeper").GetComponent<LevelKeeper>();
-        levels = levelKeeper.levels;
-    }
 }

@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EndOfLevel : MonoBehaviour {
+
     public enum CurrentLevel
     {
         MAS, ChinaTown, Kathedraal
     };
     public CurrentLevel currentLevel;
-    PopupController popupConScript;
-    SceneController sceneConScript;
-    LevelController levelConScript;
-    GameMaster gmScript;
+    private PopupController popupConScript;
+    private SceneController sceneConScript;
+    private LevelController levelConScript;
+    private GameMaster gmScript;
 
     // Use this for initialization
     void Start () {
@@ -22,10 +23,9 @@ public class EndOfLevel : MonoBehaviour {
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
     }
 
-
     void OnTriggerEnter2D(Collider2D collision)
     {
-        sceneConScript.SendCurrentLevel(currentLevel);
+        sceneConScript.SendCurrentLevel(currentLevel, true);
         
         gmScript.SaveProgress(currentLevel.ToString());
         gmScript.UpdateWinCoinText();

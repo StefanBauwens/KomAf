@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class PopupController : MonoBehaviour {
 
-    public Canvas gameOverCanvas;
-    public Canvas winCanvas;
-    private GameMaster gmScript;
-    public Canvas pauseCanvas;
-    private CanvasGroup tempCanvasGroup;
     public Player playerScript;
+    public CanvasGroup gameOverCanvas;
+    public CanvasGroup winCanvas;
+    public CanvasGroup pauseCanvas;
+    private GameMaster gmScript;
+    
 
     void Start()
     {
@@ -21,7 +21,6 @@ public class PopupController : MonoBehaviour {
     {
         Time.timeScale = 0;
         gmScript.UpdateWinCoinText();
-        //winScript.ChangePageSprite();
         SetPopupVisible(winCanvas, true);
     }
 
@@ -48,21 +47,19 @@ public class PopupController : MonoBehaviour {
         playerScript.isPaused = false;
     }
 
-    void SetPopupVisible(Canvas popup, bool setVisible)
+    void SetPopupVisible(CanvasGroup popup, bool setVisible)
     {
-        tempCanvasGroup = popup.GetComponent<CanvasGroup>();
-
         if (setVisible)
         { 
-            tempCanvasGroup.alpha = 1;
-            tempCanvasGroup.interactable = true;
-            tempCanvasGroup.blocksRaycasts = true;
+            popup.alpha = 1;
+            popup.interactable = true;
+            popup.blocksRaycasts = true;
         }
         else
         {
-            tempCanvasGroup.alpha = 0;
-            tempCanvasGroup.interactable = false;
-            tempCanvasGroup.blocksRaycasts = false;
+            popup.alpha = 0;
+            popup.interactable = false;
+            popup.blocksRaycasts = false;
         }
     }
 

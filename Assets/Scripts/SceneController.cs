@@ -6,13 +6,14 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour {
 
     private static SceneController instanceRef;
-    LevelController levelConScript;
+    public LevelController levelConScript;
+    public GameMaster gmScript;
     LocationPopup locationPopupScript;
-    GameMaster gmScript;
     EndOfLevel endOfLevel;
     protected EndOfLevel.CurrentLevel tempLevel;
     CanvasGroup locationPopupCanvas;
     LevelKeeper levelKeeper;
+    private bool tempLevelFinished;
 
     void Awake()
     {
@@ -26,13 +27,6 @@ public class SceneController : MonoBehaviour {
             Destroy(gameObject);
         }    
     }
-
-    void Start()
-    {
-        gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
-        levelConScript = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
-    }
-
 
     public void RestartLevel()
     {
@@ -50,22 +44,20 @@ public class SceneController : MonoBehaviour {
     {
         SetLocationPopupCanvasVisible(false);
         SceneManager.LoadScene(sceneName);
-        gmScript.playingLevel = true;
     }
 
     public void OpenLocationPopup(string locationName)
     {
-        Debug.Log("open location popup");
-
         locationPopupScript.locationName = locationName;
         locationPopupScript.locationText.text = locationName;
         locationPopupScript.coinsCollectedText.text = gmScript.GetCoinsCollectedInLevel(locationName).ToString();
-        SetLocationPopupCanvasVisible(true);      
+        SetLocationPopupCanvasVisible(true);  
     }
 
-    public void SendCurrentLevel(EndOfLevel.CurrentLevel currentLevel)
+    public void SendCurrentLevel(EndOfLevel.CurrentLevel currentLevel, bool levelFinished)
     {
         tempLevel = currentLevel;
+        tempLevelFinished = levelFinished;
     }
 
     void OnEnable()
@@ -88,14 +80,17 @@ public class SceneController : MonoBehaviour {
             gmScript.SetCoinsCollectedInLevel();
         }
         else if (activeScene.name == "AntwerpMap")
-        { 
+        {
             locationPopupCanvas = GameObject.FindGameObjectWithTag("LocationPopupCanvas").GetComponent<CanvasGroup>();
             locationPopupScript = GameObject.FindGameObjectWithTag("LocationPopup").GetComponent<LocationPopup>();
-            //DEBUG after second level, no level detected!
-            levelConScript.CheckLevelUnlocked();
+
             levelConScript.SetLevelsFromArray();
-            levelConScript.GetLevelUnlocker(tempLevel); // all level related code only in AntwerpMap!
-         
+            levelConScript.CheckLevelUnlocked();
+            if (tempLevelFinished)
+            {
+                levelConScript.GetLevelUnlocker(tempLevel); // all level related code only in AntwerpMap!
+                tempLevelFinished = false;
+            }  
         }
     }
 

@@ -9,7 +9,7 @@ public class Page : MonoBehaviour {
         MAS, ChinaTown, Kathedraal
     };
     public LevelOfPage levelOfPage;
-    GameMaster gmScript;
+    private GameMaster gmScript;
 
     void Start()
     {
