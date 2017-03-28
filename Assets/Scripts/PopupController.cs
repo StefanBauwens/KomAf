@@ -5,52 +5,63 @@ using UnityEngine.UI;
 
 public class PopupController : MonoBehaviour {
 
-    public GameObject gameOverObject;
-    public GameObject winObject;
-    WinGame winScript;
-    public GameObject pauseObject;
     public Player playerScript;
-    public GameMaster gmScript;
+    public CanvasGroup gameOverCanvas;
+    public CanvasGroup winCanvas;
+    public CanvasGroup pauseCanvas;
+    private GameMaster gmScript;
+    
 
     void Start()
     {
-        winScript = winObject.GetComponent<WinGame>();
+        gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
     }
 
     public void WinPopup()
     {
         Time.timeScale = 0;
-        gmScript.SaveScore();
-        winScript.ChangePageSprite();
-        winObject.SetActive(true);
+        gmScript.UpdateWinCoinText();
+        SetPopupVisible(winCanvas, true);
     }
 
     public void GameOverPopUp()
     {
         Time.timeScale = 0;
-        gmScript.SaveScore();
-        if (gameOverObject) // clear error
+        if (gameOverCanvas) // clear error
         {
-            gameOverObject.SetActive(true);
+            SetPopupVisible(gameOverCanvas, true);
         }
-        
     }
 
     public void PausePopup()
     {
         playerScript.isPaused = true;
         Time.timeScale = 0;
-        gmScript.SaveScore();
-        pauseObject.SetActive(true);
+        SetPopupVisible(pauseCanvas, true);
     }
 
     public void Resume()
     {
-        pauseObject.SetActive(false);
+        SetPopupVisible(pauseCanvas, false);
         Time.timeScale = 1;
         playerScript.isPaused = false;
     }
 
+    void SetPopupVisible(CanvasGroup popup, bool setVisible)
+    {
+        if (setVisible)
+        { 
+            popup.alpha = 1;
+            popup.interactable = true;
+            popup.blocksRaycasts = true;
+        }
+        else
+        {
+            popup.alpha = 0;
+            popup.interactable = false;
+            popup.blocksRaycasts = false;
+        }
+    }
 
 
 }

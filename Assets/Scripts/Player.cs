@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
     protected Animator anim;
     protected SpriteRenderer spriteR;
 
+    private GameMaster gmScript;
+
     public float jumpHeight = 5;
     public float moveSpeed = 5;
 
@@ -22,16 +24,15 @@ public class Player : MonoBehaviour {
     public float groundCheckRadius; 
     public LayerMask groundSprite;
 
-    public PopupController popupC;
-
-
+    public PopupController popupConScript;
 
     // Use this for initialization
     void Start () {
-
+        Time.timeScale = 1;
         rb = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         spriteR = gameObject.GetComponent<SpriteRenderer>();
+        gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
 	}
 
     void FixedUpdate()
@@ -42,7 +43,7 @@ public class Player : MonoBehaviour {
 
         CheckIsGrounded();
         CheckJump();
-        CheckAgainstObject();
+        CheckAgainstObject(); 
     }
 
     void Jump()
@@ -106,7 +107,6 @@ public class Player : MonoBehaviour {
 
     void OnBecameInvisible()
     {
-        popupC.GameOverPopUp();
+        popupConScript.GameOverPopUp();
     }
-    
 }

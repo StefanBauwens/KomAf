@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BeginLevel : MonoBehaviour {
+public class BeginOfLevel : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		

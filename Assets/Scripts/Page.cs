@@ -9,13 +9,10 @@ public class Page : MonoBehaviour {
         MAS, ChinaTown, Kathedraal
     };
     public LevelOfPage levelOfPage;
-    WinGame winScript;
-    GameMaster gmScript;
-    public LevelController levelConScript;
+    private GameMaster gmScript;
 
     void Start()
     {
-        winScript = GameObject.Find("Canvas").GetComponentInChildren<WinGame>();
         gmScript = GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
     }
 

@@ -2,38 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour {
 
-    protected int highScore;
-    public int score;
+    private static GameMaster instanceRef;
+    public int coinsCollectedInLevel;
     public short totalPageCount;
-    public short totalACount;
-    public bool levelCompleted;
     public bool playingLevel;
-
-    public Text scoreText;
-    public Text pauseHighScore;
-    public Text gameOverHighscore;
-    public Text winScore;
-    public WinGame winScript;
-    public Page pageScript;
+    protected string tempLevel;
+    private Text coinText;
+    public Text winCoinText;
+    WinGame winScript;
+    Page pageScript;
     public LevelController levelConScript;
-
+    
 
     void Awake()
     {
-        //DontDestroyOnLoad(gameObject);
-        //levelConScript.CheckLevelUnlocked();
-        //GetSavedHighScore();
-        //GetSavedTotalPageCount();
-        //GetSavedTotalACount();
+        if(instanceRef == null)
+        {
+            instanceRef = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+
     // Use this for initialization
     void Start ()
     {
         Time.timeScale = 1;
-        //UpdateHighScoreText();
 	}
 	
 	// Update is called once per frame
@@ -41,71 +42,76 @@ public class GameMaster : MonoBehaviour {
     {
         if (playingLevel)
         {
-            scoreText.text = score.ToString();
+            coinText.text = coinsCollectedInLevel.ToString();
         }
-	}
+    }
 
-    public void SaveScore()
+    public void UpdateWinCoinText()
     {
-        winScore.text = score.ToString();
-        
-        totalACount += winScript.CountAPoints();
+        winCoinText.text = coinsCollectedInLevel.ToString();
+    }
 
-        if(score > highScore)
-        {
-            PlayerPrefs.SetInt("highScore", score);
-            PlayerPrefs.Save();
-            highScore = score;
-            UpdateHighScoreText();
-        }
+    public void SaveCoins(string level)
+    {
+        PlayerPrefs.SetInt("coinsCollectedInLevel"+ level, coinsCollectedInLevel);
     }
 
     public void SavePageCount()
     {
         PlayerPrefs.SetInt("totalPageCount", totalPageCount);
-        PlayerPrefs.Save();
     }
 
-    public void SaveACount()
+    public void SaveUnlockedLevel(LevelPoint level)
     {
-        PlayerPrefs.SetInt("totalACount", totalACount);
-        PlayerPrefs.Save();
-    }
-
-    public void SaveUnlockedLevel(LevelPoint.CurrentLevel currentLevel)
-    {
-        PlayerPrefs.SetString(currentLevel.ToString(), "unlocked");
-        PlayerPrefs.Save();
-    }
-
-    public void GetSavedHighScore()
-    {
-        highScore = PlayerPrefs.GetInt("highScore", 0);
-    }
-
-    public void GetSavedTotalPageCount()
-    {
-        totalPageCount = (short)PlayerPrefs.GetInt("totalPageCount", 0);
-    }
-
-    public void GetSavedTotalACount()
-    {
-        totalACount = (short)PlayerPrefs.GetInt("totalACount", 0);
-    }
-
-    void UpdateHighScoreText()
-    {
-        if(highScore > 0)
-        {
-            pauseHighScore.text = highScore.ToString();
-            gameOverHighscore.text.ToString();
+        for(int i = 0; i < levelConScript.levels.Length; i++)
+        { 
+            if (levelConScript.levels[i].ToString() == level.ToString())
+            {
+                PlayerPrefs.SetString("locked/unlocked" + levelConScript.levels[i].ToString(), "unlocked");
+                PlayerPrefs.Save();
+                Debug.Log("unlock levels opgeslagen: " + levelConScript.levels[i].ToString());
+            }
         }
     }
+
+    public int GetCoinsCollectedInLevel(string level)
+    {
+        return PlayerPrefs.GetInt("coinsCollectedInLevel" + level, 0);
+    }
+
+    public void SetCoinsCollectedInLevel()
+    {
+        coinsCollectedInLevel = GetCoinsCollectedInLevel(SceneManager.GetActiveScene().name);
+    }
+
 
     public void UpdatePageCount(string levelOfPage)
     {
         totalPageCount += 1;
-        //levelConScript.PageFoundLevel(levelOfPage);
+    }
+
+    public void GetGameObjectsFromScene()
+    {
+        coinText = GameObject.Find("Canvas/CoinUI/CoinText").GetComponent<Text>();
+        winCoinText = GameObject.Find("Canvas/WinCanvas/WinPopup/winCoinText").GetComponent<Text>();
+        if (GameObject.Find("Page") != null)
+        {
+            pageScript = GameObject.Find("Page").GetComponent<Page>();
+        }
+        else
+        {
+            pageScript = null;
+        }
+        playingLevel = true;
+    }
+
+
+    public void SaveProgress(string currentLevel)
+    {
+        tempLevel = currentLevel;
+        SaveCoins(tempLevel);
+        SavePageCount();
+        PlayerPrefs.Save();
     }
 
 

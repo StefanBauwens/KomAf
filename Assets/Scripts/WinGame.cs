@@ -16,41 +16,48 @@ public class WinGame :MonoBehaviour{
     public Image A2Image;
     public Image A3Image;
     GameMaster gmScript;
+    public Button menuButton;
+    public Button restartButton;
+    SceneController sceneConScript;
 
     void Start()
     {
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
+
+        menuButton.onClick.AddListener(()=> sceneConScript.LoadAntwerpMap());
+        restartButton.onClick.AddListener(()=> sceneConScript.RestartLevel());
     }
 
-    public short CountAPoints()
-    {
-        short ACount = 0;
-        if (gmScript) // clear error
-        {
-            if (gmScript.score >= minimumA1)
-            {
-                ChangeASprite(A1Image);
-                ACount += 1;
-            }
-            if (gmScript.score >= minimumA2)
-            {
-                ChangeASprite(A2Image);
-                ACount += 1;
-            }
-            if (gmScript.score >= minimumA3)
-            {
-                ChangeASprite(A3Image);
-                ACount += 1;
-            }
-        }
+    //public short CountAPoints()
+    //{
+    //    short ACount = 0;
+    //    if (gmScript) // clear error
+    //    {
+    //        if (gmScript.coins >= minimumA1)
+    //        {
+    //            ChangeASprite(A1Image);
+    //            ACount += 1;
+    //        }
+    //        if (gmScript.coins >= minimumA2)
+    //        {
+    //            ChangeASprite(A2Image);
+    //            ACount += 1;
+    //        }
+    //        if (gmScript.coins >= minimumA3)
+    //        {
+    //            ChangeASprite(A3Image);
+    //            ACount += 1;
+    //        }
+    //    }
         
-        return ACount;
-    }
+    //    return ACount;
+    //}
 
-    void ChangeASprite(Image AImage)
-    {
-        AImage.GetComponent<Image>().sprite = redAImage;
-    }
+    //void ChangeASprite(Image AImage)
+    //{
+    //    AImage.GetComponent<Image>().sprite = redAImage;
+    //}
 
     public void ChangePageSprite()
     {

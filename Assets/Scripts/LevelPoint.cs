@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LevelPoint : StopPoint {
+
     public enum CurrentLevel
     {
         MAS, ChinaTown, Kathedraal
@@ -16,12 +17,8 @@ public class LevelPoint : StopPoint {
     public CurrentLevel currentLevel;
     public NextLevel nextLevel;
     public bool levelUnlocked;
-    public bool nextLevelUnlocked;
-    public short levelACount;
-    public int levelScore;
-    protected int maxHighscore;
-    Button levelButton;
-    SceneController sceneConScript;
+    private Button levelButton;
+    private SceneController sceneConScript;
 
 	// Use this for initialization
 	void Start () {
