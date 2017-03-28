@@ -37,6 +37,7 @@ public class Navigator : MonoBehaviour {
 	protected navigatorDirection lastLastDirection;
 
 	protected int counter;
+	protected int timeToLive;
 
 	public navigatorDirection[] directionsOfPath;
 
@@ -88,8 +89,8 @@ public class Navigator : MonoBehaviour {
 					//
 
 					//MAKE IT CHECK THAT NONE OF THOSE POSITIONS ALREADY HAVE BEEN  WALKED ON, IF SO REMOVE EVERYTHING TILL POINT
-
-					while (new Vector3(xx, yy, this.gameObject.transform.position.z) != targetLevel) {
+					timeToLive = 500;
+					while (new Vector3(xx, yy, this.gameObject.transform.position.z) != targetLevel && timeToLive>0) {
 						directionsToGo.Clear ();
 						if (colorArray [xx + 1 + (yy * worldMap.Map.width)] == roadColor) {
 							if (targetLevel.x > xx) { //add more chance if targetlevel is in this direction
@@ -154,10 +155,13 @@ public class Navigator : MonoBehaviour {
 							}
 							break;
 						}
+						timeToLive--;
+					}
+					if (timeToLive==0) {
+						Debug.Log ("Timetolive up!");
+						path.Clear ();
 					}
 					Debug.Log ("Target reached!");
-					//Debug.Log (path.To)
-					//List<navigatorDirection> tempList = new List<navigatorDirection>();
 					for (int i = 0; i < (path.Count)&&path.Count>1;i++) {
 						if (i==0) {
 							i = 1;
@@ -168,7 +172,6 @@ public class Navigator : MonoBehaviour {
 							path.RemoveAt (i - 1);
 							path.RemoveAt (i - 1);
 							i -= 2;
-							//i++;
 						}
 					}
 						
