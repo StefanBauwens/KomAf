@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/LevelMapper.unity
+- path: Assets/Scenes/AntwerpMap.unity
   isLoaded: 1
   isActive: 1

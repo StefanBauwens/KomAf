@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : InteractiveItem {
+public class Coin : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+    GameMaster gmScript;
+
+	void Start()
+	{
+        gmScript = GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        gmScript.coinsCollectedInLevel += 1;
+        Destroy(gameObject);
+    }
+
 }

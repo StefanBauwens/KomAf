@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractiveItem : MonoBehaviour {
-    public string itemName;
-    public Sprite spriteIcon;
+    //public string itemName;
+    //public Sprite spriteIcon;
 
 	// Use this for initialization
 	void Start () {

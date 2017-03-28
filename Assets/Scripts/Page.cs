@@ -2,15 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Page : InteractiveItem {
+public class Page : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public enum LevelOfPage
+    {
+        MAS, ChinaTown, Kathedraal
+    };
+    public LevelOfPage levelOfPage;
+    private GameMaster gmScript;
+
+    void Start()
+    {
+        gmScript = GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        gmScript.UpdatePageCount(levelOfPage.ToString());
+        Destroy(gameObject);
+    }
+
+
 }
