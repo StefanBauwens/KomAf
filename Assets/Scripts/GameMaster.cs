@@ -16,7 +16,10 @@ public class GameMaster : MonoBehaviour {
     WinGame winScript;
     Page pageScript;
     public LevelController levelConScript;
-    
+    public static int totalCoins;
+    TileMapper tileScript;
+    protected Transform[] coinPositions;
+    protected int coinPositionIndex;
 
     void Awake()
     {
@@ -56,6 +59,11 @@ public class GameMaster : MonoBehaviour {
         PlayerPrefs.SetInt("coinsCollectedInLevel"+ level, coinsCollectedInLevel);
     }
 
+    public void SaveTotalCoins()
+    {
+        PlayerPrefs.SetInt("totalCoins", totalCoins);
+    }
+
     public void SavePageCount()
     {
         PlayerPrefs.SetInt("totalPageCount", totalPageCount);
@@ -70,6 +78,18 @@ public class GameMaster : MonoBehaviour {
                 PlayerPrefs.SetString("locked/unlocked" + levelConScript.levels[i].ToString(), "unlocked");
                 PlayerPrefs.Save();
                 Debug.Log("unlock levels opgeslagen: " + levelConScript.levels[i].ToString());
+            }
+        }
+    }
+
+    public void SaveCoinPositions()
+    {
+        coinPositionIndex = 0;
+        for(int i = 0; i > tileScript.coinArray.Length; i++)
+        {
+            if(tileScript.coinArray[i] != null)
+            {
+                coinPositions[coinPositionIndex] = tileScript.coinArray[i].gameObject.transform;
             }
         }
     }
@@ -94,6 +114,7 @@ public class GameMaster : MonoBehaviour {
     {
         coinText = GameObject.Find("Canvas/CoinUI/CoinText").GetComponent<Text>();
         winCoinText = GameObject.Find("Canvas/WinCanvas/WinPopup/winCoinText").GetComponent<Text>();
+        tileScript = GameObject.FindGameObjectWithTag("MapDrawer").GetComponent<TileMapper>();
         if (GameObject.Find("Page") != null)
         {
             pageScript = GameObject.Find("Page").GetComponent<Page>();
@@ -110,6 +131,7 @@ public class GameMaster : MonoBehaviour {
     {
         tempLevel = currentLevel;
         SaveCoins(tempLevel);
+        SaveTotalCoins();
         SavePageCount();
         PlayerPrefs.Save();
     }

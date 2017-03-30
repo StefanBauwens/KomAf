@@ -14,6 +14,7 @@ public class Coin : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collision)
     {
         gmScript.coinsCollectedInLevel += 1;
+        GameMaster.totalCoins += 1;
         Destroy(gameObject);
     }
 

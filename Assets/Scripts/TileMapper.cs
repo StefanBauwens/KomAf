@@ -6,13 +6,16 @@ public class TileMapper : MonoBehaviour {
 	public GameObject[] gameObjects;
 	public string[] hexColours;
 	public Texture2D Map;
+    public GameObject[] coinArray;
 
-	protected Color[] realColours;
+    protected Color[] realColours;
 	protected GameObject tempObject;
-	protected Color[] colorArray;
+	protected Color[] colorArray; 
+    protected int coinIndex;
 
 	// Use this for initialization
 	void Start () {
+        coinIndex = 0;
 		realColours = new Color[hexColours.Length];
 		for (int i = 0; i < hexColours.Length; i++) {
 			ColorUtility.TryParseHtmlString ("#"+hexColours[i], out realColours[i]); //convert hex to colour
@@ -32,6 +35,11 @@ public class TileMapper : MonoBehaviour {
 
 				if (tempObject != null) {
 					Instantiate (tempObject, new Vector2 (width, height), Quaternion.identity);
+                    if(tempObject.name == "coin")
+                    {
+                        coinArray[coinIndex] = tempObject;
+                        coinIndex++;
+                    }
 				} else {
 					if (colorArray [width + (height * Map.width)] != new Color(1f,1f,1f)) {
 						Debug.Log (colorArray [width + (height * Map.width)]);

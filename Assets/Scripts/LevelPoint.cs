@@ -17,6 +17,7 @@ public class LevelPoint : StopPoint {
     public CurrentLevel currentLevel;
     public NextLevel nextLevel;
     public bool levelUnlocked;
+    public int maxCoins;
     private Button levelButton;
     private SceneController sceneConScript;
 
@@ -25,8 +26,11 @@ public class LevelPoint : StopPoint {
         sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
 
         levelButton = GetComponent<Button>(); 
-        levelButton.onClick.AddListener(() => sceneConScript.OpenLocationPopup(gameObject.name));
+        levelButton.onClick.AddListener(() => sceneConScript.OpenLocationPopup(gameObject.name));// extra parameter toevoegen maxCoins
     }
+    //bij scenecontroller
+    // --> openlocationpopup
+    // locationPopupScript.maxCoins.text = maxCoins van parameter
 
 
 

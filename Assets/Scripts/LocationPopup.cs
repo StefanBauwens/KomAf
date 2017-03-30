@@ -9,6 +9,7 @@ public class LocationPopup : MonoBehaviour {
     //public Text infoText;
     public Text locationText;
     public Text coinsCollectedText;
+    public Text maxCoins;
     private Button resumeButton;
     private SceneController sceneConScript;
 
