@@ -17,7 +17,7 @@ public class Navigator : MonoBehaviour {
 
 	public TileMapper worldMap;
 
-	public int x, y, xx, yy;// prevxx, prevyy;
+	protected int x, y, xx, yy;// prevxx, prevyy;
 	public navigatorDirection direction;
 	public bool isMoving;
 	protected Color[] colorArray;
@@ -32,10 +32,8 @@ public class Navigator : MonoBehaviour {
 	protected List<navigatorDirection> directionsToGo;
 	protected List<navigatorDirection> path;
 	protected List<Vector3> pathLocations;
-	//protected List<List<navigatorDirection>> pathsLeftToTry;
 
 	protected navigatorDirection lastDirection;
-	//protected navigatorDirection lastLastDirection;
 
 	protected int counter;
 	protected int timeToLive;
@@ -48,13 +46,9 @@ public class Navigator : MonoBehaviour {
 		directionsToGo = new List<navigatorDirection> ();
 		path		   = new List<navigatorDirection> ();
 		pathLocations  = new List<Vector3> ();
-		//pathsLeftToTry = new List<List<navigatorDirection>> ();
 
 		lastDirection     = navigatorDirection.idle;
-		//lastLastDirection = navigatorDirection.idle;
-
 		counter = 0;
-
 		step = 0.5f; //speed
 
 		colorArray = worldMap.Map.GetPixels ();
@@ -75,9 +69,6 @@ public class Navigator : MonoBehaviour {
 			Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
 			if (hit != null && hit.collider != null && direction==navigatorDirection.idle && path.Count==0) {
-				//Debug.Log ("x: "+hit.collider.transform.position.x + " y:"+hit.collider.transform.position.y);
-
-
 				if (colorArray [(int)hit.collider.transform.position.x + ((int)hit.collider.transform.position.y * worldMap.Map.width)] != grassColor) {
 					targetLevel = new Vector3 (hit.collider.transform.position.x, hit.collider.transform.position.y, this.gameObject.transform.position.z);
 
@@ -87,12 +78,8 @@ public class Navigator : MonoBehaviour {
 					pathLocations.Clear ();
 					pathLocations.Add (new Vector3 (xx, yy, this.gameObject.transform.position.z));
 					path.Add (navigatorDirection.idle);
-					//
-					// ADD A WHILE HERE TO KEEP FINDING A PATH TILL YOU REACH TARGETLEVEL. ALSO MAKE SURE THAT WHEN A RANDOM POSITION
-					// IS CHOSEN THERE IS MORE CHANCE IN THE DIRECTION OF THE TARGET.(UNLESS THAT WAY IS BLOCKED OFCOURSE)
-					// JUST USE YOUR BRAIN OK 
-					// THEN LATER ON REMOVE 'OPPOSITES' OUT OF THE LIST SUCH AS LEFT_RIGHT DOWN_UP
-					//
+
+					//CLEAN UP CODE LATER
 
 					//MAKE IT CHECK THAT NONE OF THOSE POSITIONS ALREADY HAVE BEEN  WALKED ON, IF SO REMOVE EVERYTHING TILL POINT
 					timeToLive = 1000;
@@ -171,20 +158,23 @@ public class Navigator : MonoBehaviour {
 						pathLocations.Clear ();
 					}
 						
-					//The following removes the navigator from going back and forth: Is no longer neccesary I THINK with the code under it
+					//The following removes the navigator from going back and forth: Is no longer neccesary with the code under it, but still fancy
 
 					/*for (int i = 0; i < (path.Count)&&path.Count>1;i++) {
 						if (i==0) {
 							i = 1;
 						}
-						Debug.Log (i);
-						Debug.Log (path.Count);
 						if (path [i] == (navigatorDirection)(((int)path [i - 1] + 2) % 4)) {
 							path.RemoveAt (i - 1);
 							path.RemoveAt (i - 1);
 							i -= 2;
 						}
 					}*/
+
+
+					//The following checks the list of calculated positions and sees if the same position is found twice or more in the list
+					//If so, this means that the player will somewhere be going in circles. So we eliminate all the positions betweeen these
+					//duplicates so that we get a more optimised route.
 
 					List<Vector3> tempList 			  = new List<Vector3> ();
 					List<navigatorDirection> tempPath = new List<navigatorDirection> ();
@@ -203,7 +193,7 @@ public class Navigator : MonoBehaviour {
 					path = tempPath;
 					locationsPath = tempList.ToArray ();
 						
-					directionsOfPath = path.ToArray();
+					directionsOfPath = path.ToArray(); //this shows the calculated route in the inspector and is more for debugging purposes
 
 					counter = 0;
 				}
@@ -229,8 +219,8 @@ public class Navigator : MonoBehaviour {
 			}
 		}
 
+		//This checks if a path has been calculated and will move you step by step(counter goes up each time till the path has been completed)
 		if (path.Count>0 && direction==navigatorDirection.idle) {
-			//Debug.Log ("changing");
 			direction = path [counter];
 			counter++;
 			if (path.Count==counter) {
@@ -238,96 +228,93 @@ public class Navigator : MonoBehaviour {
 				pathLocations.Clear ();
 			}
 		}
-
-
-
-		//if (isMoving) {
-			switch (direction) {
-			case navigatorDirection.up:
-				if (isMoving) {
-					this.gameObject.transform.position = Vector3.Lerp (this.gameObject.transform.position, targetPosition, step/Vector3.Distance(this.gameObject.transform.position, targetPosition));
-					if (this.gameObject.transform.position == targetPosition) {
-						isMoving = false;
-						y++;
-						if (colorArray [x + (y * worldMap.Map.width)] !=roadColor) {
-							direction = navigatorDirection.idle;
-						}
-					}
-				}
-
-				if (!isMoving) {
-					if (colorArray [x + ((y + 1) * worldMap.Map.width)] != grassColor && direction != navigatorDirection.idle) { //HARDCODED
-						targetPosition = new Vector3 (this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1, this.gameObject.transform.position.z);
-						isMoving = true;
-					} else {
+			
+		switch (direction) {
+		case navigatorDirection.up:
+			if (isMoving) {
+				this.gameObject.transform.position = Vector3.Lerp (this.gameObject.transform.position, targetPosition, step/Vector3.Distance(this.gameObject.transform.position, targetPosition));
+				if (this.gameObject.transform.position == targetPosition) {
+					isMoving = false;
+					y++;
+					if (colorArray [x + (y * worldMap.Map.width)] !=roadColor) {
 						direction = navigatorDirection.idle;
 					}
 				}
-				break;
-			case navigatorDirection.right:
-				if (isMoving) {
-					this.gameObject.transform.position = Vector3.Lerp (this.gameObject.transform.position, targetPosition, step/Vector3.Distance(this.gameObject.transform.position, targetPosition));
-					if (this.gameObject.transform.position == targetPosition) {
-						isMoving = false;
-						x++;
-						if (colorArray [x + (y * worldMap.Map.width)] !=roadColor) {
-							direction = navigatorDirection.idle;
-						}
-					}
-				}
-
-				if (!isMoving) {
-					if (colorArray [x + 1 + (y * worldMap.Map.width)] != grassColor && direction!=navigatorDirection.idle) { //HARDCODED
-						targetPosition = new Vector3 (this.gameObject.transform.position.x+1, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
-						isMoving = true;
-					} else {
-						direction = navigatorDirection.idle;
-					}
-				}
-				break;
-			case navigatorDirection.down:
-				if (isMoving) {
-					this.gameObject.transform.position = Vector3.Lerp (this.gameObject.transform.position, targetPosition, step/Vector3.Distance(this.gameObject.transform.position, targetPosition));
-					if (this.gameObject.transform.position == targetPosition) {
-						isMoving = false;
-						y--;
-						if (colorArray [x + (y * worldMap.Map.width)] !=roadColor) {
-							direction = navigatorDirection.idle;
-						}
-					}
-				}
-
-				if (!isMoving) {
-					if (colorArray [x + ((y-1) * worldMap.Map.width)] !=grassColor && direction!=navigatorDirection.idle) { //HARDCODED
-						targetPosition = new Vector3 (this.gameObject.transform.position.x, this.gameObject.transform.position.y - 1, this.gameObject.transform.position.z);
-						isMoving = true;
-					} else {
-						direction = navigatorDirection.idle;
-					}
-				}
-				break;
-			case navigatorDirection.left:
-				if (isMoving) {
-					this.gameObject.transform.position = Vector3.Lerp (this.gameObject.transform.position, targetPosition, step/Vector3.Distance(this.gameObject.transform.position, targetPosition));
-					if (this.gameObject.transform.position == targetPosition) {
-						isMoving = false;
-						x--;
-						if (colorArray [x + (y * worldMap.Map.width)] !=roadColor) {
-							direction = navigatorDirection.idle;
-						}
-					}
-				}
-
-				if (!isMoving) {
-					if (colorArray [x -1 + (y * worldMap.Map.width)] != grassColor && direction!=navigatorDirection.idle) { //HARDCODED
-						targetPosition = new Vector3 (this.gameObject.transform.position.x-1, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
-						isMoving = true;
-					} else {
-						direction = navigatorDirection.idle;
-					}
-				}
-				break;
 			}
-		//}
+
+			if (!isMoving) {
+				if (colorArray [x + ((y + 1) * worldMap.Map.width)] != grassColor && direction != navigatorDirection.idle) { //HARDCODED
+					targetPosition = new Vector3 (this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1, this.gameObject.transform.position.z);
+					isMoving = true;
+				} else {
+					direction = navigatorDirection.idle;
+				}
+			}
+			break;
+		case navigatorDirection.right:
+			if (isMoving) {
+				this.gameObject.transform.position = Vector3.Lerp (this.gameObject.transform.position, targetPosition, step/Vector3.Distance(this.gameObject.transform.position, targetPosition));
+				if (this.gameObject.transform.position == targetPosition) {
+					isMoving = false;
+					x++;
+					if (colorArray [x + (y * worldMap.Map.width)] !=roadColor) {
+						direction = navigatorDirection.idle;
+					}
+				}
+			}
+
+			if (!isMoving) {
+				if (colorArray [x + 1 + (y * worldMap.Map.width)] != grassColor && direction!=navigatorDirection.idle) { //HARDCODED
+					targetPosition = new Vector3 (this.gameObject.transform.position.x+1, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+					isMoving = true;
+				} else {
+					direction = navigatorDirection.idle;
+				}
+			}
+			break;
+		case navigatorDirection.down:
+			if (isMoving) {
+				this.gameObject.transform.position = Vector3.Lerp (this.gameObject.transform.position, targetPosition, step/Vector3.Distance(this.gameObject.transform.position, targetPosition));
+				if (this.gameObject.transform.position == targetPosition) {
+					isMoving = false;
+					y--;
+					if (colorArray [x + (y * worldMap.Map.width)] !=roadColor) {
+						direction = navigatorDirection.idle;
+					}
+				}
+			}
+
+			if (!isMoving) {
+				if (colorArray [x + ((y-1) * worldMap.Map.width)] !=grassColor && direction!=navigatorDirection.idle) { //HARDCODED
+					targetPosition = new Vector3 (this.gameObject.transform.position.x, this.gameObject.transform.position.y - 1, this.gameObject.transform.position.z);
+					isMoving = true;
+				} else {
+					direction = navigatorDirection.idle;
+				}
+			}
+			break;
+		case navigatorDirection.left:
+			if (isMoving) {
+				this.gameObject.transform.position = Vector3.Lerp (this.gameObject.transform.position, targetPosition, step/Vector3.Distance(this.gameObject.transform.position, targetPosition));
+				if (this.gameObject.transform.position == targetPosition) {
+					isMoving = false;
+					x--;
+					if (colorArray [x + (y * worldMap.Map.width)] !=roadColor) {
+						direction = navigatorDirection.idle;
+					}
+				}
+			}
+
+			if (!isMoving) {
+				if (colorArray [x - 1 + (y * worldMap.Map.width)] != grassColor && direction!=navigatorDirection.idle) { //HARDCODED
+					targetPosition = new Vector3 (this.gameObject.transform.position.x-1, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+					isMoving = true;
+				} else {
+					direction = navigatorDirection.idle;
+				}
+			}
+			break;
+		}
+
 	}
 }
