@@ -31,24 +31,27 @@ public class Navigator : MonoBehaviour {
 
 	protected List<navigatorDirection> directionsToGo;
 	protected List<navigatorDirection> path;
-	protected List<List<navigatorDirection>> pathsLeftToTry;
+	protected List<Vector3> pathLocations;
+	//protected List<List<navigatorDirection>> pathsLeftToTry;
 
 	protected navigatorDirection lastDirection;
-	protected navigatorDirection lastLastDirection;
+	//protected navigatorDirection lastLastDirection;
 
 	protected int counter;
 	protected int timeToLive;
 
 	public navigatorDirection[] directionsOfPath;
+	public Vector3[] locationsPath;
 
 	// Use this for initialization
 	void Start () {
 		directionsToGo = new List<navigatorDirection> ();
 		path		   = new List<navigatorDirection> ();
-		pathsLeftToTry = new List<List<navigatorDirection>> ();
+		pathLocations  = new List<Vector3> ();
+		//pathsLeftToTry = new List<List<navigatorDirection>> ();
 
 		lastDirection     = navigatorDirection.idle;
-		lastLastDirection = navigatorDirection.idle;
+		//lastLastDirection = navigatorDirection.idle;
 
 		counter = 0;
 
@@ -81,6 +84,9 @@ public class Navigator : MonoBehaviour {
 					xx = x;
 					yy = y;
 					path.Clear ();
+					pathLocations.Clear ();
+					pathLocations.Add (new Vector3 (xx, yy, this.gameObject.transform.position.z));
+					path.Add (navigatorDirection.idle);
 					//
 					// ADD A WHILE HERE TO KEEP FINDING A PATH TILL YOU REACH TARGETLEVEL. ALSO MAKE SURE THAT WHEN A RANDOM POSITION
 					// IS CHOSEN THERE IS MORE CHANCE IN THE DIRECTION OF THE TARGET.(UNLESS THAT WAY IS BLOCKED OFCOURSE)
@@ -89,7 +95,7 @@ public class Navigator : MonoBehaviour {
 					//
 
 					//MAKE IT CHECK THAT NONE OF THOSE POSITIONS ALREADY HAVE BEEN  WALKED ON, IF SO REMOVE EVERYTHING TILL POINT
-					timeToLive = 500;
+					timeToLive = 1000;
 					while (new Vector3(xx, yy, this.gameObject.transform.position.z) != targetLevel && timeToLive>0) {
 						directionsToGo.Clear ();
 						if (colorArray [xx + 1 + (yy * worldMap.Map.width)] == roadColor) {
@@ -156,13 +162,18 @@ public class Navigator : MonoBehaviour {
 							break;
 						}
 						timeToLive--;
+						pathLocations.Add (new Vector3 (xx, yy, this.gameObject.transform.position.z));
 					}
+						
 					if (timeToLive==0) {
 						Debug.Log ("Timetolive up!");
 						path.Clear ();
+						pathLocations.Clear ();
 					}
-					Debug.Log ("Target reached!");
-					for (int i = 0; i < (path.Count)&&path.Count>1;i++) {
+						
+					//The following removes the navigator from going back and forth: Is no longer neccesary I THINK with the code under it
+
+					/*for (int i = 0; i < (path.Count)&&path.Count>1;i++) {
 						if (i==0) {
 							i = 1;
 						}
@@ -173,7 +184,24 @@ public class Navigator : MonoBehaviour {
 							path.RemoveAt (i - 1);
 							i -= 2;
 						}
+					}*/
+
+					List<Vector3> tempList 			  = new List<Vector3> ();
+					List<navigatorDirection> tempPath = new List<navigatorDirection> ();
+
+					for (int i = 0; i < pathLocations.Count; i++) {
+						if (tempList.Contains (pathLocations [i])) {
+							int indexNr = tempList.LastIndexOf (pathLocations [i]);
+							tempList.RemoveRange (indexNr + 1, tempList.Count - indexNr - 1);
+							tempPath.RemoveRange (indexNr + 1, tempPath.Count - indexNr - 1);
+						} else {
+							tempList.Add(pathLocations[i]);
+							tempPath.Add(path[i]);
+						}
 					}
+						
+					path = tempPath;
+					locationsPath = tempList.ToArray ();
 						
 					directionsOfPath = path.ToArray();
 
@@ -202,10 +230,12 @@ public class Navigator : MonoBehaviour {
 		}
 
 		if (path.Count>0 && direction==navigatorDirection.idle) {
+			//Debug.Log ("changing");
 			direction = path [counter];
 			counter++;
 			if (path.Count==counter) {
 				path.Clear();
+				pathLocations.Clear ();
 			}
 		}
 
