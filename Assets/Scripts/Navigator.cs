@@ -41,6 +41,9 @@ public class Navigator : MonoBehaviour {
 	public navigatorDirection[] directionsOfPath;
 	public Vector3[] locationsPath;
 
+	protected RaycastHit2D hit;
+	protected bool startLevel;
+
 	// Use this for initialization
 	void Start () {
 		directionsToGo = new List<navigatorDirection> ();
@@ -54,6 +57,7 @@ public class Navigator : MonoBehaviour {
 		colorArray = worldMap.Map.GetPixels ();
 		direction  = navigatorDirection.idle;
 		isMoving   = false;
+		this.gameObject.transform.position = new Vector3 (PlayerPrefs.GetInt ("xCoord", 40), PlayerPrefs.GetInt ("yCoord", 16), -1);
 
 		x = (int)this.gameObject.transform.position.x;
 		y = (int)this.gameObject.transform.position.y;
@@ -62,12 +66,13 @@ public class Navigator : MonoBehaviour {
 
 		roadColor  = new Color (1, 0, 0);
 		grassColor = new Color (0, 0, 0);
+		startLevel = false;
 	}
 	
 	void Update () {
 		if (Input.touchCount>0) {
 			Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
+			hit = Physics2D.Raycast(pos, Vector2.zero);
 			if (hit != null && hit.collider != null && direction==navigatorDirection.idle && path.Count==0) {
 				if (colorArray [(int)hit.collider.transform.position.x + ((int)hit.collider.transform.position.y * worldMap.Map.width)] != grassColor) {
 					targetLevel = new Vector3 (hit.collider.transform.position.x, hit.collider.transform.position.y, this.gameObject.transform.position.z);
@@ -224,8 +229,10 @@ public class Navigator : MonoBehaviour {
 			direction = path [counter];
 			counter++;
 			if (path.Count==counter) {
+				//YOU HAVE REACHED THE LEVEL you clicked on
 				path.Clear();
 				pathLocations.Clear ();
+				startLevel = true;
 			}
 		}
 			
@@ -314,6 +321,15 @@ public class Navigator : MonoBehaviour {
 				}
 			}
 			break;
+		}
+
+		if (startLevel && direction == navigatorDirection.idle) {
+			startLevel = false;
+			if (hit.collider.gameObject.GetComponent<LevelPoint>().levelUnlocked) { 
+				hit.collider.gameObject.GetComponent<LevelPoint> ().HasClickedOnLevel (); //similiar to the effect of pressing a level button
+			}
+			PlayerPrefs.SetInt ("xCoord", x);
+			PlayerPrefs.SetInt ("yCoord", y);
 		}
 
 	}

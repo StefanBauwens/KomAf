@@ -14,6 +14,7 @@ public class SceneController : MonoBehaviour {
     CanvasGroup locationPopupCanvas;
     LevelKeeper levelKeeper;
     private bool tempLevelFinished;
+	public string AntwerpMap = "AntwerpMap";
 
     void Awake()
     {
@@ -36,7 +37,7 @@ public class SceneController : MonoBehaviour {
     public void LoadAntwerpMap()
     {
         gmScript.playingLevel = false;
-        SceneManager.LoadScene("AntwerpMap"); 
+        SceneManager.LoadScene(AntwerpMap); 
     }
 
 
@@ -73,13 +74,13 @@ public class SceneController : MonoBehaviour {
 
     void LevelFinishedLoading(Scene previousScene, Scene activeScene)
     {
-        if (activeScene.name != "AntwerpMap")
+        if (activeScene.name != AntwerpMap)
         {
             endOfLevel = GameObject.Find("EndOfLevel").GetComponent<EndOfLevel>();
             gmScript.GetGameObjectsFromScene();
             gmScript.SetCoinsCollectedInLevel();
         }
-        else if (activeScene.name == "AntwerpMap")
+        else if (activeScene.name == AntwerpMap)
         {
             locationPopupCanvas = GameObject.FindGameObjectWithTag("LocationPopupCanvas").GetComponent<CanvasGroup>();
             locationPopupScript = GameObject.FindGameObjectWithTag("LocationPopup").GetComponent<LocationPopup>();
