@@ -25,14 +25,18 @@ public class LevelPoint : StopPoint {
 	void Start () {
         sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
 
-        levelButton = GetComponent<Button>(); 
-        levelButton.onClick.AddListener(() => sceneConScript.OpenLocationPopup(gameObject.name));// extra parameter toevoegen maxCoins
+        //levelButton = GetComponent<Button>(); 
+        //levelButton.onClick.AddListener(() => sceneConScript.OpenLocationPopup(gameObject.name));// extra parameter toevoegen maxCoins
     }
     //bij scenecontroller
     // --> openlocationpopup
     // locationPopupScript.maxCoins.text = maxCoins van parameter
 
-
+    //call this from stefan's script when navigator has reaches this level instead of using a button
+    public void HasClickedOnLevel()
+    {
+        sceneConScript.OpenLocationPopup(gameObject.name);
+    }
 
 
 

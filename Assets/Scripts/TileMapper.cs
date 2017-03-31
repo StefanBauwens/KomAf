@@ -34,12 +34,16 @@ public class TileMapper : MonoBehaviour {
 				}
 
 				if (tempObject != null) {
+
 					Instantiate (tempObject, new Vector2 (width, height), Quaternion.identity);
-                    if(tempObject.name == "coin")
-                    {
-                        coinArray[coinIndex] = tempObject;
-                        coinIndex++;
-                    }
+                    //if(tempObject.name == "coin")
+                    //{
+                    //    coinArray[coinIndex] = tempObject;
+                    //    coinIndex++;
+                    //}
+
+					GameObject newInstant = Instantiate (tempObject, new Vector2 (width, height), Quaternion.identity);
+					newInstant.name = tempObject.name;
 				} else {
 					if (colorArray [width + (height * Map.width)] != new Color(1f,1f,1f)) {
 						Debug.Log (colorArray [width + (height * Map.width)]);

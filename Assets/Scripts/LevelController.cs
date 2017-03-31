@@ -9,6 +9,7 @@ public class LevelController : MonoBehaviour {
     private static LevelController instanceRef;
     protected Image[] levelImages;
     public Sprite unlockSprite;
+	public Sprite lockSprite;
 
     public GameMaster gmScript;
     private LevelKeeper levelKeeper;
@@ -45,11 +46,13 @@ public class LevelController : MonoBehaviour {
     {
         for (int i = 1; i < levels.Length; i++) // index = 1 --> MAS always unlocked
         {      
-            if (PlayerPrefs.GetString("locked/unlocked" + levels[i].ToString(), "locked") == "unlocked")
-            {
-                levels[i].levelUnlocked = true;
-                MakeLevelButtonInteractable(levels[i]);
-            }
+			if (PlayerPrefs.GetString ("locked/unlocked" + levels [i].ToString (), "locked") == "unlocked") {
+				levels [i].levelUnlocked = true;
+				MakeLevelButtonInteractable (levels [i]);
+			} else {
+				levels [i].levelUnlocked = false;	
+				MakeLevelNotInteractable (levels [i]);
+			}
         }
     }
 
@@ -90,9 +93,22 @@ public class LevelController : MonoBehaviour {
 
     public void MakeLevelButtonInteractable(LevelPoint level)
     {
-        level.GetComponent<Image>().sprite = unlockSprite;
-        level.GetComponent<Button>().interactable = true;
+		if (level.GetComponent<Image> () != null) {
+			level.GetComponent<Image> ().sprite = unlockSprite;
+		} else {
+			level.GetComponent<SpriteRenderer>().sprite = unlockSprite;
+		}
+        //level.GetComponent<Button>().interactable = true;
     }
+
+	public void MakeLevelNotInteractable(LevelPoint level)
+	{
+		if (level.GetComponent<Image> () != null) {
+			level.GetComponent<Image> ().sprite = lockSprite;
+		} else {
+			level.GetComponent<SpriteRenderer>().sprite = lockSprite;
+		}
+	}
 
     public void SetLevelsFromArray()
     {
