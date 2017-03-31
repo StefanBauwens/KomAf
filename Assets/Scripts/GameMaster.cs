@@ -114,7 +114,7 @@ public class GameMaster : MonoBehaviour {
     {
         coinText = GameObject.Find("Canvas/CoinUI/CoinText").GetComponent<Text>();
         winCoinText = GameObject.Find("Canvas/WinCanvas/WinPopup/winCoinText").GetComponent<Text>();
-        tileScript = GameObject.FindGameObjectWithTag("MapDrawer").GetComponent<TileMapper>();
+        //tileScript = GameObject.FindGameObjectWithTag("MapDrawer").GetComponent<TileMapper>();
         if (GameObject.Find("Page") != null)
         {
             pageScript = GameObject.Find("Page").GetComponent<Page>();
