@@ -43,6 +43,8 @@ public class Navigator : MonoBehaviour {
 
 	protected RaycastHit2D hit;
 	protected bool startLevel;
+	public LevelPoint[] levels;
+	protected bool reverseDirection;
 
 	// Use this for initialization
 	void Start () {
@@ -67,9 +69,17 @@ public class Navigator : MonoBehaviour {
 		roadColor  = new Color (1, 0, 0);
 		grassColor = new Color (0, 0, 0);
 		startLevel = false;
+
+		//this might not work if this runs BEFORE the start of tilemapper:
+		//levels = FindObjectsOfType(typeof(LevelPoint)) as LevelPoint[];
+
+		reverseDirection = false;
 	}
 	
 	void Update () {
+		while (levels.Length==0) {
+			levels = FindObjectsOfType(typeof(LevelPoint)) as LevelPoint[];
+		}
 		if (Input.touchCount>0) {
 			Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			hit = Physics2D.Raycast(pos, Vector2.zero);
@@ -84,10 +94,8 @@ public class Navigator : MonoBehaviour {
 					pathLocations.Add (new Vector3 (xx, yy, this.gameObject.transform.position.z));
 					path.Add (navigatorDirection.idle);
 
-					//CLEAN UP CODE LATER
 
-					//MAKE IT CHECK THAT NONE OF THOSE POSITIONS ALREADY HAVE BEEN  WALKED ON, IF SO REMOVE EVERYTHING TILL POINT
-					timeToLive = 1000;
+					timeToLive = 1500;
 					while (new Vector3(xx, yy, this.gameObject.transform.position.z) != targetLevel && timeToLive>0) {
 						directionsToGo.Clear ();
 						if (colorArray [xx + 1 + (yy * worldMap.Map.width)] == roadColor) {
@@ -116,7 +124,7 @@ public class Navigator : MonoBehaviour {
 						}
 
 						System.Random rand = new System.Random();
-						lastDirection = directionsToGo[rand.Next (0, directionsToGo.Count)];
+						lastDirection = directionsToGo [rand.Next (0, directionsToGo.Count)];
 						path.Add (lastDirection);
 
 						switch (lastDirection) {
@@ -155,6 +163,17 @@ public class Navigator : MonoBehaviour {
 						}
 						timeToLive--;
 						pathLocations.Add (new Vector3 (xx, yy, this.gameObject.transform.position.z));
+						foreach (LevelPoint item in levels) {
+							if (item.gameObject.transform.position == new Vector3(xx,yy,0) && !item.levelUnlocked) {
+								if (targetLevel != new Vector3 (item.gameObject.transform.position.x, item.gameObject.transform.position.y, this.gameObject.transform.position.z)) {
+									path.RemoveAt (path.Count - 1);
+									pathLocations.RemoveAt (pathLocations.Count - 1);
+									xx = (int)pathLocations [pathLocations.Count - 1].x;
+									yy = (int)pathLocations [pathLocations.Count - 1].y;	
+								}
+							}
+						}
+
 					}
 						
 					if (timeToLive==0) {
@@ -206,8 +225,6 @@ public class Navigator : MonoBehaviour {
 		}
 
 
-
-
 		if (direction==navigatorDirection.idle) {
 			targetPosition = new Vector3 (0, 0, 0);
 			if (Input.GetKeyDown(KeyCode.UpArrow)) {
@@ -253,6 +270,7 @@ public class Navigator : MonoBehaviour {
 				if (colorArray [x + ((y + 1) * worldMap.Map.width)] != grassColor && direction != navigatorDirection.idle) { //HARDCODED
 					targetPosition = new Vector3 (this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1, this.gameObject.transform.position.z);
 					isMoving = true;
+					checkToStop (0,-1);
 				} else {
 					direction = navigatorDirection.idle;
 				}
@@ -274,6 +292,7 @@ public class Navigator : MonoBehaviour {
 				if (colorArray [x + 1 + (y * worldMap.Map.width)] != grassColor && direction!=navigatorDirection.idle) { //HARDCODED
 					targetPosition = new Vector3 (this.gameObject.transform.position.x+1, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
 					isMoving = true;
+					checkToStop (-1,0);
 				} else {
 					direction = navigatorDirection.idle;
 				}
@@ -295,6 +314,7 @@ public class Navigator : MonoBehaviour {
 				if (colorArray [x + ((y-1) * worldMap.Map.width)] !=grassColor && direction!=navigatorDirection.idle) { //HARDCODED
 					targetPosition = new Vector3 (this.gameObject.transform.position.x, this.gameObject.transform.position.y - 1, this.gameObject.transform.position.z);
 					isMoving = true;
+					checkToStop (0,1);
 				} else {
 					direction = navigatorDirection.idle;
 				}
@@ -316,6 +336,7 @@ public class Navigator : MonoBehaviour {
 				if (colorArray [x - 1 + (y * worldMap.Map.width)] != grassColor && direction!=navigatorDirection.idle) { //HARDCODED
 					targetPosition = new Vector3 (this.gameObject.transform.position.x-1, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
 					isMoving = true;
+					checkToStop (1,0);
 				} else {
 					direction = navigatorDirection.idle;
 				}
@@ -332,5 +353,17 @@ public class Navigator : MonoBehaviour {
 			PlayerPrefs.SetInt ("yCoord", y);
 		}
 
+	}
+
+	void checkToStop (int addTox, int addToy)
+	{
+		foreach (LevelPoint item in levels) {
+			if (targetPosition == new Vector3(item.gameObject.transform.position.x, item.gameObject.transform.position.y, targetPosition.z) && !item.levelUnlocked) {
+				targetPosition = new Vector3 (targetPosition.x+addTox, targetPosition.y+addToy, targetPosition.z);
+				isMoving = false;
+				direction = navigatorDirection.idle;
+				//Debug.Log ("this happensdsdsd");
+			}
+		}
 	}
 }
