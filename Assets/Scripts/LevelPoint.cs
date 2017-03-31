@@ -27,6 +27,7 @@ public class LevelPoint : StopPoint {
 
         //levelButton = GetComponent<Button>(); 
         //levelButton.onClick.AddListener(() => sceneConScript.OpenLocationPopup(gameObject.name));// extra parameter toevoegen maxCoins
+
     }
     //bij scenecontroller
     // --> openlocationpopup
@@ -37,6 +38,8 @@ public class LevelPoint : StopPoint {
     {
         sceneConScript.OpenLocationPopup(gameObject.name);
     }
+
+
 
 
 
