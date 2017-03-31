@@ -36,6 +36,7 @@ public class TileMapper : MonoBehaviour {
 				if (tempObject != null) {
 
 					//Instantiate (tempObject, new Vector2 (width, height), Quaternion.identity);
+
                     //if(tempObject.name == "coin")
                     //{
                     //    coinArray[coinIndex] = tempObject;

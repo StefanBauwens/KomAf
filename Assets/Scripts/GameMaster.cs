@@ -17,6 +17,7 @@ public class GameMaster : MonoBehaviour {
     Page pageScript;
     public LevelController levelConScript;
     public static int totalCoins;
+    public Text totalCoinsText;
     TileMapper tileScript;
     protected Transform[] coinPositions;
     protected int coinPositionIndex;
@@ -136,6 +137,11 @@ public class GameMaster : MonoBehaviour {
         PlayerPrefs.Save();
     }
 
+    public void UpdateTotalCoinUI()
+    {
+        totalCoinsText = GameObject.Find("Canvas/CoinUI/totalCoins").GetComponent<Text>();
+        totalCoinsText.text = GameMaster.totalCoins.ToString();
+    }
 
 
 

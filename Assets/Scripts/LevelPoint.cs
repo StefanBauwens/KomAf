@@ -36,7 +36,7 @@ public class LevelPoint : StopPoint {
     //call this from stefan's script when navigator has reaches this level instead of using a button
     public void HasClickedOnLevel()
     {
-        sceneConScript.OpenLocationPopup(gameObject.name);
+        sceneConScript.OpenLocationPopup(gameObject.name, maxCoins);
     }
 
 

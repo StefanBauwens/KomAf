@@ -47,11 +47,12 @@ public class SceneController : MonoBehaviour {
         SceneManager.LoadScene(sceneName);
     }
 
-    public void OpenLocationPopup(string locationName)
+    public void OpenLocationPopup(string locationName, int maxCoins)
     {
         locationPopupScript.locationName = locationName;
         locationPopupScript.locationText.text = locationName;
         locationPopupScript.coinsCollectedText.text = gmScript.GetCoinsCollectedInLevel(locationName).ToString();
+        locationPopupScript.maxCoins.text = maxCoins.ToString();
         SetLocationPopupCanvasVisible(true);  
     }
 
@@ -91,9 +92,12 @@ public class SceneController : MonoBehaviour {
             {
                 levelConScript.GetLevelUnlocker(tempLevel); // all level related code only in AntwerpMap!
                 tempLevelFinished = false;
-            }  
+            }
+
+            gmScript.UpdateTotalCoinUI();
         }
     }
+
 
     void SetLocationPopupCanvasVisible(bool setVisible)
     {
