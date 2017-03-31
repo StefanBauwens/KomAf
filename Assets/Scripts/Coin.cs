@@ -8,11 +8,12 @@ public class Coin : MonoBehaviour {
 
 	void Start()
 	{
-        gmScript = GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
+        gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
 	}
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        gmScript.AddCollectedCoinPosition(gameObject.transform.position);
         gmScript.coinsCollectedInLevel += 1;
         GameMaster.totalCoins += 1;
         Destroy(gameObject);

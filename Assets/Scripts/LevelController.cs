@@ -116,36 +116,4 @@ public class LevelController : MonoBehaviour {
         levelKeeper = GameObject.FindGameObjectWithTag("LevelKeeper").GetComponent<LevelKeeper>();
         levels = levelKeeper.levels;
     }
-
-    //  FUNCTION TO CHECK SCENECHANGE ONLY 1 IN ALL SCRIPTS!!! GODVERDOMME
-
-    //void OnEnable()
-    //{
-    //    SceneManager.activeSceneChanged += LevelFinishedLoading; // satrt listening for scene change when script enabled
-    //}
-
-    //void OnDisable()
-    //{
-    //    // Remember to always have an unsubscription for every delegate you subscribe to!
-    //    SceneManager.activeSceneChanged -= LevelFinishedLoading; // stop listening for scene change when script disabled
-    //}
-
-    //void LevelFinishedLoading(Scene previousScene, Scene activeScene)
-    //{
-    //    //voert maar 1x uit...
-    //    if (activeScene.name == "AntwerpMap")
-    //    {
-    //        Debug.Log("in levelcontroller: " + count);
-    //        levelKeeper = GameObject.FindGameObjectWithTag("LevelKeeper").GetComponent<LevelKeeper>();
-    //        levels = levelKeeper.levels;
-    //        Debug.Log("assigned levels from levelkeeper");
-    //    }
-    //    else if (activeScene.name != "AntwerpMap")
-    //    {
-    //        for(int i = 0; i < levels.Length; i++)
-    //        {
-    //            levels[i] = null;
-    //        }        
-    //    }     
-    //}
 }

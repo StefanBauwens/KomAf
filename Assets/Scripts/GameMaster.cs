@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class GameMaster : MonoBehaviour {
 
     private static GameMaster instanceRef;
-    public int coinsCollectedInLevel;
     public short totalPageCount;
     public bool playingLevel;
     protected string tempLevel;
@@ -18,9 +17,8 @@ public class GameMaster : MonoBehaviour {
     public LevelController levelConScript;
     public static int totalCoins;
     public Text totalCoinsText;
-    TileMapper tileScript;
-    protected Transform[] coinPositions;
-    protected int coinPositionIndex;
+    public List<Vector3> collectedCoinsPos;
+    public int coinsCollectedInLevel;
 
     void Awake()
     {
@@ -83,15 +81,26 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
-    public void SaveCoinPositions()
+    public void AddCollectedCoinPosition(Vector3 coinPos)
     {
-        coinPositionIndex = 0;
-        for(int i = 0; i > tileScript.coinArray.Length; i++)
+        collectedCoinsPos.Add(coinPos);
+    }
+
+    public void SaveCollectedCoinPositions(EndOfLevel.CurrentLevel level)
+    {
+        for(int i = 0; i < collectedCoinsPos.Count; i++)
         {
-            if(tileScript.coinArray[i] != null)
-            {
-                coinPositions[coinPositionIndex] = tileScript.coinArray[i].gameObject.transform;
-            }
+            PlayerPrefs.SetString("coinPosition"+ i + level.ToString(), collectedCoinsPos[i].x.ToString() + "," + collectedCoinsPos[i].y.ToString());
+        }
+        PlayerPrefs.Save();
+        collectedCoinsPos.Clear();
+    }
+
+    public void GetCollectedCoinPositions(string level)
+    {
+        for(int i = 0; i < GetCoinsCollectedInLevel(level.ToString()); i++)
+        {
+            AddCollectedCoinPosition(StringToVector3(PlayerPrefs.GetString("coinPosition" + i + level, "noPositionFound")));  
         }
     }
 
@@ -105,7 +114,6 @@ public class GameMaster : MonoBehaviour {
         coinsCollectedInLevel = GetCoinsCollectedInLevel(SceneManager.GetActiveScene().name);
     }
 
-
     public void UpdatePageCount(string levelOfPage)
     {
         totalPageCount += 1;
@@ -115,7 +123,6 @@ public class GameMaster : MonoBehaviour {
     {
         coinText = GameObject.Find("Canvas/CoinUI/CoinText").GetComponent<Text>();
         winCoinText = GameObject.Find("Canvas/WinCanvas/WinPopup/winCoinText").GetComponent<Text>();
-        //tileScript = GameObject.FindGameObjectWithTag("MapDrawer").GetComponent<TileMapper>();
         if (GameObject.Find("Page") != null)
         {
             pageScript = GameObject.Find("Page").GetComponent<Page>();
@@ -143,6 +150,11 @@ public class GameMaster : MonoBehaviour {
         totalCoinsText.text = GameMaster.totalCoins.ToString();
     }
 
-
+    public static Vector3 StringToVector3(string sVector)
+    {
+        string[] sArray = sVector.Split(',');
+        Vector3 result = new Vector3(float.Parse(sArray[0]),float.Parse(sArray[1]), 0);
+        return result;
+    }
 
 }

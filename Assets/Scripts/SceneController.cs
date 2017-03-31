@@ -37,6 +37,10 @@ public class SceneController : MonoBehaviour {
     public void LoadAntwerpMap()
     {
         gmScript.playingLevel = false;
+        if (tempLevelFinished)
+        {
+            gmScript.SaveCollectedCoinPositions(tempLevel); // it can only save when level completed --> test with pause menu, go to antwerp map and back (still have to connect buttons with functions)
+        }
         SceneManager.LoadScene(AntwerpMap); 
     }
 
@@ -90,7 +94,7 @@ public class SceneController : MonoBehaviour {
             levelConScript.CheckLevelUnlocked();
             if (tempLevelFinished)
             {
-                levelConScript.GetLevelUnlocker(tempLevel); // all level related code only in AntwerpMap!
+                levelConScript.GetLevelUnlocker(tempLevel); // all level related code only in AntwerpMap!  
                 tempLevelFinished = false;
             }
 

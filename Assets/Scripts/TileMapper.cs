@@ -1,21 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TileMapper : MonoBehaviour {
 	public GameObject[] gameObjects;
 	public string[] hexColours;
 	public Texture2D Map;
-    public GameObject[] coinArray;
 
     protected Color[] realColours;
 	protected GameObject tempObject;
-	protected Color[] colorArray; 
-    protected int coinIndex;
+	protected Color[] colorArray;
+    protected GameMaster gmScript;
+
 
 	// Use this for initialization
 	void Start () {
-        coinIndex = 0;
+        gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        if((SceneManager.GetActiveScene().name) != "AntwerpMap2")
+        {
+            gmScript.GetCollectedCoinPositions((SceneManager.GetActiveScene().name));
+        }
+
 		realColours = new Color[hexColours.Length];
 		for (int i = 0; i < hexColours.Length; i++) {
 			ColorUtility.TryParseHtmlString ("#"+hexColours[i], out realColours[i]); //convert hex to colour
@@ -33,25 +39,34 @@ public class TileMapper : MonoBehaviour {
 					}
 				}
 
-				if (tempObject != null) {
+				if (tempObject != null)
+                { 
+                    GameObject newInstant = Instantiate(tempObject, new Vector2(width, height), Quaternion.identity);
+                    newInstant.name = tempObject.name;
 
-					//Instantiate (tempObject, new Vector2 (width, height), Quaternion.identity);
-
-                    //if(tempObject.name == "coin")
-                    //{
-                    //    coinArray[coinIndex] = tempObject;
-                    //    coinIndex++;
-                    //}
-
-					GameObject newInstant = Instantiate (tempObject, new Vector2 (width, height), Quaternion.identity);
-					newInstant.name = tempObject.name;
-				} else {
+                    if (newInstant.name == "coin")
+                    {
+                        if (gmScript.collectedCoinsPos.Contains(newInstant.transform.position))// coin already collected --> delete gameobject
+                        {
+                            Debug.Log("coin already exists at: " + newInstant.transform.position);
+                            Destroy(newInstant);
+                        }
+                        else
+                        {
+                            Debug.Log("coin not in list, not destroyed");
+                        }
+                    }
+                }
+                else
+                {
 					if (colorArray [width + (height * Map.width)] != new Color(1f,1f,1f)) {
 						Debug.Log (colorArray [width + (height * Map.width)]);
 
 					}
-				}
+			    }
 			}
 		}
 	}
+
+    
 }
