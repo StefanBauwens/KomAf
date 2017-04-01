@@ -31,6 +31,7 @@ public class SceneController : MonoBehaviour {
 
     public void RestartLevel()
     {
+        gmScript.collectedCoinsPos.Clear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -39,7 +40,9 @@ public class SceneController : MonoBehaviour {
         gmScript.playingLevel = false;
         if (tempLevelFinished)
         {
-            gmScript.SaveCollectedCoinPositions(tempLevel); // it can only save when level completed --> test with pause menu, go to antwerp map and back (still have to connect buttons with functions)
+            GameMaster.totalCoins += gmScript.coinsCollectedInLevel;
+            gmScript.SaveTotalCoins();
+            gmScript.SaveCollectedCoinPositions(tempLevel);
         }
         SceneManager.LoadScene(AntwerpMap); 
     }

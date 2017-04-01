@@ -15,7 +15,6 @@ public class Coin : MonoBehaviour {
     {
         gmScript.AddCollectedCoinPosition(gameObject.transform.position);
         gmScript.coinsCollectedInLevel += 1;
-        GameMaster.totalCoins += 1;
         Destroy(gameObject);
     }
 

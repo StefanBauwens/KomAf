@@ -109,6 +109,11 @@ public class GameMaster : MonoBehaviour {
         return PlayerPrefs.GetInt("coinsCollectedInLevel" + level, 0);
     }
 
+    public int GetTotalCoins()
+    {
+        return PlayerPrefs.GetInt("totalCoins", 0);
+    }
+
     public void SetCoinsCollectedInLevel()
     {
         coinsCollectedInLevel = GetCoinsCollectedInLevel(SceneManager.GetActiveScene().name);
@@ -146,8 +151,9 @@ public class GameMaster : MonoBehaviour {
 
     public void UpdateTotalCoinUI()
     {
+        totalCoins = GetTotalCoins();
         totalCoinsText = GameObject.Find("Canvas/CoinUI/totalCoins").GetComponent<Text>();
-        totalCoinsText.text = GameMaster.totalCoins.ToString();
+        totalCoinsText.text = totalCoins.ToString();
     }
 
     public static Vector3 StringToVector3(string sVector)
