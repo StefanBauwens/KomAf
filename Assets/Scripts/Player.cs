@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
     protected Rigidbody2D rb;
     protected Animator anim;
     protected SpriteRenderer spriteR;
+    protected AudioSource jumpSound;
 
     private GameMaster gmScript;
 
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Time.timeScale = 1;
+        jumpSound = gameObject.GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         spriteR = gameObject.GetComponent<SpriteRenderer>();
@@ -73,11 +75,13 @@ public class Player : MonoBehaviour {
 			if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space)) && isGrounded) //(Input.GetKeyDown(KeyCode.Space) && isGrounded)
 			{
 				Jump();
-			}
+                jumpSound.Play();
+            }
 			if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space)) && !isGrounded && !doubleJumped)
 			{
 				Jump();
-				doubleJumped = true;
+                jumpSound.Play();
+                doubleJumped = true;
 			}
 		}
     }

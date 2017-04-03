@@ -10,15 +10,36 @@ public class PopupController : MonoBehaviour {
     public CanvasGroup winCanvas;
     public CanvasGroup pauseCanvas;
     private GameMaster gmScript;
-    
+    private AudioSource audSource;
+    public AudioClip[] sounds;
+    private AudioClip buttonSound;
+    private AudioClip gameOverSound;
+    private AudioClip winSound;
 
     void Start()
     {
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        audSource= gameObject.GetComponent<AudioSource>();
+        for(int i = 0; i < sounds.Length; i++)
+        {
+            if(sounds[i].name == "button")
+            {
+                buttonSound = sounds[i];
+            }
+            else if(sounds[i].name == "gameOver")
+            {
+                gameOverSound = sounds[i];
+            }
+            else if(sounds[i].name == "win")
+            {
+                winSound = sounds[i];
+            }
+        }
     }
 
     public void WinPopup()
     {
+        audSource.PlayOneShot(winSound,0.5f);
         Time.timeScale = 0;
         gmScript.UpdateWinCoinText();
         SetPopupVisible(winCanvas, true);
@@ -26,6 +47,7 @@ public class PopupController : MonoBehaviour {
 
     public void GameOverPopUp()
     {
+        audSource.PlayOneShot(gameOverSound,0.5f);
         Time.timeScale = 0;
         if (gameOverCanvas) // clear error
         {
@@ -35,6 +57,7 @@ public class PopupController : MonoBehaviour {
 
     public void PausePopup()
     {
+        audSource.PlayOneShot(buttonSound);
         playerScript.isPaused = true;
         Time.timeScale = 0;
         SetPopupVisible(pauseCanvas, true);
@@ -42,6 +65,7 @@ public class PopupController : MonoBehaviour {
 
     public void Resume()
     {
+        audSource.PlayOneShot(buttonSound);
         SetPopupVisible(pauseCanvas, false);
         Time.timeScale = 1;
         playerScript.isPaused = false;
