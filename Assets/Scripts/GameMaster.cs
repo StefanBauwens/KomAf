@@ -160,6 +160,7 @@ public class GameMaster : MonoBehaviour {
     {
         string[] sArray = sVector.Split(',');
         Vector3 result = new Vector3(float.Parse(sArray[0]),float.Parse(sArray[1]), 0);
+        Debug.Log("return: " + result);
         return result;
     }
 

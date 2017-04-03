@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
 
+    private AudioSource buttonSound;
     private static SceneController instanceRef;
     public LevelController levelConScript;
     public GameMaster gmScript;
@@ -26,17 +27,21 @@ public class SceneController : MonoBehaviour {
         else
         {
             Destroy(gameObject);
-        }    
+        }
+
+        buttonSound = GetComponent<AudioSource>();
     }
 
     public void RestartLevel()
     {
+        buttonSound.Play();
         gmScript.collectedCoinsPos.Clear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadAntwerpMap()
     {
+        buttonSound.Play();
         gmScript.playingLevel = false;
         if (tempLevelFinished)
         {
@@ -50,12 +55,14 @@ public class SceneController : MonoBehaviour {
 
     public void LoadLevelByName(string sceneName)
     {
+        buttonSound.Play();
         SetLocationPopupCanvasVisible(false);
         SceneManager.LoadScene(sceneName);
     }
 
     public void OpenLocationPopup(string locationName, int maxCoins)
     {
+        buttonSound.Play();
         locationPopupScript.locationName = locationName;
         locationPopupScript.locationText.text = locationName;
         locationPopupScript.coinsCollectedText.text = gmScript.GetCoinsCollectedInLevel(locationName).ToString();
