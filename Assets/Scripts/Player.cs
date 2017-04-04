@@ -88,10 +88,11 @@ public class Player : MonoBehaviour {
 
     void CheckAgainstObject()
     {
-        if (isAgainstObject && !isGrounded)
+		if (isAgainstObject && !isGrounded)
         {
             doubleJumped = false;
             rb.velocity = Vector2.up * 2f;
+			Debug.Log ("pushing upward");
         }
     }
 

@@ -11,6 +11,7 @@ public class ObstacleCheck : MonoBehaviour {
         if(collision.CompareTag("Obstacle"))
         {
             player.isAgainstObject = true;
+			//Debug.Log ("Isagainst");
         }
     }
 
