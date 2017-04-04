@@ -76,7 +76,6 @@ public class GameMaster : MonoBehaviour {
             {
                 PlayerPrefs.SetString("locked/unlocked" + levelConScript.levels[i].ToString(), "unlocked");
                 PlayerPrefs.Save();
-                Debug.Log("unlock levels opgeslagen: " + levelConScript.levels[i].ToString());
             }
         }
     }
@@ -100,7 +99,10 @@ public class GameMaster : MonoBehaviour {
     {
         for(int i = 0; i < GetCoinsCollectedInLevel(level.ToString()); i++)
         {
-            AddCollectedCoinPosition(StringToVector3(PlayerPrefs.GetString("coinPosition" + i + level, "noPositionFound")));  
+            if(PlayerPrefs.GetString("coinPosition" + i + level, "noPositionFound") != "noPositionFound")
+            {
+                AddCollectedCoinPosition(StringToVector3(PlayerPrefs.GetString("coinPosition" + i + level, "noPositionFound")));
+            }
         }
     }
 
@@ -160,7 +162,6 @@ public class GameMaster : MonoBehaviour {
     {
         string[] sArray = sVector.Split(',');
         Vector3 result = new Vector3(float.Parse(sArray[0]),float.Parse(sArray[1]), 0);
-        Debug.Log("return: " + result);
         return result;
     }
 

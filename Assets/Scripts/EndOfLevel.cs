@@ -25,11 +25,13 @@ public class EndOfLevel : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        sceneConScript.SendCurrentLevel(currentLevel, true);
-        
-        gmScript.SaveProgress(currentLevel.ToString());
-        gmScript.UpdateWinCoinText();
-        popupConScript.WinPopup();
+        if(collision.tag == "Player")
+        {
+            sceneConScript.SendCurrentLevel(currentLevel, true);
 
+            gmScript.SaveProgress(currentLevel.ToString());
+            gmScript.UpdateWinCoinText();
+            popupConScript.WinPopup();
+        }
     }
 }

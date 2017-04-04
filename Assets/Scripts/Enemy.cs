@@ -8,16 +8,19 @@ public class Enemy : MonoBehaviour {
 	public bool isWalkingRight; //change back to protected after debugging!
 	protected Rigidbody2D rb;
 
-	public float moveSpeed = 5;
+	public float moveSpeed = 2;
 	protected int collisionCount = 0;
 
 	public bool isGrounded;
+
+    protected PopupController popupScript;
 
 	// Use this for initialization
 	void Start () {
 		isWalkingRight = true;
 		//anim = gameObject.GetComponent<Animator> ();
 		rb 	 = gameObject.GetComponent<Rigidbody2D> ();
+        popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
 		isGrounded = true;
 	}
 	
@@ -33,7 +36,7 @@ public class Enemy : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (coll.gameObject.name == "Player") {
-			Debug.Log ("You died"); //DO GAME OVER THING HERE
+            popupScript.GameOverPopUp();
 		} else {
 			Reverse ();
 		}

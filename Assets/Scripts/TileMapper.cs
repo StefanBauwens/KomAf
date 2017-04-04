@@ -48,12 +48,7 @@ public class TileMapper : MonoBehaviour {
                     {
                         if (gmScript.collectedCoinsPos.Contains(newInstant.transform.position))// coin already collected --> delete gameobject
                         {
-                            Debug.Log("coin already exists at: " + newInstant.transform.position);
                             Destroy(newInstant);
-                        }
-                        else
-                        {
-                            Debug.Log("coin not in list, not destroyed");
                         }
                     }
                 }

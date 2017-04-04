@@ -62,20 +62,13 @@ public class LevelController : MonoBehaviour {
         {
             if (nextLevelToUnlock.ToString() == levels[i].currentLevel.ToString())
             {
-                if (levels[i].levelUnlocked)
-                {
-                    Debug.Log("Already saved");
-                }
-                else
+                if (!levels[i].levelUnlocked)
                 {
                     levels[i].levelUnlocked = true;
 
-                    if (levels[i].levelUnlocked)
-                    {
-                        MakeLevelButtonInteractable(levels[i]);
-                        gmScript.SaveUnlockedLevel(levels[i]);
-                    }
-                }    
+                    MakeLevelButtonInteractable(levels[i]);
+                    gmScript.SaveUnlockedLevel(levels[i]);
+                }
             }
         }
     }

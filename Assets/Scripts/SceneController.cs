@@ -16,6 +16,7 @@ public class SceneController : MonoBehaviour {
     LevelKeeper levelKeeper;
     private bool tempLevelFinished;
 	public string AntwerpMap = "AntwerpMap";
+    protected PopupController popupScript;
 
     void Awake()
     {
@@ -28,7 +29,7 @@ public class SceneController : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
+        
         buttonSound = GetComponent<AudioSource>();
     }
 
@@ -91,6 +92,7 @@ public class SceneController : MonoBehaviour {
     {
         if (activeScene.name != AntwerpMap)
         {
+            popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
             endOfLevel = GameObject.Find("EndOfLevel").GetComponent<EndOfLevel>();
             gmScript.GetGameObjectsFromScene();
             gmScript.SetCoinsCollectedInLevel();

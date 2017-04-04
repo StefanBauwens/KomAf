@@ -39,7 +39,10 @@ public class PopupController : MonoBehaviour {
 
     public void WinPopup()
     {
-        audSource.PlayOneShot(winSound,0.5f);
+        if (audSource)
+        {
+            audSource.PlayOneShot(winSound, 0.5f);
+        }
         Time.timeScale = 0;
         gmScript.UpdateWinCoinText();
         SetPopupVisible(winCanvas, true);
@@ -47,12 +50,16 @@ public class PopupController : MonoBehaviour {
 
     public void GameOverPopUp()
     {
-        audSource.PlayOneShot(gameOverSound,0.5f);
+        if (audSource)
+        {
+            audSource.PlayOneShot(gameOverSound, 0.5f);
+        }
         Time.timeScale = 0;
-        if (gameOverCanvas) // clear error
+        if (gameOverCanvas)
         {
             SetPopupVisible(gameOverCanvas, true);
         }
+        
     }
 
     public void PausePopup()
@@ -86,6 +93,4 @@ public class PopupController : MonoBehaviour {
             popup.blocksRaycasts = false;
         }
     }
-
-
 }
