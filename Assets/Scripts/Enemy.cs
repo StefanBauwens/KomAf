@@ -38,11 +38,14 @@ public class Enemy : MonoBehaviour {
 		if (coll.gameObject.name == "Player") {
             popupScript.GameOverPopUp();
 		} else {
-			Reverse ();
+			//Reverse ();
+			if (coll.gameObject.name == "Enemy") {
+				Reverse ();
+			}
 		}
 	}
 
-	void Reverse()
+	public void Reverse()
 	{
 		isWalkingRight = !isWalkingRight;
 		transform.Rotate(new Vector3(0,180,0)); //flip the enemy

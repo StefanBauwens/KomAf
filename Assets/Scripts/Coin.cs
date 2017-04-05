@@ -21,12 +21,14 @@ public class Coin : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        audSource.PlayOneShot(coinSound);
-        renderer.enabled = false;
-        collider.enabled = false;
-        gmScript.AddCollectedCoinPosition(gameObject.transform.position);
-        gmScript.coinsCollectedInLevel += 1;
-        Destroy(gameObject, coinSound.length);
+		if (collision.name == "Player") {
+			audSource.PlayOneShot(coinSound);
+			renderer.enabled = false;
+			collider.enabled = false;
+			gmScript.AddCollectedCoinPosition(gameObject.transform.position);
+			gmScript.coinsCollectedInLevel += 1;
+			Destroy(gameObject, coinSound.length);
+		} 
     }
 
 }
