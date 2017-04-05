@@ -6,7 +6,7 @@ public class Page : MonoBehaviour {
 
     public enum LevelOfPage
     {
-        MAS, ChinaTown, Kathedraal
+        SintAnnastrand, ZwemvijverBoekenberg, Vlaeykensgang
     };
     public LevelOfPage levelOfPage;
     private GameMaster gmScript;

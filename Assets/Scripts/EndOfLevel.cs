@@ -7,7 +7,7 @@ public class EndOfLevel : MonoBehaviour {
 
     public enum CurrentLevel
     {
-        MAS, ChinaTown, Kathedraal
+        SintAnnastrand, ZwemvijverBoekenberg, Vlaeykensgang
     };
     public CurrentLevel currentLevel;
     private PopupController popupConScript;

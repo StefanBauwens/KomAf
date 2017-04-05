@@ -21,7 +21,8 @@ public class Coin : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-		if (collision.name == "Player") {
+        if (collision.name == "Player") {
+            
 			audSource.PlayOneShot(coinSound);
 			renderer.enabled = false;
 			collider.enabled = false;
