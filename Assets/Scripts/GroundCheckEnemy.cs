@@ -29,7 +29,7 @@ public class GroundCheckEnemy : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D other)
 	{
-		if(other.name == "ground8x8")
+		if(other.tag == "Obstacle")
 		{
 			isGrounded = false;
 		}
@@ -37,7 +37,7 @@ public class GroundCheckEnemy : MonoBehaviour {
 
 	void OnTriggerStay2D(Collider2D other)
 	{
-		if(other.name == "ground8x8")
+		if(other.tag == "Obstacle")
 		{
 			isGrounded = true;
 			count = 0;
