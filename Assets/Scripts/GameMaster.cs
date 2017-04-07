@@ -85,11 +85,11 @@ public class GameMaster : MonoBehaviour {
         collectedCoinsPos.Add(coinPos);
     }
 
-    public void SaveCollectedCoinPositions(EndOfLevel.CurrentLevel level)
+    public void SaveCollectedCoinPositions(string level)
     {
         for(int i = 0; i < collectedCoinsPos.Count; i++)
         {
-            PlayerPrefs.SetString("coinPosition"+ i + level.ToString(), collectedCoinsPos[i].x.ToString() + "," + collectedCoinsPos[i].y.ToString());
+            PlayerPrefs.SetString("coinPosition"+ i + level, collectedCoinsPos[i].x.ToString() + "," + collectedCoinsPos[i].y.ToString());
         }
         PlayerPrefs.Save();
         collectedCoinsPos.Clear();

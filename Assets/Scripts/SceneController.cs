@@ -11,7 +11,7 @@ public class SceneController : MonoBehaviour {
     public GameMaster gmScript;
     LocationPopup locationPopupScript;
     EndOfLevel endOfLevel;
-    protected EndOfLevel.CurrentLevel tempLevel;
+    protected string tempLevel;
     CanvasGroup locationPopupCanvas;
     LevelKeeper levelKeeper;
     private bool tempLevelFinished;
@@ -71,7 +71,7 @@ public class SceneController : MonoBehaviour {
         SetLocationPopupCanvasVisible(true);  
     }
 
-    public void SendCurrentLevel(EndOfLevel.CurrentLevel currentLevel, bool levelFinished)
+    public void SendCurrentLevel(string currentLevel, bool levelFinished)
     {
         tempLevel = currentLevel;
         tempLevelFinished = levelFinished;
@@ -93,7 +93,6 @@ public class SceneController : MonoBehaviour {
         if (activeScene.name != AntwerpMap)
         {
             popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
-            endOfLevel = GameObject.Find("EndOfLevel").GetComponent<EndOfLevel>();
             gmScript.GetGameObjectsFromScene();
             gmScript.SetCoinsCollectedInLevel();
         }

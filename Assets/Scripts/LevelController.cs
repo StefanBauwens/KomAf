@@ -73,11 +73,11 @@ public class LevelController : MonoBehaviour {
         }
     }
 
-    public void GetLevelUnlocker(EndOfLevel.CurrentLevel currentLevel)
+    public void GetLevelUnlocker(string currentLevel)
     {
         for (int i = 0; i < levels.Length; i++)
         { 
-            if (currentLevel.ToString() == levels[i].currentLevel.ToString())
+            if (currentLevel == levels[i].currentLevel.ToString())
             {
                 UnlockNextLevel(levels[i].nextLevel);       
             }
