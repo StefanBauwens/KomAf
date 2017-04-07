@@ -37,11 +37,6 @@ public class Enemy : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (coll.gameObject.name == "Player") {
             popupScript.GameOverPopUp();
-		} else {
-			//Reverse ();
-			if (coll.gameObject.name == "Enemy") {
-				Reverse ();
-			}
 		}
 	}
 

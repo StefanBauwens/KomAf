@@ -11,8 +11,11 @@ public class CameraController : MonoBehaviour {
     public float smoothTimeY;
     public float smoothTimeX;
 
-    public float addToX = 0;
-    public float addToY = 0;
+    protected float addToX = 0;
+    protected float addToY = 0;
+
+	protected float speedCamera = 0.03f;
+	protected float speedBackToNormal = 1f;
 
     // Use this for initialization
     void Start () {
@@ -31,17 +34,17 @@ public class CameraController : MonoBehaviour {
         {
             if(playerScript.inReverseDirection)
             {
-                addToX -= 0.05f;
+				addToX -= speedCamera;
             }
             else
             {
-                addToX += 0.05f;
+				addToX += speedCamera;
             }
         }
         else
         {
-            addToY = Mathf.Lerp(addToY, 0, 0.5f * Time.deltaTime);
-            addToX = Mathf.Lerp(addToX, 0, 0.5f * Time.deltaTime);
+			addToY = Mathf.Lerp(addToY, 0, speedBackToNormal * Time.deltaTime);
+			addToX = Mathf.Lerp(addToX, 0, speedBackToNormal * Time.deltaTime);
         }
         
     }
