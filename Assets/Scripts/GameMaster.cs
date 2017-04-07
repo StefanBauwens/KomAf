@@ -124,6 +124,7 @@ public class GameMaster : MonoBehaviour {
     public void UpdatePageCount(string levelOfPage)
     {
         totalPageCount += 1;
+        Debug.Log("Page collected");
     }
 
     public void GetGameObjectsFromScene()
