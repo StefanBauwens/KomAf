@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using SingleShadePlugin; //Using this plugin because of unity bug with location
+//This means that everywhere where normally "Input.location" is used it's replaced by "InputLocation"
 
 public class GPSLocator : MonoBehaviour {
 
@@ -15,13 +17,8 @@ public class GPSLocator : MonoBehaviour {
 	public void Start () {
 		Instance = this;
 		DontDestroyOnLoad (gameObject);
-	}
-
-	public void RunIt()
-	{
 		StartCoroutine (StartLocationService ());
 	}
-
 
 	IEnumerator StartLocationService ()
 	{
@@ -31,7 +28,8 @@ public class GPSLocator : MonoBehaviour {
 			yield break;
 		}
 
-		Input.location.Start (3,3);
+
+		Input.location.Start ();//(0.1f,0.1f);
 		int maxWait = 20;
 		while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0) {
 			yield return new WaitForSeconds (1);
@@ -47,8 +45,8 @@ public class GPSLocator : MonoBehaviour {
 		}
 		longitude = Input.location.lastData.longitude;
 		latitude = Input.location.lastData.latitude;
-		Input.location.Stop ();
 		isBusy = false;
+
 		yield break;
 	}
 

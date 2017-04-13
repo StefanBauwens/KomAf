@@ -10,7 +10,7 @@ public class GPSTest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (GPSLocator.Instance.isBusy == false) {
-			GPSLocator.Instance.RunIt();
+			GPSLocator.Instance.Start ();
 		}
 		gpsText.text = "Lon:" + GPSLocator.Instance.longitude.ToString () + " Lat:" + GPSLocator.Instance.latitude.ToString ();
 	}
