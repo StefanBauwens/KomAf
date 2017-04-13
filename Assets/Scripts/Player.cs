@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
 
     private GameMaster gmScript;
 
-    public float jumpHeight = 5;
+    public float jumpHeight = 6;
     public float moveSpeed = 5;
 
     public bool isGrounded;
