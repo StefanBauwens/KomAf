@@ -49,8 +49,14 @@ public class SceneController : MonoBehaviour {
             GameMaster.totalCoins += gmScript.coinsCollectedInLevel;
             gmScript.SaveTotalCoins();
             gmScript.SaveCollectedCoinPositions(tempLevel);
+            if (gmScript.pageCollected)
+            {
+                gmScript.pageCount++;
+                gmScript.SavePageCount();
+            }
             gmScript.GetPageCount();
         }
+        
         SceneManager.LoadScene(AntwerpMap); 
     }
 

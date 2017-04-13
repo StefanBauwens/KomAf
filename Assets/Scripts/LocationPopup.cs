@@ -30,11 +30,11 @@ public class LocationPopup : MonoBehaviour {
         {
             locationInfoText.text = locationInfoScript.sintAnnastrandText.text;
         }
-        else if(gmScript.PageCount >= 1 && locationName == "ZwemvijverBoekenberg")
+        else if(gmScript.pageCount >= 1 && locationName == "ZwemvijverBoekenberg")
         {
             locationInfoText.text = locationInfoScript.zwemvijverBoekenbergText.text;
         }
-        else if (gmScript.PageCount >= 2 && locationName == "Vlaeykensgang")
+        else if (gmScript.pageCount >= 2 && locationName == "Vlaeykensgang")
         {
             locationInfoText.text = locationInfoScript.vlaeykensgangText.text;
         }

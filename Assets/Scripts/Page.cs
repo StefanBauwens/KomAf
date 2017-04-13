@@ -24,7 +24,8 @@ public class Page : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collision)
     {
         winPopupScript.ChangePageSprite();
-        gmScript.UpdatePageCount(levelOfPage);
+        gmScript.pageCollected = true;
+        //gmScript.UpdatePageCount(levelOfPage);
         Destroy(gameObject);
     }
 

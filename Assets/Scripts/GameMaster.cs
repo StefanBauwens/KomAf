@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameMaster : MonoBehaviour {
 
     private static GameMaster instanceRef;
-    public int PageCount;
+    public int pageCount;
+    public bool pageCollected;
     public bool playingLevel;
     protected string tempLevel;
     private Text coinText;
@@ -63,11 +64,6 @@ public class GameMaster : MonoBehaviour {
         PlayerPrefs.SetInt("totalCoins", totalCoins);
     }
 
-    public void SavePageCount()
-    {
-        PlayerPrefs.SetInt("totalPageCount", PageCount);
-    }
-
     public void SaveUnlockedLevel(LevelPoint level)
     {
         for(int i = 0; i < levelConScript.levels.Length; i++)
@@ -121,22 +117,16 @@ public class GameMaster : MonoBehaviour {
         coinsCollectedInLevel = GetCoinsCollectedInLevel(SceneManager.GetActiveScene().name);
     }
 
-    public void UpdatePageCount(string levelOfPage)
+    public void SavePageCount()
     {
-        PageCount += 1;
-        SavePageCount(PageCount);
-    }
-
-    protected void SavePageCount(int pages)
-    {
-        PlayerPrefs.SetInt("PageCount", pages);
-        Debug.Log("Saved page count: " + pages);
+        PlayerPrefs.SetInt("PageCount", pageCount);
+        Debug.Log("Saved page count: " + pageCount);
     }
 
     public void GetPageCount()
     {
-        PageCount = PlayerPrefs.GetInt("PageCount", 0);
-        Debug.Log("get page count from save file: " + PageCount);
+        pageCount = PlayerPrefs.GetInt("PageCount", 0);
+        Debug.Log("get page count from save file: " + pageCount);
     }
 
 
