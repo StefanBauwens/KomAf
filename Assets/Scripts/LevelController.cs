@@ -105,7 +105,6 @@ public class LevelController : MonoBehaviour {
 
     public void SetLevelsFromArray()
     {
-        
         levelKeeper = GameObject.FindGameObjectWithTag("LevelKeeper").GetComponent<LevelKeeper>();
         levels = levelKeeper.levels;
     }

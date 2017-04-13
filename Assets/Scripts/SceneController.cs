@@ -15,7 +15,7 @@ public class SceneController : MonoBehaviour {
     CanvasGroup locationPopupCanvas;
     LevelKeeper levelKeeper;
     private bool tempLevelFinished;
-	public string AntwerpMap = "AntwerpMap";
+    public string AntwerpMap;
     protected PopupController popupScript;
 
     void Awake()
@@ -49,6 +49,7 @@ public class SceneController : MonoBehaviour {
             GameMaster.totalCoins += gmScript.coinsCollectedInLevel;
             gmScript.SaveTotalCoins();
             gmScript.SaveCollectedCoinPositions(tempLevel);
+            gmScript.GetPageCount();
         }
         SceneManager.LoadScene(AntwerpMap); 
     }
@@ -65,7 +66,8 @@ public class SceneController : MonoBehaviour {
     {
         buttonSound.Play();
         locationPopupScript.locationName = locationName;
-        locationPopupScript.locationText.text = locationName;
+        locationPopupScript.locationNameText.text = locationName;
+        locationPopupScript.CheckLocationInfo();
         locationPopupScript.coinsCollectedText.text = gmScript.GetCoinsCollectedInLevel(locationName).ToString();
         locationPopupScript.maxCoins.text = maxCoins.ToString();
         SetLocationPopupCanvasVisible(true);  
