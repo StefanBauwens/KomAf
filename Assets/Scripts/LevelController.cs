@@ -38,7 +38,6 @@ public class LevelController : MonoBehaviour {
         {
             PlayerPrefs.DeleteAll();
             Debug.Log("deleted playerprefs");
-            Debug.Log("deleted playerprefs");
         }
     }
 

@@ -25,7 +25,6 @@ public class Page : MonoBehaviour {
     {
         winPopupScript.ChangePageSprite();
         gmScript.pageCollected = true;
-        //gmScript.UpdatePageCount(levelOfPage);
         Destroy(gameObject);
     }
 

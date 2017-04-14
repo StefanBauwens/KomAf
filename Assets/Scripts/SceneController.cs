@@ -46,13 +46,12 @@ public class SceneController : MonoBehaviour {
         gmScript.playingLevel = false;
         if (tempLevelFinished)
         {
-            GameMaster.totalCoins += gmScript.coinsCollectedInLevel;
-            gmScript.SaveTotalCoins();
-            gmScript.SaveCollectedCoinPositions(tempLevel);
+            gmScript.SaveProgress(tempLevel);
             if (gmScript.pageCollected)
             {
                 gmScript.pageCount++;
                 gmScript.SavePageCount();
+                gmScript.pageCollected = false;
             }
             gmScript.GetPageCount();
         }
