@@ -14,7 +14,6 @@ public class EndOfLevel : MonoBehaviour {
     // Use this for initialization
     void Start () {
         currentLevel = SceneManager.GetActiveScene().name;
-        Debug.Log("currentlevel: " + currentLevel);
         levelConScript = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
         popupConScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
         sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
@@ -26,7 +25,6 @@ public class EndOfLevel : MonoBehaviour {
         if(collision.tag == "Player")
         {
             sceneConScript.SendCurrentLevel(currentLevel, true);
-            gmScript.SaveProgress(currentLevel);
             gmScript.UpdateWinCoinText();
             popupConScript.WinPopup();
         }

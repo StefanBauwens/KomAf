@@ -57,6 +57,18 @@ public class GameMaster : MonoBehaviour {
     public void SaveCoins(string level)
     {
         PlayerPrefs.SetInt("coinsCollectedInLevel"+ level, coinsCollectedInLevel);
+        Debug.Log(coinsCollectedInLevel + " coins saved in level: " + level);
+    }
+
+    public void UpdateTotalCoins(string level)
+    {
+        Debug.Log("coinscollectedinlevel: " + coinsCollectedInLevel + " coins from save file: " + GetCoinsCollectedInLevel(level));
+        if (coinsCollectedInLevel > GetCoinsCollectedInLevel(level))
+        {
+            totalCoins -= GetCoinsCollectedInLevel(level);
+            totalCoins += coinsCollectedInLevel;
+            SaveTotalCoins();
+        }
     }
 
     public void SaveTotalCoins()
@@ -120,6 +132,7 @@ public class GameMaster : MonoBehaviour {
     public void SavePageCount()
     {
         PlayerPrefs.SetInt("PageCount", pageCount);
+        PlayerPrefs.Save();
         Debug.Log("Saved page count: " + pageCount);
     }
 
@@ -149,9 +162,9 @@ public class GameMaster : MonoBehaviour {
     public void SaveProgress(string currentLevel)
     {
         tempLevel = currentLevel;
+        UpdateTotalCoins(tempLevel);
+        SaveCollectedCoinPositions(tempLevel);
         SaveCoins(tempLevel);
-        SaveTotalCoins();
-        SavePageCount();
         PlayerPrefs.Save();
     }
 
