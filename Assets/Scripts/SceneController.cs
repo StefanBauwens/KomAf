@@ -55,8 +55,7 @@ public class SceneController : MonoBehaviour {
             }
             gmScript.GetPageCount();
         }
-        
-        SceneManager.LoadScene(AntwerpMap); 
+		SceneManager.LoadScene(AntwerpMap); 
     }
 
 

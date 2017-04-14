@@ -10,7 +10,7 @@ public class GPSTest : MonoBehaviour {
 	
 	// Update is called once per frame
 
-	void Start()
+	/*void Start()
 	{
 		gps.isBusy = false;
 		gps.StartCoroutine (gps.StartLocationService ());
@@ -21,5 +21,5 @@ public class GPSTest : MonoBehaviour {
 			gps.Start ();
 		}
 		gpsText.text = "Lon:" + gps.longitude.ToString () + " Lat:" + gps.latitude.ToString ();
-	}
+	}*/
 }
