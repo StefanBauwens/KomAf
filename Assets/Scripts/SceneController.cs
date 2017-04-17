@@ -47,12 +47,8 @@ public class SceneController : MonoBehaviour {
         if (tempLevelFinished)
         {
             gmScript.SaveProgress(tempLevel);
-            if (gmScript.pageCollected)
-            {
-                gmScript.pageCount++;
-                gmScript.SavePageCount();
-                gmScript.pageCollected = false;
-            }
+            
+            // code lines that run before AntwerpMap is loaded completely
             gmScript.GetPageCount();
         }
         

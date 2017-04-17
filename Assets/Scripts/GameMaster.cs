@@ -133,15 +133,35 @@ public class GameMaster : MonoBehaviour {
     {
         PlayerPrefs.SetInt("PageCount", pageCount);
         PlayerPrefs.Save();
-        Debug.Log("Saved page count: " + pageCount);
     }
 
     public void GetPageCount()
     {
         pageCount = PlayerPrefs.GetInt("PageCount", 0);
-        Debug.Log("get page count from save file: " + pageCount);
     }
 
+    public void SavePageCollected(string level)
+    {
+        if (pageCollected)
+        {
+            PlayerPrefs.SetString("pageCollected" + level, "true");
+            pageCount++;
+            SavePageCount();
+            pageCollected = false;
+        }
+    }
+
+    public bool CheckPageCollected(string level)
+    {
+        if(PlayerPrefs.GetString("pageCollected" + level, "false") == "true")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public void GetGameObjectsFromScene()
     {
@@ -165,6 +185,7 @@ public class GameMaster : MonoBehaviour {
         UpdateTotalCoins(tempLevel);
         SaveCollectedCoinPositions(tempLevel);
         SaveCoins(tempLevel);
+        SavePageCollected(tempLevel);
         PlayerPrefs.Save();
     }
 

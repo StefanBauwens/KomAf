@@ -12,14 +12,15 @@ public class TileMapper : MonoBehaviour {
 	protected GameObject tempObject;
 	protected Color[] colorArray;
     protected GameMaster gmScript;
-
+    protected string level;
 
 	// Use this for initialization
 	void Start () {
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
         if((SceneManager.GetActiveScene().name) != "AntwerpMap2")
         {
-            gmScript.GetCollectedCoinPositions((SceneManager.GetActiveScene().name));
+            level = SceneManager.GetActiveScene().name;
+            gmScript.GetCollectedCoinPositions(level);
         }
 
 		realColours = new Color[hexColours.Length];
@@ -47,6 +48,14 @@ public class TileMapper : MonoBehaviour {
                     if (newInstant.name == "coin")
                     {
                         if (gmScript.collectedCoinsPos.Contains(newInstant.transform.position))// coin already collected --> delete gameobject
+                        {
+                            Destroy(newInstant);
+                        }
+                    }
+
+                    if(newInstant.name == "Page")
+                    {
+                        if(gmScript.CheckPageCollected(level))
                         {
                             Destroy(newInstant);
                         }
