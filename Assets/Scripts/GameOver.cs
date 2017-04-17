@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameOver{
+public class GameOver : MonoBehaviour{
 
+    private SceneController sceneConScript;
+    public Button menuButton;
+    public Button restartButton;
 
-    public void GameOverPopup()
+    // Use this for initialization
+    void Start()
     {
+        sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
 
+        menuButton.onClick.AddListener(() => sceneConScript.LoadAntwerpMap());
+        restartButton.onClick.AddListener(() => sceneConScript.RestartLevel());
     }
 
 }

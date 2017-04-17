@@ -5,15 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
 
+    private AudioSource buttonSound;
     private static SceneController instanceRef;
     public LevelController levelConScript;
     public GameMaster gmScript;
     LocationPopup locationPopupScript;
     EndOfLevel endOfLevel;
-    protected EndOfLevel.CurrentLevel tempLevel;
+    protected string tempLevel;
     CanvasGroup locationPopupCanvas;
     LevelKeeper levelKeeper;
     private bool tempLevelFinished;
+    public string AntwerpMap;
+    protected PopupController popupScript;
 
     void Awake()
     {
@@ -25,36 +28,52 @@ public class SceneController : MonoBehaviour {
         else
         {
             Destroy(gameObject);
-        }    
+        }
+        
+        buttonSound = GetComponent<AudioSource>();
     }
 
     public void RestartLevel()
     {
+        buttonSound.Play();
+        gmScript.collectedCoinsPos.Clear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadAntwerpMap()
     {
+        buttonSound.Play();
         gmScript.playingLevel = false;
-        SceneManager.LoadScene("AntwerpMap"); 
+        if (tempLevelFinished)
+        {
+            gmScript.SaveProgress(tempLevel);
+            
+            // code lines that run before AntwerpMap is loaded completely
+            gmScript.GetPageCount();
+        }
+		SceneManager.LoadScene(AntwerpMap); 
     }
 
 
     public void LoadLevelByName(string sceneName)
     {
+        buttonSound.Play();
         SetLocationPopupCanvasVisible(false);
         SceneManager.LoadScene(sceneName);
     }
 
-    public void OpenLocationPopup(string locationName)
+    public void OpenLocationPopup(string locationName, int maxCoins)
     {
+        buttonSound.Play();
         locationPopupScript.locationName = locationName;
-        locationPopupScript.locationText.text = locationName;
+        locationPopupScript.locationNameText.text = locationName;
+        locationPopupScript.CheckLocationInfo();
         locationPopupScript.coinsCollectedText.text = gmScript.GetCoinsCollectedInLevel(locationName).ToString();
+        locationPopupScript.maxCoins.text = maxCoins.ToString();
         SetLocationPopupCanvasVisible(true);  
     }
 
-    public void SendCurrentLevel(EndOfLevel.CurrentLevel currentLevel, bool levelFinished)
+    public void SendCurrentLevel(string currentLevel, bool levelFinished)
     {
         tempLevel = currentLevel;
         tempLevelFinished = levelFinished;
@@ -73,13 +92,13 @@ public class SceneController : MonoBehaviour {
 
     void LevelFinishedLoading(Scene previousScene, Scene activeScene)
     {
-        if (activeScene.name != "AntwerpMap")
+        if (activeScene.name != AntwerpMap)
         {
-            endOfLevel = GameObject.Find("EndOfLevel").GetComponent<EndOfLevel>();
+            popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
             gmScript.GetGameObjectsFromScene();
             gmScript.SetCoinsCollectedInLevel();
         }
-        else if (activeScene.name == "AntwerpMap")
+        else if (activeScene.name == AntwerpMap)
         {
             locationPopupCanvas = GameObject.FindGameObjectWithTag("LocationPopupCanvas").GetComponent<CanvasGroup>();
             locationPopupScript = GameObject.FindGameObjectWithTag("LocationPopup").GetComponent<LocationPopup>();
@@ -88,11 +107,14 @@ public class SceneController : MonoBehaviour {
             levelConScript.CheckLevelUnlocked();
             if (tempLevelFinished)
             {
-                levelConScript.GetLevelUnlocker(tempLevel); // all level related code only in AntwerpMap!
+                levelConScript.GetLevelUnlocker(tempLevel); // all level related code only in AntwerpMap!  
                 tempLevelFinished = false;
-            }  
+            }
+
+            gmScript.UpdateTotalCoinUI();
         }
     }
+
 
     void SetLocationPopupCanvasVisible(bool setVisible)
     {

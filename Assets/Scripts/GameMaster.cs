@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameMaster : MonoBehaviour {
 
     private static GameMaster instanceRef;
-    public int coinsCollectedInLevel;
-    public short totalPageCount;
+    public int pageCount;
+    public bool pageCollected;
     public bool playingLevel;
     protected string tempLevel;
     private Text coinText;
@@ -16,7 +16,10 @@ public class GameMaster : MonoBehaviour {
     WinGame winScript;
     Page pageScript;
     public LevelController levelConScript;
-    
+    public static int totalCoins;
+    public Text totalCoinsText;
+    public List<Vector3> collectedCoinsPos;
+    public int coinsCollectedInLevel;
 
     void Awake()
     {
@@ -54,11 +57,23 @@ public class GameMaster : MonoBehaviour {
     public void SaveCoins(string level)
     {
         PlayerPrefs.SetInt("coinsCollectedInLevel"+ level, coinsCollectedInLevel);
+        Debug.Log(coinsCollectedInLevel + " coins saved in level: " + level);
     }
 
-    public void SavePageCount()
+    public void UpdateTotalCoins(string level)
     {
-        PlayerPrefs.SetInt("totalPageCount", totalPageCount);
+        Debug.Log("coinscollectedinlevel: " + coinsCollectedInLevel + " coins from save file: " + GetCoinsCollectedInLevel(level));
+        if (coinsCollectedInLevel > GetCoinsCollectedInLevel(level))
+        {
+            totalCoins -= GetCoinsCollectedInLevel(level);
+            totalCoins += coinsCollectedInLevel;
+            SaveTotalCoins();
+        }
+    }
+
+    public void SaveTotalCoins()
+    {
+        PlayerPrefs.SetInt("totalCoins", totalCoins);
     }
 
     public void SaveUnlockedLevel(LevelPoint level)
@@ -69,7 +84,32 @@ public class GameMaster : MonoBehaviour {
             {
                 PlayerPrefs.SetString("locked/unlocked" + levelConScript.levels[i].ToString(), "unlocked");
                 PlayerPrefs.Save();
-                Debug.Log("unlock levels opgeslagen: " + levelConScript.levels[i].ToString());
+            }
+        }
+    }
+
+    public void AddCollectedCoinPosition(Vector3 coinPos)
+    {
+        collectedCoinsPos.Add(coinPos);
+    }
+
+    public void SaveCollectedCoinPositions(string level)
+    {
+        for(int i = 0; i < collectedCoinsPos.Count; i++)
+        {
+            PlayerPrefs.SetString("coinPosition"+ i + level, collectedCoinsPos[i].x.ToString() + "," + collectedCoinsPos[i].y.ToString());
+        }
+        PlayerPrefs.Save();
+        collectedCoinsPos.Clear();
+    }
+
+    public void GetCollectedCoinPositions(string level)
+    {
+        for(int i = 0; i < GetCoinsCollectedInLevel(level.ToString()); i++)
+        {
+            if(PlayerPrefs.GetString("coinPosition" + i + level, "noPositionFound") != "noPositionFound")
+            {
+                AddCollectedCoinPosition(StringToVector3(PlayerPrefs.GetString("coinPosition" + i + level, "noPositionFound")));
             }
         }
     }
@@ -79,15 +119,48 @@ public class GameMaster : MonoBehaviour {
         return PlayerPrefs.GetInt("coinsCollectedInLevel" + level, 0);
     }
 
+    public int GetTotalCoins()
+    {
+        return PlayerPrefs.GetInt("totalCoins", 0);
+    }
+
     public void SetCoinsCollectedInLevel()
     {
         coinsCollectedInLevel = GetCoinsCollectedInLevel(SceneManager.GetActiveScene().name);
     }
 
-
-    public void UpdatePageCount(string levelOfPage)
+    public void SavePageCount()
     {
-        totalPageCount += 1;
+        PlayerPrefs.SetInt("PageCount", pageCount);
+        PlayerPrefs.Save();
+    }
+
+    public void GetPageCount()
+    {
+        pageCount = PlayerPrefs.GetInt("PageCount", 0);
+    }
+
+    public void SavePageCollected(string level)
+    {
+        if (pageCollected)
+        {
+            PlayerPrefs.SetString("pageCollected" + level, "true");
+            pageCount++;
+            SavePageCount();
+            pageCollected = false;
+        }
+    }
+
+    public bool CheckPageCollected(string level)
+    {
+        if(PlayerPrefs.GetString("pageCollected" + level, "false") == "true")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void GetGameObjectsFromScene()
@@ -109,12 +182,25 @@ public class GameMaster : MonoBehaviour {
     public void SaveProgress(string currentLevel)
     {
         tempLevel = currentLevel;
+        UpdateTotalCoins(tempLevel);
+        SaveCollectedCoinPositions(tempLevel);
         SaveCoins(tempLevel);
-        SavePageCount();
+        SavePageCollected(tempLevel);
         PlayerPrefs.Save();
     }
 
+    public void UpdateTotalCoinUI()
+    {
+        totalCoins = GetTotalCoins();
+        totalCoinsText = GameObject.Find("Canvas/CoinUI/totalCoins").GetComponent<Text>();
+        totalCoinsText.text = totalCoins.ToString();
+    }
 
-
+    public static Vector3 StringToVector3(string sVector)
+    {
+        string[] sArray = sVector.Split(',');
+        Vector3 result = new Vector3(float.Parse(sArray[0]),float.Parse(sArray[1]), 0);
+        return result;
+    }
 
 }

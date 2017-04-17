@@ -5,11 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EndOfLevel : MonoBehaviour {
 
-    public enum CurrentLevel
-    {
-        MAS, ChinaTown, Kathedraal
-    };
-    public CurrentLevel currentLevel;
+    private string currentLevel;
     private PopupController popupConScript;
     private SceneController sceneConScript;
     private LevelController levelConScript;
@@ -17,6 +13,7 @@ public class EndOfLevel : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        currentLevel = SceneManager.GetActiveScene().name;
         levelConScript = GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>();
         popupConScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
         sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
@@ -25,11 +22,11 @@ public class EndOfLevel : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        sceneConScript.SendCurrentLevel(currentLevel, true);
-        
-        gmScript.SaveProgress(currentLevel.ToString());
-        gmScript.UpdateWinCoinText();
-        popupConScript.WinPopup();
-
+        if(collision.tag == "Player")
+        {
+            sceneConScript.SendCurrentLevel(currentLevel, true);
+            gmScript.UpdateWinCoinText();
+            popupConScript.WinPopup();
+        }
     }
 }

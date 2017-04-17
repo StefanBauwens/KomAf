@@ -8,9 +8,10 @@ public class ObstacleCheck : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.CompareTag("Obstacle"))
+        if (collision.CompareTag("Obstacle") || collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             player.isAgainstObject = true;
+			//Debug.Log ("Isagainst");
         }
     }
 
