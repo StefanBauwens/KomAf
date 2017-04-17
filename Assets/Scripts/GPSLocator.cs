@@ -14,12 +14,17 @@ public class GPSLocator : MonoBehaviour {
 	public float longitude;
 	public float latitude;
 
-	protected float fakelat = 51.171547f;
-	protected float fakelon = 4.122102f;
+	//protected float fakelat = 51.166498f;
+	//protected float fakelon = 4.132195f;
 
 	public bool isBusy;// = true;
 
 	public Text gpsText;
+
+	public string[] Levels;
+	public Vector2[] LevelsLatLong; //Array Levels and this array should be same long
+	public float kmToleranceToLevel = 0.05f; //50 meter
+
 	//public Text debugger;
 
 	// Use this for initialization
@@ -36,7 +41,23 @@ public class GPSLocator : MonoBehaviour {
 			StartCoroutine (StartLocationService ());
 		}
 		//gpsText.text = "Lon:" + longitude.ToString () + " Lat:" + latitude.ToString ();
-		gpsText.text = "Distance to fakelatlon =" + getDistanceFromLatLonInKm(latitude, longitude, fakelat, fakelon).ToString();
+		//gpsText.text = "Distance to fakelatlon =" + getDistanceFromLatLonInKm(latitude, longitude, fakelat, fakelon).ToString();
+
+		//Iterate over the latitudes & longitudes to see if player is in the neighborhood of the location
+		for (int i = 0; i < LevelsLatLong.Length; i++) {
+			if (getDistanceFromLatLonInKm(LevelsLatLong[i].x, LevelsLatLong[i].y, latitude, longitude) <= kmToleranceToLevel) {
+				if (PlayerPrefs.GetInt(Levels [i] + "_secret", 0)==0) { //this makes that it only shows the message the first time.
+					gpsText.text = Levels [i] + " secret unlocked!"; 
+					//REPLACE THE ABOVE LINE WITH A NICE POPUP THAT SAYS YOU UNLOCKED SECET CONTENT IN THE SPECIFIC LEVEL
+				}
+				PlayerPrefs.SetInt (Levels [i] + "_secret", 1); //1 is secret unlocked, 0 means it's still locked
+				PlayerPrefs.Save ();
+			}
+			if (!PlayerPrefs.HasKey(Levels[i] + "_secret")) { //if playerprefs don't exist yet create it with value 0
+				PlayerPrefs.SetInt(Levels[i] + "_secret",  0);
+				PlayerPrefs.Save();
+			}
+		}
 	}
 
 	public IEnumerator StartLocationService ()

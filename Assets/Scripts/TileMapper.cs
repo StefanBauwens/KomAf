@@ -7,6 +7,7 @@ public class TileMapper : MonoBehaviour {
 	public GameObject[] gameObjects;
 	public string[] hexColours;
 	public Texture2D Map;
+	public Texture2D SecretMap;
 
     protected Color[] realColours;
 	protected GameObject tempObject;
@@ -17,19 +18,23 @@ public class TileMapper : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
-        if((SceneManager.GetActiveScene().name) != "AntwerpMap2")
+        if((SceneManager.GetActiveScene().name) != "AntwerpMap2") //hardcoded, but then again who cares lol
         {
             level = SceneManager.GetActiveScene().name;
             gmScript.GetCollectedCoinPositions(level);
         }
 
+		if (SecretMap != null &&  PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_secret", 0)==1) {
+			Map = SecretMap;
+		}
+
 		realColours = new Color[hexColours.Length];
 		for (int i = 0; i < hexColours.Length; i++) {
 			ColorUtility.TryParseHtmlString ("#"+hexColours[i], out realColours[i]); //convert hex to colour
 		}
-
+			
 		colorArray = Map.GetPixels(); //faster than getpixel
-		for (int height = 0; height < Map.height; height++) {
+		for (int height = 0; height < Map.height; height++) { //draws the map
 			for (int width = 0; width < Map.width; width++) {
 				tempObject = null;
 
