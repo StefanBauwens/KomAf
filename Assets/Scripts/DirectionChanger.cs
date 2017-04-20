@@ -17,15 +17,14 @@ public class DirectionChanger : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(currentDirection == Direction.Reverse)
-        {
-            reverseSound.Play();
-            playerScript.inReverseDirection = true;
-        }
-        else
-        {
-            reverseSound.Play();
-            playerScript.inReverseDirection = false;
-        }
+		if (collision.collider.name == "Player") {
+			if (currentDirection == Direction.Reverse) {
+				reverseSound.Play ();
+				playerScript.inReverseDirection = true;
+			} else {
+				reverseSound.Play ();
+				playerScript.inReverseDirection = false;
+			}
+		}
     }
 }
