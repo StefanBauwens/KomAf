@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/SintAnnastrand.unity
+- path: Assets/Scenes/Vlaeykensgang.unity
   isLoaded: 1
   isActive: 1
