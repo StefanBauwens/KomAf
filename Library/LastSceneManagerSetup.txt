@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/AntwerpMap2.unity
+=======
+- path: Assets/Scenes/Vlaeykensgang.unity
+>>>>>>> ad3fb66d6a9e0d4d6cdcbc843e7ae6aad76c24bc
   isLoaded: 1
   isActive: 1
