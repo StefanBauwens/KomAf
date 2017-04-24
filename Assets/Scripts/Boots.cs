@@ -22,10 +22,6 @@ public class Boots : Powerup {
         jumpHigherSound = gameObject.GetComponent<AudioSource>();
     }
 	
-	// Update is called once per frame
-	void Update () {
-        
-	}
     void OnTriggerEnter2D(Collider2D collision)
     {
         jumpHigherSound.Play();
@@ -39,7 +35,8 @@ public class Boots : Powerup {
         playerScript.jumpHeight = newJumpHeight;
         yield return new WaitForSeconds(extraJumpTime);
 		playerScript.jumpHeight = oldJumpHeight;
-        Destroy(gameObject);
+        renderer.enabled = true;
+        collider.enabled = true;
     }
 
 }
