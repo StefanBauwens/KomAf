@@ -38,6 +38,9 @@ public class Enemy : MonoBehaviour {
 		if (coll.gameObject.name == "Player") {
 			popupScript.GameOverPopUp ();
 		}
+		/*if (coll.gameObject.name =="Enemy") {
+			Reverse();
+		}*/
 	}
 
 	public void Reverse()
