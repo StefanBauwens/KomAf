@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/DeRuien.unity
-=======
-- path: Assets/Scenes/SintAnnastrand.unity
->>>>>>> ebe14043e16fc1bdc7f963880ec9a20546b8357d
+- path: Assets/Scenes/AntwerpMap2.unity
   isLoaded: 1
   isActive: 1
