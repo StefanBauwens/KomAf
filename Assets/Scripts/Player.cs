@@ -21,6 +21,8 @@ public class Player : MonoBehaviour {
     public bool inReverseDirection;
     public bool jumpHigher;
 
+	public bool isSinglePaused; 
+
     public Transform groundCheck;
     public float groundCheckRadius; 
     public LayerMask groundSprite;
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		isSinglePaused = false;
 		jumpHeight = 8f;
         Time.timeScale = 1;
         jumpSound = gameObject.GetComponent<AudioSource>();
@@ -40,13 +43,17 @@ public class Player : MonoBehaviour {
 
     void FixedUpdate()
     {
-        ChangeDirection();
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundSprite); // detect if player collides with ground
-        anim.SetBool("isGrounded", isGrounded);
+		if (!isSinglePaused) {
+			ChangeDirection ();
+			isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, groundSprite); // detect if player collides with ground
+			anim.SetBool ("isGrounded", isGrounded);
 
-        CheckIsGrounded();
-        CheckJump();
-        CheckAgainstObject(); 
+			CheckIsGrounded ();
+			CheckJump ();
+			CheckAgainstObject ();
+		} else {
+			anim.enabled = false;
+		}
     }
 
     void Jump()
