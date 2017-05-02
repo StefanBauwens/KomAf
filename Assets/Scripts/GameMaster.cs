@@ -196,6 +196,28 @@ public class GameMaster : MonoBehaviour {
         totalCoinsText.text = totalCoins.ToString();
     }
 
+    public void SaveCurrentDisguise(string currentDisguise)
+    {
+        PlayerPrefs.SetString("currentDisguise", currentDisguise);
+        PlayerPrefs.Save();
+    }
+
+    public string GetCurrentDisguise()
+    {
+        return PlayerPrefs.GetString("currentDisguise", "noDisguiseSelected");
+    }
+
+    public void SaveItemsBought(string itemName)
+    {
+        PlayerPrefs.SetString("itemsBought", itemName);
+        PlayerPrefs.Save();
+    }
+
+    public string GetItemsBought()
+    {
+        return PlayerPrefs.GetString("itemsBought", "noItemsBought");
+    }
+
     public static Vector3 StringToVector3(string sVector)
     {
         string[] sArray = sVector.Split(',');

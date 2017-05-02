@@ -3,58 +3,128 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum ItemState
-{
-    InShop, Bought, Selected, NotSelected
-};
-
 public class DisguiseItem : MonoBehaviour {
 
     public Image disguiseImage;
+    public Image selectImage;
     public Text disguiseName;
     public Text disguiseDescription;
     public Text disguisePrice;
-    public GameObject button;
-    private Button buySelectButton;
-    private ItemState currentState;
+    public GameObject buyButtonObject;
+    public GameObject selectButtonObject;
+    private Button buyButton;
+    private Button selectButton;
+    private bool itemBought = false;
+    private bool itemSelected = false;
+    private ShopList shopScript;
+    
 
     public Sprite itemSprite;
+    public Sprite selectSprite;
+    public Sprite deselectSprite;
     public string itemName;
     public string itemDescription;
-    public int price;
+    public int itemPrice;
 
 	// Use this for initialization
 	void Start () {
-
-	}
+        shopScript = GetComponentInParent<ShopList>();
+        
+    }
 	
 	public void ItemSetup()
     {
         disguiseImage.sprite = itemSprite;
         disguiseName.text = itemName;
         disguiseDescription.text = itemDescription;
-        disguisePrice.text = price.ToString();
-        buySelectButton = button.GetComponent<Button>();
-        CheckState();
+        disguisePrice.text = itemPrice.ToString();
+        buyButton = buyButtonObject.GetComponent<Button>();
+        selectButton = selectButtonObject.GetComponent<Button>();
+        CheckItemState();
     }
 
-    public void CheckState()
+    public void CheckItemState()
     {
-        if(currentState == ItemState.InShop)
+        CheckItemBought();
+        CheckItemSelected();
+    }
+
+    public void CheckItemBought()
+    {
+        if(itemBought)
         {
-            buySelectButton.GetComponentInChildren<Text>().text = "Kopen";
+            buyButton.GetComponentInChildren<Text>().text = "Gekocht";
         }
-        else if (currentState == ItemState.Bought)
+        else
         {
-            buySelectButton.GetComponentInChildren<Text>().text = "Gekocht";
+            buyButton.GetComponentInChildren<Text>().text = "Kopen";
         }
-        else if (currentState == ItemState.NotSelected)
+        
+        CheckBuyButtonInteractable();
+    }
+
+    public void CheckItemSelected()
+    {
+        if(itemBought && this.ToString() != shopScript.currentItem)
         {
-            buySelectButton.GetComponentInChildren<Text>().text = "Aandoen";
+            selectButton.GetComponentInChildren<Text>().text = "Selecteren";
+            selectImage.sprite = deselectSprite;
+            selectButton.interactable = true;
         }
-        else if (currentState == ItemState.Selected)
+        else if (this.ToString() == shopScript.currentItem)
         {
-            buySelectButton.GetComponentInChildren<Text>().text = "Uitdoen";
+            selectButton.GetComponentInChildren<Text>().text = "Geselecteerd";
+            selectImage.sprite = selectSprite;
+            selectButton.interactable = false;
+        }
+        else
+        {
+            selectButton.GetComponentInChildren<Text>().text = "Niet in bezit";
+            selectImage.sprite = deselectSprite;
+            selectButton.interactable = false;
+        }
+        Debug.Log("current item in checkitemselected: " + shopScript.currentItem); 
+    }
+
+    public void CheckBuyButtonInteractable()
+    {
+        //if(GameMaster.totalCoins > itemPrice)
+
+        if (shopScript.testCoins >= itemPrice && !itemBought)
+        {
+            buyButton.interactable = true;
+        }
+        else
+        {
+            buyButton.interactable = false;
+        }
+    }
+
+
+    public void BuyItem()
+    {
+        //if(!itemBought && GameMaster.totalCoins > itemPrice)
+        if(!itemBought && shopScript.testCoins >= itemPrice)
+        {
+            //GameMaster.totalCoins -= itemPrice;
+            shopScript.testCoins -= itemPrice;
+            itemBought = true;
+            shopScript.itemsBought.Add(this);
+            Debug.Log("Added " + gameObject + " to the list");
+            buyButton.interactable = false;
+            shopScript.RefreshShop();
+        }
+    }
+
+    public void SelectItem()
+    {
+        if(itemBought && !itemSelected)
+        {
+            selectImage.sprite = selectSprite;
+            itemSelected = true;
+            shopScript.currentItem = this.ToString();
+            Debug.Log("current item: " + shopScript.currentItem);
+            shopScript.RefreshShop();
         }
     }
 }
