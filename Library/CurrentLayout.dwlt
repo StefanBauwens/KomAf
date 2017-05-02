@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 3}
-  m_MinSize: {x: 950, y: 571}
+  m_MinSize: {x: 950, y: 613}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -37,12 +37,16 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     y: 1189
+=======
+    y: 1090
+>>>>>>> e0931b66a3803ff15ed9d68ebe11daab4b622e6f
     width: 1187
-    height: 102
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+    height: 201
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -79,7 +83,7 @@ MonoBehaviour:
 <<<<<<< Updated upstream
     width: 2560
     height: 1341
-  m_MinSize: {x: 950, y: 571}
+  m_MinSize: {x: 950, y: 613}
   m_MaxSize: {x: 10000, y: 10000}
 =======
     width: 311
@@ -135,8 +139,8 @@ MonoBehaviour:
     y: 30
     width: 2560
     height: 1291
-  m_MinSize: {x: 911, y: 521}
-  m_MaxSize: {x: 22006, y: 12021}
+  m_MinSize: {x: 913, y: 563}
+  m_MaxSize: {x: 22008, y: 12063}
   vertical: 0
   controlID: 21
 --- !u!114 &6
@@ -180,8 +184,8 @@ MonoBehaviour:
     y: 0
     width: 1187
     height: 1291
-  m_MinSize: {x: 202, y: 521}
-  m_MaxSize: {x: 4002, y: 12021}
+  m_MinSize: {x: 202, y: 563}
+  m_MaxSize: {x: 4002, y: 12063}
   vertical: 1
   controlID: 22
 --- !u!114 &8
@@ -262,8 +266,8 @@ MonoBehaviour:
 <<<<<<< Updated upstream
     width: 573
     height: 1291
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -294,9 +298,9 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1187
-    height: 734
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+    height: 577
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -317,11 +321,11 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 734
+    y: 577
     width: 1187
-    height: 455
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+    height: 513
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -350,9 +354,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: -2560
-    y: 1097
+    y: 998
     width: 1185
-    height: 81
+    height: 180
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -381,9 +385,9 @@ MonoBehaviour:
     height: 1270
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0e690000
-    m_LastClickedID: 26894
-    m_ExpandedIDs: d230ffff7031ffff4632ffff6e33ffffec33ffff6035ffff6435ffffb439ffff543affff2a3bffff523cffffd03cffff443effff483effff8e41ffff6244ffff1e45fffff445ffff1c47ffff2047ffff7c48ffffaa49ffffdcfbffff0000000068280000c428000052460000f0570000c86800000e690000
+    m_SelectedIDs: 388b0000
+    m_LastClickedID: 35640
+    m_ExpandedIDs: 9675fbfffc7bfbff4884fbff968afbff4a8cfbff288efbfff0c6fcff1ecbfcff3410fdff5093ffff82afffffdcfbffff00000000ca280000ec2e00003e370000123800002e38000006560000a45f0000c25f0000386200009462000010630000427a0000ae7b00000e7e0000da820000d6850000388b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -402,7 +406,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 8}
     m_SearchString: 
   m_ExpandedScenes:
-  - AntwerpMap2
+  - ZwemvijverBoekenberg
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -644,21 +648,21 @@ MonoBehaviour:
     serializedVersion: 2
 <<<<<<< Updated upstream
     x: -2560
-    y: 642
+    y: 485
     width: 1185
-    height: 434
+    height: 492
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
   m_Stats: 0
-  m_SelectedSizes: 00000000000000000000000004000000000000000000000000000000000000000000000000000000
+  m_SelectedSizes: 00000000000000000000000010000000000000000000000000000000000000000000000000000000
   m_TargetDisplay: 0
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
-    m_HBaseRangeMin: -240
-    m_HBaseRangeMax: 240
-    m_VBaseRangeMin: -400
-    m_VBaseRangeMax: 400
+    m_HBaseRangeMin: -133.59375
+    m_HBaseRangeMax: 133.59375
+    m_VBaseRangeMin: -237.5
+    m_VBaseRangeMax: 237.5
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -676,24 +680,24 @@ MonoBehaviour:
       x: 0
       y: 17
       width: 1185
-      height: 417
-    m_Scale: {x: 0.52125, y: 0.52125}
-    m_Translation: {x: 592.5, y: 208.5}
+      height: 475
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 592.5, y: 237.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1136.6907
-      y: -400
-      width: 2273.3813
-      height: 800
+      x: -592.5
+      y: -237.5
+      width: 1185
+      height: 475
     m_MinimalGUI: 1
-  m_defaultScale: 0.52125
+  m_defaultScale: 1
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
-  m_LastWindowPixelSize: {x: 1185, y: 434}
+  m_LastWindowPixelSize: {x: 1185, y: 492}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000001000100000100
@@ -756,17 +760,22 @@ MonoBehaviour:
     x: -2560
     y: -92
     width: 1185
-    height: 713
+    height: 556
   m_SceneLighting: 1
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   lastFramingTime: 4543.514144957066
 =======
   lastFramingTime: 3404.226737688203
 >>>>>>> Stashed changes
+=======
+  lastFramingTime: 4327.206128954887
+>>>>>>> e0931b66a3803ff15ed9d68ebe11daab4b622e6f
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     m_Target: {x: 149.70808, y: 293.49335, z: 0}
     speed: 2
@@ -776,6 +785,11 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 119.7054, y: 251.91179, z: 5.1292458}
 >>>>>>> Stashed changes
+=======
+    m_Target: {x: 127.03755, y: 216.23526, z: 0}
+    speed: 2
+    m_Value: {x: 127.03755, y: 216.23526, z: 0}
+>>>>>>> e0931b66a3803ff15ed9d68ebe11daab4b622e6f
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -802,6 +816,7 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     m_Target: 827.1682
     speed: 2
@@ -811,6 +826,11 @@ MonoBehaviour:
     speed: 2
     m_Value: 273.29974
 >>>>>>> Stashed changes
+=======
+    m_Target: 852.5024
+    speed: 2
+    m_Value: 852.5024
+>>>>>>> e0931b66a3803ff15ed9d68ebe11daab4b622e6f
   m_Ortho:
     m_Target: 1
     speed: 2

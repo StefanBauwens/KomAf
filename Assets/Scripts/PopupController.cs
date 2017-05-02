@@ -7,6 +7,7 @@ public class PopupController : MonoBehaviour {
 
     public Player playerScript;
     public CanvasGroup gameOverCanvas;
+	public CanvasGroup gameOverCanvasDeath;
     public CanvasGroup winCanvas;
     public CanvasGroup pauseCanvas;
     private GameMaster gmScript;
@@ -61,6 +62,20 @@ public class PopupController : MonoBehaviour {
         }
         
     }
+
+	public void GameOverPopUpDeath() //shows the popup for when the player touches an enemy
+	{
+		if (audSource)
+		{
+			audSource.PlayOneShot(gameOverSound, 0.5f);
+		}
+		Time.timeScale = 0;
+		if (gameOverCanvasDeath)
+		{
+			SetPopupVisible(gameOverCanvasDeath, true);
+		}
+
+	}
 
     public void PausePopup()
     {
