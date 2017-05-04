@@ -11,15 +11,17 @@ public class Player : MonoBehaviour {
 
     private GameMaster gmScript;
 
-    public float jumpHeight = 6;
+    public float jumpHeight = 8f;
     public float moveSpeed = 5;
 
     public bool isGrounded;
-    public bool doubleJumped;
+    //public bool doubleJumped;
     public bool isAgainstObject;
     public bool isPaused;
     public bool inReverseDirection;
     public bool jumpHigher;
+
+	public bool isSinglePaused; 
 
     public Transform groundCheck;
     public float groundCheckRadius; 
@@ -29,6 +31,8 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		isSinglePaused = false;
+		jumpHeight = 8f;
         Time.timeScale = 1;
         jumpSound = gameObject.GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -39,13 +43,17 @@ public class Player : MonoBehaviour {
 
     void FixedUpdate()
     {
-        ChangeDirection();
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundSprite); // detect if player collides with ground
-        anim.SetBool("isGrounded", isGrounded);
+		if (!isSinglePaused) {
+			ChangeDirection ();
+			isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, groundSprite); // detect if player collides with ground
+			anim.SetBool ("isGrounded", isGrounded);
 
-        CheckIsGrounded();
-        CheckJump();
-        CheckAgainstObject(); 
+			CheckIsGrounded ();
+			CheckJump ();
+			CheckAgainstObject ();
+		} else {
+			anim.enabled = false;
+		}
     }
 
     void Jump()
@@ -65,7 +73,7 @@ public class Player : MonoBehaviour {
     {
         if (isGrounded)
         {
-            doubleJumped = false;
+            //doubleJumped = false;
         }
     }
 
@@ -77,12 +85,12 @@ public class Player : MonoBehaviour {
 				Jump();
                 jumpSound.Play();
             }
-			if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space)) && !isGrounded && !doubleJumped)
+			/*if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space)) && !isGrounded && !doubleJumped)
 			{
 				Jump();
                 jumpSound.Play();
                 doubleJumped = true;
-			}
+			}*/
 		}
     }
 
@@ -90,7 +98,6 @@ public class Player : MonoBehaviour {
     {
 		if (isAgainstObject && !isGrounded)
         {
-            //doubleJumped = false;
 			isGrounded = true;
         }
     }

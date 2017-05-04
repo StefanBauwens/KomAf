@@ -20,6 +20,7 @@ public class GameMaster : MonoBehaviour {
     public Text totalCoinsText;
     public List<Vector3> collectedCoinsPos;
     public int coinsCollectedInLevel;
+    public int nrOfItems = 10;
 
     void Awake()
     {
@@ -194,6 +195,28 @@ public class GameMaster : MonoBehaviour {
         totalCoins = GetTotalCoins();
         totalCoinsText = GameObject.Find("Canvas/CoinUI/totalCoins").GetComponent<Text>();
         totalCoinsText.text = totalCoins.ToString();
+    }
+
+    public void SaveCurrentDisguise(string currentDisguise)
+    {
+        PlayerPrefs.SetString("currentDisguise", currentDisguise);
+        PlayerPrefs.Save();
+    }
+
+    public string GetCurrentDisguise()
+    {
+        return PlayerPrefs.GetString("currentDisguise", "noDisguiseSelected");
+    }
+
+    public void SaveItemsBought(string itemName, int itemNumber)
+    {
+            PlayerPrefs.SetString("itemsBought" + itemNumber, itemName);
+            PlayerPrefs.Save();
+    }
+
+    public string GetItemsBought(int itemNumber)
+    {
+        return PlayerPrefs.GetString("itemsBought" + itemNumber, "itemNotBought");
     }
 
     public static Vector3 StringToVector3(string sVector)

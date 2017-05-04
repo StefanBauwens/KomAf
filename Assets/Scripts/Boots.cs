@@ -5,7 +5,8 @@ using UnityEngine;
 public class Boots : Powerup {
 
     Player playerScript;
-    public float newJumpHeight = 8f;
+    public float newJumpHeight = 11f;
+	protected float oldJumpHeight;
     protected float extraJumpTime = 5f;
     protected Renderer renderer;
     protected Collider2D collider;
@@ -13,16 +14,14 @@ public class Boots : Powerup {
 
 	// Use this for initialization
 	void Start () {
+		newJumpHeight = 11f;
         renderer = GetComponent<Renderer>();
         collider = GetComponent<Collider2D>();
 		playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
+		oldJumpHeight = playerScript.jumpHeight;
         jumpHigherSound = gameObject.GetComponent<AudioSource>();
     }
 	
-	// Update is called once per frame
-	void Update () {
-        
-	}
     void OnTriggerEnter2D(Collider2D collision)
     {
         jumpHigherSound.Play();
@@ -35,8 +34,9 @@ public class Boots : Powerup {
     {
         playerScript.jumpHeight = newJumpHeight;
         yield return new WaitForSeconds(extraJumpTime);
-        playerScript.jumpHeight = 5f;
-        Destroy(gameObject);
+		playerScript.jumpHeight = oldJumpHeight;
+        renderer.enabled = true;
+        collider.enabled = true;
     }
 
 }

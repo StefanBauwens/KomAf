@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour {
     protected float addToX = 0;
     protected float addToY = 0;
 
-	protected float speedCamera = 0.03f;
+	public float speedCamera = 0.03f;
 	protected float speedBackToNormal = 1f;
 
     // Use this for initialization

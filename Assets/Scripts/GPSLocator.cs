@@ -19,7 +19,8 @@ public class GPSLocator : MonoBehaviour {
 
 	public bool isBusy;// = true;
 
-	public Text gpsText;
+    public GameObject gpsPopupCanvas;
+    public Text levelText;
 
 	public string[] Levels;
 	public Vector2[] LevelsLatLong; //Array Levels and this array should be same long
@@ -37,19 +38,21 @@ public class GPSLocator : MonoBehaviour {
 	}
 
 	void Update () {
-		if (!isBusy) {
+        if (!isBusy) {
 			StartCoroutine (StartLocationService ());
 		}
-		//gpsText.text = "Lon:" + longitude.ToString () + " Lat:" + latitude.ToString ();
-		//gpsText.text = "Distance to fakelatlon =" + getDistanceFromLatLonInKm(latitude, longitude, fakelat, fakelon).ToString();
-
+        //gpsText.text = "Lon:" + longitude.ToString () + " Lat:" + latitude.ToString ();
+        //gpsText.text = "Distance to fakelatlon =" + getDistanceFromLatLonInKm(latitude, longitude, fakelat, fakelon).ToString();
+        
 		//Iterate over the latitudes & longitudes to see if player is in the neighborhood of the location
 		for (int i = 0; i < LevelsLatLong.Length; i++) {
 			if (getDistanceFromLatLonInKm(LevelsLatLong[i].x, LevelsLatLong[i].y, latitude, longitude) <= kmToleranceToLevel) {
 				if (PlayerPrefs.GetInt(Levels [i] + "_secret", 0)==0) { //this makes that it only shows the message the first time.
-					gpsText.text = Levels [i] + " secret unlocked!"; 
-					//REPLACE THE ABOVE LINE WITH A NICE POPUP THAT SAYS YOU UNLOCKED SECET CONTENT IN THE SPECIFIC LEVEL
-				}
+                    //gpsText.text = Levels [i] + " secret unlocked!"; 
+                    levelText.text = Levels[i];
+                    OpenCloseGPSPopup();
+                    //REPLACE THE ABOVE LINE WITH A NICE POPUP THAT SAYS YOU UNLOCKED SECET CONTENT IN THE SPECIFIC LEVEL
+                }
 				PlayerPrefs.SetInt (Levels [i] + "_secret", 1); //1 is secret unlocked, 0 means it's still locked
 				PlayerPrefs.Save ();
 			}
@@ -107,4 +110,10 @@ public class GPSLocator : MonoBehaviour {
 	{
 		return deg * (float)(Math.PI/180f);
 	}
+
+    public void OpenCloseGPSPopup()
+    {
+        gpsPopupCanvas.GetComponent<EasyTween>().OpenCloseObjectAnimation();
+    }
+
 }

@@ -10,6 +10,7 @@ public class LocationPopup : MonoBehaviour {
     public Text locationNameText;
     public Text coinsCollectedText;
     public Text maxCoins;
+    private CanvasGroup locationPopupCanvas;
     private Button resumeButton;
     private SceneController sceneConScript;
     private GameMaster gmScript;
@@ -20,8 +21,9 @@ public class LocationPopup : MonoBehaviour {
         sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
         locationInfoScript = GameObject.FindGameObjectWithTag("LocationInfoKeeper").GetComponent<LocationInfoKeeper>();
-        resumeButton = GetComponentInChildren<Button>();
+        resumeButton = GameObject.FindGameObjectWithTag("ResumeButton").GetComponent<Button>();
         resumeButton.onClick.AddListener(() => sceneConScript.LoadLevelByName(locationName)); // register button event and pass parameter with lambda
+        locationPopupCanvas = GetComponentInParent<CanvasGroup>();
     }
 
     public void CheckLocationInfo()
@@ -42,5 +44,12 @@ public class LocationPopup : MonoBehaviour {
         {
             locationInfoText.text = "Pagina van GATE15 brochure nog niet gevonden.";
         }
+    }
+
+    public void CloseLocationPopup()
+    {
+        locationPopupCanvas.alpha = 0;
+        locationPopupCanvas.interactable = false;
+        locationPopupCanvas.blocksRaycasts = false;
     }
 }
