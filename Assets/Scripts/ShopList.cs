@@ -6,41 +6,67 @@ using UnityEngine.UI;
 public class ShopList : MonoBehaviour {
 
     public DisguiseItem[] itemArray;
-    public List<DisguiseItem> itemsBought;
+    public List<string> itemsBought;
     public string currentItem;
     public Text totalCoinsShop;
     public int testCoins;
-    private int itemCount;
     private GameMaster gmScript;
+    private int nrOfItems;
+    public CanvasGroup shopCanvasGroup;
+
 
     // Use this for initialization
     void Start () {
         
         gmScript = GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
-        SetupShop();
+        nrOfItems = gmScript.nrOfItems;
+        itemArray = new DisguiseItem[nrOfItems];
+        List<string> itemsBought = new List<string>();
+        
+        //SetupShop();
 	}
 
-    private void SetupShop()
+    public void SetupShop()
     {
         //totalCoinsShop.text = GameMaster.totalCoins.ToString();
         totalCoinsShop.text = testCoins.ToString();
 
+        
 
-        currentItem = gmScript.GetCurrentDisguise();
-        // ADD BOUGHT ITEMS TO LIST
-        Debug.Log(gmScript.GetCurrentDisguise());
-
-        itemArray = new DisguiseItem[transform.childCount];
-
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < nrOfItems; i++)
         {
             itemArray[i] = transform.GetChild(i).gameObject.GetComponent<DisguiseItem>();
             Debug.Log(itemArray[i]);
         }
 
-        for (int j = 0; j < itemArray.Length; j++)
+        // add bought items to list
+        for (int itemNumber = 0; itemNumber < nrOfItems; itemNumber++)
         {
-            itemArray[j].ItemSetup();
+            if(gmScript.GetItemsBought(itemNumber) != "itemNotBought")
+            {
+                itemsBought.Add(gmScript.GetItemsBought(itemNumber));
+            }
+            else if(gmScript.GetItemsBought(itemNumber) == "itemNotBought")
+            {
+                itemsBought.Add("itemNotBought");
+            }
+        }
+
+        // change boolean (from items in list) to bought
+        for(int j = 0; j < nrOfItems; j++)
+        {
+            Debug.Log("itemname: " + itemArray[j] + "name in list: " + itemsBought[j]);
+            if( itemsBought.Contains(itemArray[j].ToString()))
+            {
+                itemArray[j].itemBought = true;
+            }
+        }
+
+        currentItem = gmScript.GetCurrentDisguise();
+
+        for (int j = 0; j < nrOfItems; j++)
+        {
+            itemArray[j].CheckItemState();
         }
     }
 
@@ -57,13 +83,18 @@ public class ShopList : MonoBehaviour {
     public void ExitShop()
     {
         gmScript.SaveCurrentDisguise(currentItem);
-        for(int i = 0; i < itemsBought.Count; i++)
+        for(int itemNr = 0; itemNr < nrOfItems; itemNr++)
         {
-            gmScript.SaveItemsBought(itemsBought[i].ToString());
-            Debug.Log("saved items bought: " + itemsBought[i].ToString());
+            if(itemArray[itemNr].itemBought)
+            {
+                gmScript.SaveItemsBought(itemArray[itemNr].ToString(), itemNr);
+                Debug.Log("saved items bought: " + itemArray[itemNr].ToString());
+            }    
         }
-        
-        gameObject.SetActive(false);
+
+        shopCanvasGroup.alpha = 0;
+        shopCanvasGroup.interactable = false;
+        shopCanvasGroup.blocksRaycasts = false;
     }
 
 }

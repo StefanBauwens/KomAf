@@ -20,6 +20,7 @@ public class GameMaster : MonoBehaviour {
     public Text totalCoinsText;
     public List<Vector3> collectedCoinsPos;
     public int coinsCollectedInLevel;
+    public int nrOfItems = 10;
 
     void Awake()
     {
@@ -207,15 +208,15 @@ public class GameMaster : MonoBehaviour {
         return PlayerPrefs.GetString("currentDisguise", "noDisguiseSelected");
     }
 
-    public void SaveItemsBought(string itemName)
+    public void SaveItemsBought(string itemName, int itemNumber)
     {
-        PlayerPrefs.SetString("itemsBought", itemName);
-        PlayerPrefs.Save();
+            PlayerPrefs.SetString("itemsBought" + itemNumber, itemName);
+            PlayerPrefs.Save();
     }
 
-    public string GetItemsBought()
+    public string GetItemsBought(int itemNumber)
     {
-        return PlayerPrefs.GetString("itemsBought", "noItemsBought");
+        return PlayerPrefs.GetString("itemsBought" + itemNumber, "itemNotBought");
     }
 
     public static Vector3 StringToVector3(string sVector)

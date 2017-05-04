@@ -14,7 +14,7 @@ public class DisguiseItem : MonoBehaviour {
     public GameObject selectButtonObject;
     private Button buyButton;
     private Button selectButton;
-    private bool itemBought = false;
+    public bool itemBought = false;
     private bool itemSelected = false;
     private ShopList shopScript;
     
@@ -29,18 +29,19 @@ public class DisguiseItem : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         shopScript = GetComponentInParent<ShopList>();
-        
+        buyButton = buyButtonObject.GetComponent<Button>();
+        selectButton = selectButtonObject.GetComponent<Button>();
+        ItemSetup();
     }
-	
-	public void ItemSetup()
+
+    public void ItemSetup()
     {
         disguiseImage.sprite = itemSprite;
         disguiseName.text = itemName;
         disguiseDescription.text = itemDescription;
         disguisePrice.text = itemPrice.ToString();
-        buyButton = buyButtonObject.GetComponent<Button>();
-        selectButton = selectButtonObject.GetComponent<Button>();
-        CheckItemState();
+        shopScript.SetupShop();
+        //CheckItemState();
     }
 
     public void CheckItemState()
@@ -70,12 +71,15 @@ public class DisguiseItem : MonoBehaviour {
             selectButton.GetComponentInChildren<Text>().text = "Selecteren";
             selectImage.sprite = deselectSprite;
             selectButton.interactable = true;
+            itemSelected = false;
         }
         else if (this.ToString() == shopScript.currentItem)
         {
             selectButton.GetComponentInChildren<Text>().text = "Geselecteerd";
             selectImage.sprite = selectSprite;
             selectButton.interactable = false;
+            itemSelected = true;
+            Debug.Log("current item in checkitemselected: " + shopScript.currentItem);
         }
         else
         {
@@ -83,7 +87,6 @@ public class DisguiseItem : MonoBehaviour {
             selectImage.sprite = deselectSprite;
             selectButton.interactable = false;
         }
-        Debug.Log("current item in checkitemselected: " + shopScript.currentItem); 
     }
 
     public void CheckBuyButtonInteractable()
@@ -109,8 +112,7 @@ public class DisguiseItem : MonoBehaviour {
             //GameMaster.totalCoins -= itemPrice;
             shopScript.testCoins -= itemPrice;
             itemBought = true;
-            shopScript.itemsBought.Add(this);
-            Debug.Log("Added " + gameObject + " to the list");
+            shopScript.itemsBought.Add(this.ToString());
             buyButton.interactable = false;
             shopScript.RefreshShop();
         }
