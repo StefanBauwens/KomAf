@@ -7,9 +7,11 @@ public class DisguiseItem : MonoBehaviour {
 
     public Image disguiseImage;
     public Image selectImage;
+    public Image valiueImage;
     public Text disguiseName;
     public Text disguiseDescription;
     public Text disguisePrice;
+    public Text disguiseValue;
     public GameObject buyButtonObject;
     public GameObject selectButtonObject;
     private Button buyButton;
@@ -25,6 +27,7 @@ public class DisguiseItem : MonoBehaviour {
     public string itemName;
     public string itemDescription;
     public int itemPrice;
+    public int itemValue;
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +43,7 @@ public class DisguiseItem : MonoBehaviour {
         disguiseName.text = itemName;
         disguiseDescription.text = itemDescription;
         disguisePrice.text = itemPrice.ToString();
+        disguiseValue.text = itemValue.ToString();
         shopScript.SetupShop();
         //CheckItemState();
     }
