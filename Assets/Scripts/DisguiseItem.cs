@@ -29,13 +29,24 @@ public class DisguiseItem : MonoBehaviour {
     public int itemPrice;
     public int itemValue;
 
+	//protected bool hasRun;
+
 	// Use this for initialization
 	void Start () {
         shopScript = GetComponentInParent<ShopList>();
         buyButton = buyButtonObject.GetComponent<Button>();
         selectButton = selectButtonObject.GetComponent<Button>();
+		//hasRun = false;
         ItemSetup();
     }
+
+	/*void Update()
+	{
+		if (!hasRun) {
+			hasRun = true;
+			ItemSetup ();
+		}
+	}*/
 
     public void ItemSetup()
     {
@@ -44,7 +55,7 @@ public class DisguiseItem : MonoBehaviour {
         disguiseDescription.text = itemDescription;
         disguisePrice.text = itemPrice.ToString();
         disguiseValue.text = itemValue.ToString();
-        shopScript.SetupShop(this);
+        //shopScript.SetupShop(this);
         //CheckItemState();
     }
 

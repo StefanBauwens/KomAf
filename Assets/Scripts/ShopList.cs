@@ -14,6 +14,8 @@ public class ShopList : MonoBehaviour {
     private GameMaster gmScript;
     private int nrOfItems;
     public CanvasGroup shopCanvasGroup;
+	protected bool hasRun;
+
 
 
     // Use this for initialization
@@ -24,32 +26,28 @@ public class ShopList : MonoBehaviour {
         itemArray = new DisguiseItem[nrOfItems];
         itemsBought = new List<string>();
 		itemList = new List<DisguiseItem> ();
-        
+		hasRun = false;
         //SetupShop();
 	}
 
-	public void SetupShop(DisguiseItem dItem)
-    {
-		if (gmScript == null) {
-			Start ();
-
+	void Update()
+	{
+		if (!hasRun) {
+			hasRun = true;
+			SetupShop ();
 		}
+	}
 
-
+	public void SetupShop()
+    {
         //totalCoinsShop.text = GameMaster.totalCoins.ToString();
-        totalCoinsShop.text = testCoins.ToString();
+        totalCoinsShop.text = testCoins.ToString();   
 
-        
-
-        /*for (int i = 0; i < nrOfItems; i++)
+        for (int i = 0; i < nrOfItems; i++)
         {
             itemArray[i] = transform.GetChild(i).gameObject.GetComponent<DisguiseItem>();
             Debug.Log(itemArray[i]);
-        }*/
-
-		itemList.Add (dItem);
-		Debug.Log (dItem);
-		itemArray = itemList.ToArray ();
+        }
 
         // add bought items to list
         for (int itemNumber = 0; itemNumber < nrOfItems; itemNumber++)
