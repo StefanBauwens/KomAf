@@ -44,7 +44,7 @@ public class DisguiseItem : MonoBehaviour {
         disguiseDescription.text = itemDescription;
         disguisePrice.text = itemPrice.ToString();
         disguiseValue.text = itemValue.ToString();
-        shopScript.SetupShop();
+        shopScript.SetupShop(this);
         //CheckItemState();
     }
 

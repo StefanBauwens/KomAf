@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ShopList : MonoBehaviour {
 
     public DisguiseItem[] itemArray;
+	protected List<DisguiseItem> itemList;
     public List<string> itemsBought;
     public string currentItem;
     public Text totalCoinsShop;
@@ -21,23 +22,34 @@ public class ShopList : MonoBehaviour {
         gmScript = GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
         nrOfItems = gmScript.nrOfItems;
         itemArray = new DisguiseItem[nrOfItems];
-        List<string> itemsBought = new List<string>();
+        itemsBought = new List<string>();
+		itemList = new List<DisguiseItem> ();
         
         //SetupShop();
 	}
 
-    public void SetupShop()
+	public void SetupShop(DisguiseItem dItem)
     {
+		if (gmScript == null) {
+			Start ();
+
+		}
+
+
         //totalCoinsShop.text = GameMaster.totalCoins.ToString();
         totalCoinsShop.text = testCoins.ToString();
 
         
 
-        for (int i = 0; i < nrOfItems; i++)
+        /*for (int i = 0; i < nrOfItems; i++)
         {
             itemArray[i] = transform.GetChild(i).gameObject.GetComponent<DisguiseItem>();
             Debug.Log(itemArray[i]);
-        }
+        }*/
+
+		itemList.Add (dItem);
+		Debug.Log (dItem);
+		itemArray = itemList.ToArray ();
 
         // add bought items to list
         for (int itemNumber = 0; itemNumber < nrOfItems; itemNumber++)
@@ -82,7 +94,7 @@ public class ShopList : MonoBehaviour {
 
     public void ExitShop()
     {
-        gmScript.SaveCurrentDisguise(currentItem);
+        gmScript.SaveCurrentDisguise(currentItem); 
         for(int itemNr = 0; itemNr < nrOfItems; itemNr++)
         {
             if(itemArray[itemNr].itemBought)
