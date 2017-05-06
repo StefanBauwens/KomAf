@@ -81,7 +81,7 @@ public class SceneController : MonoBehaviour {
 
     void OnEnable()
     {
-        SceneManager.activeSceneChanged += LevelFinishedLoading; // satrt listening for scene change when script enabled
+        SceneManager.activeSceneChanged += LevelFinishedLoading; // start listening for scene change when script enabled
     }
 
     void OnDisable()

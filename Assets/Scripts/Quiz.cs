@@ -24,10 +24,15 @@ public class Quiz : MonoBehaviour {
 
 	protected bool isBusy;
 
+    protected SceneController sceneConScript;
+    protected PopupController popupScript;
+
 	//@Stefan maybe add a "repeat the question" option
 
 	// Use this for initialization
 	void Start () {
+        sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
+        popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
 		isBusy = false;
 
 		//adds the question to the sentences
@@ -79,10 +84,13 @@ public class Quiz : MonoBehaviour {
 	{
 		if ((easy && nrOfButton == correctElementEasy) || (!easy && nrOfButton == correctElementHard)) {
 			popupText.text = "THAT's CORRECT!!";
-			//proceed to next level @CINDY DO YOUR MAGIC HERE
+            //proceed to next level @CINDY DO YOUR MAGIC HERE
+            sceneConScript.LoadAntwerpMap();
+
 		} else {
 			popupText.text = "Wrong...";
-			//Game over thingie @CINDY HERE TOO
+            //Game over thingie @CINDY HERE TOO
+            popupScript.GameOverPopUpDeath();
 		}	
 	}
 
