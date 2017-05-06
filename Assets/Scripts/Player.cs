@@ -11,7 +11,8 @@ public class Player : MonoBehaviour {
 
     private GameMaster gmScript;
 
-    public float jumpHeight = 8f;
+    public float jumpHeight = 14f;
+	public float smallJump = 14f;
     public float moveSpeed = 5;
 
     public bool isGrounded;
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		isSinglePaused = false;
-		jumpHeight = 8f;
+		//jumpHeight = 8f;
         Time.timeScale = 1;
         jumpSound = gameObject.GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();

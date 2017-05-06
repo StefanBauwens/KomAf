@@ -14,11 +14,11 @@ public class Boots : Powerup {
 
 	// Use this for initialization
 	void Start () {
-		newJumpHeight = 11f;
+		//newJumpHeight = 11f;
         renderer = GetComponent<Renderer>();
         collider = GetComponent<Collider2D>();
 		playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
-		oldJumpHeight = playerScript.jumpHeight;
+		oldJumpHeight = playerScript.smallJump;
         jumpHigherSound = gameObject.GetComponent<AudioSource>();
     }
 	
