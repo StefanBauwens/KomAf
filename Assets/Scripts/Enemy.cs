@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class Enemy : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class Enemy : MonoBehaviour {
 	protected Rigidbody2D rb;
 
 	public float moveSpeed = 2;
+	protected float waitForDeathPopupSeconds = 0.3f;
 	protected int collisionCount = 0;
 
 	public bool isGrounded;
@@ -36,7 +38,8 @@ public class Enemy : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (coll.gameObject.name == "Player") {
-			popupScript.GameOverPopUpDeath ();
+			//wait a second
+			StartCoroutine(ShowDeathScreen());
 		}
 		/*if (coll.gameObject.name =="Enemy") {
 			Reverse();
@@ -47,5 +50,11 @@ public class Enemy : MonoBehaviour {
 	{
 		isWalkingRight = !isWalkingRight;
 		transform.Rotate(new Vector3(0,180,0)); //flip the enemy
+	}
+
+	IEnumerator ShowDeathScreen() //using coroutine to wait a while before showing the death screen
+	{
+		yield return new WaitForSeconds(waitForDeathPopupSeconds);
+		popupScript.GameOverPopUpDeath ();
 	}
 }
