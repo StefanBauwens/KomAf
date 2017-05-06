@@ -18,7 +18,7 @@ public class TileMapper : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
-        if((SceneManager.GetActiveScene().name) != "AntwerpMap2") //hardcoded, but then again who cares lol
+        if((SceneManager.GetActiveScene().name) != "AntwerpMap2") //hardcoded
         {
             level = SceneManager.GetActiveScene().name;
             gmScript.GetCollectedCoinPositions(level);
