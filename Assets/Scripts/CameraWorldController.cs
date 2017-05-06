@@ -10,16 +10,21 @@ public class CameraWorldController : MonoBehaviour {
 	protected float xToAdd; //middle of the camera coordinates
 	protected float yToAdd;
 	public GameObject Player;
+
+	protected CameraDrag cmDrag;
 	// Use this for initialization
 	void Start () {
 		currentVelocity = new Vector3 (0,0,0);
 		smoothTime = 0.6f;
 		maxSpeed = 1f;
+		cmDrag = this.gameObject.GetComponent<CameraDrag> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 targetPosition = new Vector3(Player.transform.position.x + xToAdd , Player.transform.position.y+yToAdd, transform.position.z);
-		transform.position = Vector3.SmoothDamp (transform.position, targetPosition, ref currentVelocity, smoothTime, maxSpeed, maxSpeed);
+		if (!cmDrag.isDragging) {
+			Vector3 targetPosition = new Vector3(Player.transform.position.x + xToAdd , Player.transform.position.y+yToAdd, transform.position.z);
+			transform.position = Vector3.SmoothDamp (transform.position, targetPosition, ref currentVelocity, smoothTime, maxSpeed, maxSpeed);
+		}
 	}
 }
