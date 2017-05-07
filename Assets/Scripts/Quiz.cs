@@ -80,7 +80,7 @@ public class Quiz : MonoBehaviour {
 				yield return new WaitForSeconds(typeSpeed);
 				popupText.text = sentences [j].Substring (0, i);
 			}
-			yield return new WaitForSeconds(typeSpeed*2); //this makes it wait a little longer at the end of each sentence
+			yield return new WaitForSeconds(typeSpeed*3); //this makes it wait a little longer at the end of each sentence
 		}
 
 		foreach (Button b in answerButtons) { //Show the buttons only after asking the question
@@ -93,13 +93,12 @@ public class Quiz : MonoBehaviour {
 	{
 		if ((easy && nrOfButton == correctElementEasy) || (!easy && nrOfButton == correctElementHard)) {
 			popupText.text = "THAT's CORRECT!!";
-            //proceed to next level @CINDY DO YOUR MAGIC HERE
-            //sceneConScript.LoadAntwerpMap();
+            StartCoroutine(AnswerRight());
+            
 
 		} else {
 			popupText.text = "Wrong...";
-            //Game over thingie @CINDY HERE TOO
-            //popupScript.GameOverPopUpDeath();
+            StartCoroutine(AnswerWrong());
 		}	
 	}
 
@@ -108,5 +107,18 @@ public class Quiz : MonoBehaviour {
 		b.onClick.AddListener (() => ButtonClick(i));
 	}
 
+    protected IEnumerator AnswerRight()
+    {
+        popupText.text = "You may pass now...";
+        yield return new WaitForSeconds(1.5f);
+        popupScript.WinPopup();
+    }
+
+    protected IEnumerator AnswerWrong()
+    {
+        popupText.text = "That's too suspicious, you are the alien!";
+        yield return new WaitForSeconds(1.5f);
+        popupScript.GameOverPopUpDeath();
+    }
 
 }
