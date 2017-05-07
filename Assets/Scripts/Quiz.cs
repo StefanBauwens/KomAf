@@ -30,13 +30,11 @@ public class Quiz : MonoBehaviour {
 	//@Stefan maybe add a "repeat the question" option
 
 	// Use this for initialization
-	void Start () {
-        sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
-        popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
+	void Start() {
 		isBusy = false;
 
 		//adds the question to the sentences
-		Array.Resize(ref sentences, sentences.Length + 1); 
+		Array.Resize (ref sentences, sentences.Length + 1); 
 		if (easy) {
 			sentences [sentences.Length - 1] = easyQuestion;
 		} else {
@@ -52,10 +50,20 @@ public class Quiz : MonoBehaviour {
 			}
 			answerButtons [i].gameObject.SetActive (false);//hide the buttons at first
 		}
+		sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
+		popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
+	}
 
+	void OnEnable() {
 		StartCoroutine ("StartWriting"); 
 	}
 
+	void Update () {
+		if (sceneConScript == null || popupScript == null) {
+			sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
+			popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
+		}
+	}
 	/*protected void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.name == "Player" && isBusy == false) {
@@ -66,6 +74,7 @@ public class Quiz : MonoBehaviour {
 
 	protected IEnumerator StartWriting()
 	{
+		Debug.Log ("Coroutine started");
 		for (int j = 0; j < sentences.Length; j++) {
 			for (int i = 0; i <= sentences[j].Length; i++) {
 				yield return new WaitForSeconds(typeSpeed);
@@ -85,12 +94,12 @@ public class Quiz : MonoBehaviour {
 		if ((easy && nrOfButton == correctElementEasy) || (!easy && nrOfButton == correctElementHard)) {
 			popupText.text = "THAT's CORRECT!!";
             //proceed to next level @CINDY DO YOUR MAGIC HERE
-            sceneConScript.LoadAntwerpMap();
+            //sceneConScript.LoadAntwerpMap();
 
 		} else {
 			popupText.text = "Wrong...";
             //Game over thingie @CINDY HERE TOO
-            popupScript.GameOverPopUpDeath();
+            //popupScript.GameOverPopUpDeath();
 		}	
 	}
 
