@@ -15,7 +15,7 @@ public class ShopList : MonoBehaviour {
     private int nrOfItems;
     public CanvasGroup shopCanvasGroup;
 	protected bool hasRun;
-
+    public GATE15 gate15Script;
 
 
     // Use this for initialization
@@ -105,6 +105,14 @@ public class ShopList : MonoBehaviour {
         shopCanvasGroup.alpha = 0;
         shopCanvasGroup.interactable = false;
         shopCanvasGroup.blocksRaycasts = false;
+    }
+
+    public void OpenShop()
+    {
+        gate15Script.ExitGate15();
+        shopCanvasGroup.alpha = 1;
+        shopCanvasGroup.interactable = true;
+        shopCanvasGroup.blocksRaycasts = true; 
     }
 
 }

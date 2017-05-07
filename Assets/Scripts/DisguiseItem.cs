@@ -19,7 +19,6 @@ public class DisguiseItem : MonoBehaviour {
     public bool itemBought = false;
     private bool itemSelected = false;
     private ShopList shopScript;
-    
 
     public Sprite itemSprite;
     public Sprite selectSprite;
