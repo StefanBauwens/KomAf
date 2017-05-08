@@ -8,13 +8,21 @@ public class CameraDrag : MonoBehaviour {
 	private Vector3 dragOrigin;
 	public bool isDragging;
 
+	protected CanvasGroup gate15Canvas;
+	protected CanvasGroup ShopCanvas;
+
 	void Start()
 	{
 		isDragging = false;
+		gate15Canvas = GameObject.FindGameObjectWithTag ("Gate15").GetComponent<CanvasGroup>();
+		ShopCanvas = GameObject.FindGameObjectWithTag ("Shop").GetComponent<CanvasGroup>();
 	}
 
 	void Update()
 	{
+		if (gate15Canvas.interactable || ShopCanvas.interactable) {
+			return;
+		}
 		if (Input.GetMouseButtonDown(0))
 		{
 			dragOrigin = Input.mousePosition;
