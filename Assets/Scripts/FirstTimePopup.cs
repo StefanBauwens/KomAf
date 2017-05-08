@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class FirstTimePopup : MonoBehaviour {
 
 	public Button closeBtn;
-
+    public CanvasGroup firstTimeCanvas;
 	// Use this for initialization
 	void Start () {
+        firstTimeCanvas = GameObject.FindGameObjectWithTag("FirstTimeCanvas").GetComponent<CanvasGroup>();
 		closeBtn.onClick.AddListener(ClosePanel);
 		if (PlayerPrefs.GetInt ("seenFirstPopup", 0) == 1) {
 			ClosePanel ();
@@ -25,5 +26,8 @@ public class FirstTimePopup : MonoBehaviour {
 		PlayerPrefs.SetInt ("seenFirstPopup", 1);
 		PlayerPrefs.Save ();
 		this.gameObject.SetActive (false);
+        firstTimeCanvas.alpha = 0;
+        firstTimeCanvas.interactable = false;
+        firstTimeCanvas.blocksRaycasts = false;
 	}
 }

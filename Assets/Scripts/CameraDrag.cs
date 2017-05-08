@@ -9,18 +9,20 @@ public class CameraDrag : MonoBehaviour {
 	public bool isDragging;
 
 	protected CanvasGroup gate15Canvas;
-	protected CanvasGroup ShopCanvas;
+	protected CanvasGroup shopCanvas;
+    protected CanvasGroup firstTimeCanvas;
 
 	void Start()
 	{
 		isDragging = false;
 		gate15Canvas = GameObject.FindGameObjectWithTag ("Gate15").GetComponent<CanvasGroup>();
-		ShopCanvas = GameObject.FindGameObjectWithTag ("Shop").GetComponent<CanvasGroup>();
+		shopCanvas = GameObject.FindGameObjectWithTag ("Shop").GetComponent<CanvasGroup>();
+        firstTimeCanvas = GameObject.FindGameObjectWithTag("FirstTimeCanvas").GetComponent<CanvasGroup>();
 	}
 
 	void Update()
 	{
-		if (gate15Canvas.interactable || ShopCanvas.interactable) {
+		if (gate15Canvas.interactable || shopCanvas.interactable || firstTimeCanvas.interactable) {
 			return;
 		}
 		if (Input.GetMouseButtonDown(0))
