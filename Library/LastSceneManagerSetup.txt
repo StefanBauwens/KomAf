@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/ChinaTown.unity
+- path: Assets/Scenes/SintAnnastrand.unity
   isLoaded: 1
   isActive: 1
