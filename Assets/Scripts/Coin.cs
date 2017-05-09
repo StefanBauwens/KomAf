@@ -5,6 +5,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour {
 
     private GameMaster gmScript;
+    private Settings settingsScript;
     private AudioSource audSource;
     private AudioClip coinSound;
     private Renderer renderer;
@@ -13,6 +14,7 @@ public class Coin : MonoBehaviour {
 	void Start()
 	{
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
         audSource = gameObject.GetComponent<AudioSource>();
         renderer = gameObject.GetComponent<Renderer>();
         collider = gameObject.GetComponent<Collider2D>();
@@ -23,7 +25,7 @@ public class Coin : MonoBehaviour {
     {
         if (collision.name == "Player") {
             
-			audSource.PlayOneShot(coinSound);
+			audSource.PlayOneShot(coinSound, settingsScript.volumeSE);
 			renderer.enabled = false;
 			collider.enabled = false;
 			gmScript.AddCollectedCoinPosition(gameObject.transform.position);

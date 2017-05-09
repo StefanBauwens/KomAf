@@ -46,7 +46,6 @@ public class ShopList : MonoBehaviour {
         for (int i = 0; i < nrOfItems; i++)
         {
             itemArray[i] = transform.GetChild(i).gameObject.GetComponent<DisguiseItem>();
-            Debug.Log(itemArray[i]);
         }
 
         // add bought items to list
@@ -65,7 +64,6 @@ public class ShopList : MonoBehaviour {
         // change boolean (from items in list) to bought
         for(int j = 0; j < nrOfItems; j++)
         {
-            Debug.Log("itemname: " + itemArray[j] + "name in list: " + itemsBought[j]);
             if( itemsBought.Contains(itemArray[j].ToString()))
             {
                 itemArray[j].itemBought = true;
@@ -98,7 +96,6 @@ public class ShopList : MonoBehaviour {
             if(itemArray[itemNr].itemBought)
             {
                 gmScript.SaveItemsBought(itemArray[itemNr].ToString(), itemNr);
-                Debug.Log("saved items bought: " + itemArray[itemNr].ToString());
             }    
         }
 

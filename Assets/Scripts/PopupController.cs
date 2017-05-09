@@ -16,10 +16,12 @@ public class PopupController : MonoBehaviour {
     private AudioClip buttonSound;
     private AudioClip gameOverSound;
     private AudioClip winSound;
+    protected Settings settingsScript;
 
     void Start()
     {
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
         audSource= gameObject.GetComponent<AudioSource>();
         for(int i = 0; i < sounds.Length; i++)
         {
@@ -42,7 +44,7 @@ public class PopupController : MonoBehaviour {
     {
         if (audSource)
         {
-            audSource.PlayOneShot(winSound, 0.5f);
+            audSource.PlayOneShot(winSound, settingsScript.volumeSE);
         }
         Time.timeScale = 0;
         gmScript.UpdateWinCoinText();
@@ -53,7 +55,7 @@ public class PopupController : MonoBehaviour {
     {
         if (audSource)
         {
-            audSource.PlayOneShot(gameOverSound, 0.5f);
+            audSource.PlayOneShot(gameOverSound, settingsScript.volumeSE);
         }
         Time.timeScale = 0;
         if (gameOverCanvas)
@@ -67,7 +69,7 @@ public class PopupController : MonoBehaviour {
 	{
 		if (audSource)
 		{
-			audSource.PlayOneShot(gameOverSound, 0.5f);
+			audSource.PlayOneShot(gameOverSound, settingsScript.volumeSE);
 		}
 		Time.timeScale = 0;
 		if (gameOverCanvasDeath)
@@ -79,7 +81,7 @@ public class PopupController : MonoBehaviour {
 
     public void PausePopup()
     {
-        audSource.PlayOneShot(buttonSound);
+        audSource.PlayOneShot(buttonSound, settingsScript.volumeSE);
         playerScript.isPaused = true;
         Time.timeScale = 0;
         SetPopupVisible(pauseCanvas, true);
@@ -87,7 +89,7 @@ public class PopupController : MonoBehaviour {
 
     public void Resume()
     {
-        audSource.PlayOneShot(buttonSound);
+        audSource.PlayOneShot(buttonSound, settingsScript.volumeSE);
         SetPopupVisible(pauseCanvas, false);
         Time.timeScale = 1;
         playerScript.isPaused = false;

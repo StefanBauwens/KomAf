@@ -93,7 +93,6 @@ public class DisguiseItem : MonoBehaviour {
             selectImage.sprite = selectSprite;
             selectButton.interactable = false;
             itemSelected = true;
-            Debug.Log("current item in checkitemselected: " + shopScript.currentItem);
         }
         else
         {
@@ -139,7 +138,6 @@ public class DisguiseItem : MonoBehaviour {
             selectImage.sprite = selectSprite;
             itemSelected = true;
             shopScript.currentItem = this.ToString();
-            Debug.Log("current item: " + shopScript.currentItem);
             shopScript.RefreshShop();
         }
     }

@@ -7,9 +7,11 @@ public class Player : MonoBehaviour {
     protected Rigidbody2D rb;
     protected Animator anim;
     protected SpriteRenderer spriteR;
-    protected AudioSource jumpSound;
+    protected AudioSource audSource;
+    public AudioClip jumpSound;
 
-    private GameMaster gmScript;
+    protected GameMaster gmScript;
+    protected Settings settingsScript;
 
     public float jumpHeight = 14f;
 	public float smallJump = 14f;
@@ -35,11 +37,12 @@ public class Player : MonoBehaviour {
 		isSinglePaused = false;
 		//jumpHeight = 8f;
         Time.timeScale = 1;
-        jumpSound = gameObject.GetComponent<AudioSource>();
+        audSource = gameObject.GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         spriteR = gameObject.GetComponent<SpriteRenderer>();
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
 	}
 
     void FixedUpdate()
@@ -84,7 +87,7 @@ public class Player : MonoBehaviour {
 			if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space)) && isGrounded) //(Input.GetKeyDown(KeyCode.Space) && isGrounded)
 			{
 				Jump();
-                jumpSound.Play();
+                audSource.PlayOneShot(jumpSound, settingsScript.volumeSE);
             }
 			/*if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space)) && !isGrounded && !doubleJumped)
 			{

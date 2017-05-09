@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
 
-    private AudioSource buttonSound;
+    protected AudioSource audSource;
+    public AudioClip buttonSound;
     private static SceneController instanceRef;
     public LevelController levelConScript;
     public GameMaster gmScript;
@@ -17,6 +18,7 @@ public class SceneController : MonoBehaviour {
     private bool tempLevelFinished;
     public string AntwerpMap;
     protected PopupController popupScript;
+    protected Settings settingsScript;
 
     void Awake()
     {
@@ -30,19 +32,19 @@ public class SceneController : MonoBehaviour {
             Destroy(gameObject);
         }
         
-        buttonSound = GetComponent<AudioSource>();
+        audSource = GetComponent<AudioSource>();
     }
 
     public void RestartLevel()
     {
-        buttonSound.Play();
+        audSource.PlayOneShot(buttonSound, settingsScript.volumeSE);
         gmScript.collectedCoinsPos.Clear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadAntwerpMap()
     {
-        buttonSound.Play();
+        audSource.PlayOneShot(buttonSound, settingsScript.volumeSE);
         gmScript.playingLevel = false;
         if (tempLevelFinished)
         {
@@ -57,14 +59,14 @@ public class SceneController : MonoBehaviour {
 
     public void LoadLevelByName(string sceneName)
     {
-        buttonSound.Play();
+        audSource.PlayOneShot(buttonSound, settingsScript.volumeSE);
         SetLocationPopupCanvasVisible(false);
         SceneManager.LoadScene(sceneName);
     }
 
     public void OpenLocationPopup(string locationName, int maxCoins)
     {
-        buttonSound.Play();
+        audSource.PlayOneShot(buttonSound, settingsScript.volumeSE);
         locationPopupScript.locationName = locationName;
         locationPopupScript.locationNameText.text = locationName;
         locationPopupScript.CheckLocationInfo();
@@ -94,12 +96,14 @@ public class SceneController : MonoBehaviour {
     {
         if (activeScene.name != AntwerpMap)
         {
+            settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
             popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
             gmScript.GetGameObjectsFromScene();
             gmScript.SetCoinsCollectedInLevel();
         }
         else if (activeScene.name == AntwerpMap)
         {
+            settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
             locationPopupCanvas = GameObject.FindGameObjectWithTag("LocationPopupCanvas").GetComponent<CanvasGroup>();
             locationPopupScript = GameObject.FindGameObjectWithTag("LocationPopup").GetComponent<LocationPopup>();
 
