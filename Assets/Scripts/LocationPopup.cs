@@ -30,15 +30,31 @@ public class LocationPopup : MonoBehaviour {
     {
         if(locationName == "SintAnnastrand")
         {
-            locationInfoText.text = locationInfoScript.sintAnnastrandText.text;
+            locationInfoText.text = locationInfoScript.sintannastrandText.text;
         }
         else if(gmScript.pageCount >= 1 && locationName == "ZwemvijverBoekenberg")
         {
-            locationInfoText.text = locationInfoScript.zwemvijverBoekenbergText.text;
+            locationInfoText.text = locationInfoScript.zwemvijverboekenbergText.text;
         }
         else if (gmScript.pageCount >= 2 && locationName == "Vlaeykensgang")
         {
             locationInfoText.text = locationInfoScript.vlaeykensgangText.text;
+        }
+        else if(gmScript.pageCount >= 3 && locationName == "ChinaTown")
+        {
+            locationInfoText.text = locationInfoScript.chinatownText.text;
+        }
+        else if (gmScript.pageCount >= 4 && locationName == "DeRuien")
+        {
+            locationInfoText.text = locationInfoScript.deruienText.text;
+        }
+        else if (gmScript.pageCount >= 5 && locationName == "ErfgoedBibliotheek")
+        {
+            locationInfoText.text = locationInfoScript.erfgoedbibliotheekText.text;
+        }
+        else if (gmScript.pageCount >= 6 && locationName == "Kammenstraat")
+        {
+            locationInfoText.text = locationInfoScript.kammenstraatText.text;
         }
         else
         {
