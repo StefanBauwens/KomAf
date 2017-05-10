@@ -391,7 +391,7 @@ MonoBehaviour:
     width: 841
     height: 243
   m_SceneLighting: 1
-  lastFramingTime: 4383.384811997414
+  lastFramingTime: 760.2419900298119
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
@@ -563,9 +563,9 @@ MonoBehaviour:
     height: 880
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: dcfbffff00000000
+    m_SelectedIDs: ae680000
+    m_LastClickedID: 26798
+    m_ExpandedIDs: 2c4affffb64cffffa64fffffb64fffff5a53ffff1654ffff725affffd45affffb65dffffc65dfffff260ffff0261ffff2a64ffff3a64ffff6665ffffb86affffc86affff786effff926effff0e71ffff1e71ffffbc7cffff12d3ffffdcfbffff0000000078430000a04400000a480000344a0000a44b0000f85100008a550000785600002a5a00007e5e0000e662000064670000ae68000094690000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -584,7 +584,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
   m_ExpandedScenes:
-  - SintAnnastrand
+  - AntwerpMap2
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -692,7 +692,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 5473000000000000182a00005c630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
