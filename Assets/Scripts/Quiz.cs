@@ -22,18 +22,31 @@ public class Quiz : MonoBehaviour {
 	public Button[] answerButtons;
 
 	public bool easy; //if true then player gets easy question
+	public int mininumValue; //only if the value of the bought close exceeds (or is equal to) this the player only gets an easy question
 
 	protected bool isBusy;
 	protected bool buttonsAreEnabled;
 	protected bool skipText;
+	protected bool isBusyReplying;
 
     protected SceneController sceneConScript;
     protected PopupController popupScript;
+
+	protected GameMaster gmScript;
+
 
 	//@Stefan maybe add a "repeat the question" option
 
 	// Use this for initialization
 	void Start() {
+		gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+
+		if (gmScript.currentValue >= mininumValue) {
+			easy = true;
+		} else {
+			easy = false;
+		}
+
 		//adds the question to the sentences
 		newSentences = new string[sentences.Length+1];
 		for (int i = 0; i < sentences.Length; i++) {
@@ -46,6 +59,7 @@ public class Quiz : MonoBehaviour {
 	}
 
 	void Start2(){
+		isBusyReplying = false;
 		skipText = false;
 		isBusy = false;
 		buttonsAreEnabled = false;
@@ -74,16 +88,16 @@ public class Quiz : MonoBehaviour {
 
 	void Update () {
 		if (sceneConScript == null || popupScript == null) {
-			//sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
-			//popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
+			sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
+			popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
 		}
 
 		/*if (Input.GetMouseButtonDown(0) && isBusy) {
 			skipText = true;
 		}*/
-		/*if (Input.touchCount>0 && isBusy) {
+		if (Input.touchCount>0 && isBusy && !isBusyReplying) {
 			skipText = true;
-		}*/
+		}
 
 	}
 		
@@ -109,11 +123,13 @@ public class Quiz : MonoBehaviour {
 
     protected IEnumerator AnswerRight()
     {
+		isBusyReplying = true;
 		string [] temp = {"Correct"}; //deliberatly didn't choose "you may pass now, in case it asks again another question
 		StartCoroutine (TypeSentence (temp));
 		while (isBusy) {
 			yield return new WaitForSeconds(1);
 		}
+		isBusyReplying = false;
 		if (!easy) { //asks another question
 			easy = true;
 			newSentences = new string[1];
@@ -126,11 +142,13 @@ public class Quiz : MonoBehaviour {
 
     protected IEnumerator AnswerWrong()
     {
+		isBusyReplying = true;
 		string [] temp = {"That's too suspicious, you are the alien!"};
 		StartCoroutine (TypeSentence (temp));
 		while (isBusy) { //this waits for the popup to be done speaking
 			yield return new WaitForSeconds(1);
 		}
+		isBusyReplying = false;
         popupScript.GameOverPopUpDeath();
     }
 

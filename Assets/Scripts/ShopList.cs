@@ -9,6 +9,7 @@ public class ShopList : MonoBehaviour {
 	protected List<DisguiseItem> itemList;
     public List<string> itemsBought;
     public string currentItem;
+	public int currentValue; //value of current item
     public Text totalCoinsShop;
     public int testCoins;
     private GameMaster gmScript;
@@ -100,6 +101,7 @@ public class ShopList : MonoBehaviour {
     {
         settingsScript.PlayButtonSound(audSource);
         gmScript.SaveCurrentDisguise(currentItem); 
+		gmScript.SaveCurrentDisguiseValue (currentValue);
         for(int itemNr = 0; itemNr < nrOfItems; itemNr++)
         {
             if(itemArray[itemNr].itemBought)

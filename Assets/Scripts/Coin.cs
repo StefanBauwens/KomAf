@@ -25,11 +25,11 @@ public class Coin : MonoBehaviour {
     {
         if (collision.name == "Player") {
             
-			audSource.PlayOneShot(coinSound, settingsScript.volumeSE);
 			renderer.enabled = false;
 			collider.enabled = false;
 			gmScript.AddCollectedCoinPosition(gameObject.transform.position);
 			gmScript.coinsCollectedInLevel += 1;
+			audSource.PlayOneShot(coinSound, settingsScript.volumeSE);
 			Destroy(gameObject, coinSound.length);
 		} 
     }

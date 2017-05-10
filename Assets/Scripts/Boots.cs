@@ -28,10 +28,10 @@ public class Boots : Powerup {
 	
     void OnTriggerEnter2D(Collider2D collision)
     {
-        audSource.PlayOneShot(jumpHigherSound, settingsScript.volumeSE);
         renderer.enabled = false; // object not visible for camera
         collider.enabled = false; // --> player can't interact with object
         StartCoroutine(JumpHigher());
+		audSource.PlayOneShot(jumpHigherSound, settingsScript.volumeSE);
     }
 
     IEnumerator JumpHigher()

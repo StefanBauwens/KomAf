@@ -22,11 +22,12 @@ public class DirectionChanger : MonoBehaviour {
     {
 		if (collision.collider.name == "Player") {
 			if (currentDirection == Direction.Reverse) {
-                audSource.PlayOneShot(reverseSound, settingsScript.volumeSE);
 				playerScript.inReverseDirection = true;
+				audSource.PlayOneShot(reverseSound, settingsScript.volumeSE);
 			} else {
-                audSource.PlayOneShot(reverseSound, settingsScript.volumeSE);
 				playerScript.inReverseDirection = false;
+				audSource.PlayOneShot(reverseSound, settingsScript.volumeSE);
+
 			}
 		}
     }

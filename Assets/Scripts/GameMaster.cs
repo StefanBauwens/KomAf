@@ -21,6 +21,7 @@ public class GameMaster : MonoBehaviour {
     public List<Vector3> collectedCoinsPos;
     public int coinsCollectedInLevel;
     public int nrOfItems = 10;
+	public int currentValue;
 
     void Awake()
     {
@@ -38,6 +39,7 @@ public class GameMaster : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+		currentValue = PlayerPrefs.GetInt ("currentDisguiseValue", 0);
         Time.timeScale = 1;
 	}
 	
@@ -202,6 +204,13 @@ public class GameMaster : MonoBehaviour {
         PlayerPrefs.SetString("currentDisguise", currentDisguise);
         PlayerPrefs.Save();
     }
+
+	public void SaveCurrentDisguiseValue(int currentDisguiseValue)
+	{
+		currentValue = currentDisguiseValue;
+		PlayerPrefs.SetInt("currentDisguiseValue", currentDisguiseValue);
+		PlayerPrefs.Save();
+	}
 
     public string GetCurrentDisguise()
     {

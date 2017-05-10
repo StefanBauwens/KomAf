@@ -140,6 +140,7 @@ public class DisguiseItem : MonoBehaviour {
             selectImage.sprite = selectSprite;
             itemSelected = true;
             shopScript.currentItem = this.ToString();
+			shopScript.currentValue = this.itemValue;
             shopScript.RefreshShop();
         }
     }
