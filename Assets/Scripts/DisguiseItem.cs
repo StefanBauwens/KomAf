@@ -123,6 +123,7 @@ public class DisguiseItem : MonoBehaviour {
         if(!itemBought && shopScript.testCoins >= itemPrice)
         {
             //GameMaster.totalCoins -= itemPrice;
+            shopScript.audSource.PlayOneShot(shopScript.buySound, shopScript.settingsScript.volumeSE);
             shopScript.testCoins -= itemPrice;
             itemBought = true;
             shopScript.itemsBought.Add(this.ToString());
@@ -135,6 +136,7 @@ public class DisguiseItem : MonoBehaviour {
     {
         if(itemBought && !itemSelected)
         {
+            shopScript.audSource.PlayOneShot(shopScript.selectSound, shopScript.settingsScript.volumeSE);
             selectImage.sprite = selectSprite;
             itemSelected = true;
             shopScript.currentItem = this.ToString();

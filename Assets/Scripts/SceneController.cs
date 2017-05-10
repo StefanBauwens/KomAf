@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour {
 
@@ -104,6 +105,8 @@ public class SceneController : MonoBehaviour {
         else if (activeScene.name == AntwerpMap)
         {
             settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
+            settingsScript.settingsButtonCanvas = GameObject.FindGameObjectWithTag("SettingsButton").GetComponent<Button>();
+            settingsScript.settingsButtonCanvas.onClick.AddListener(() => settingsScript.OpenSettings());
             locationPopupCanvas = GameObject.FindGameObjectWithTag("LocationPopupCanvas").GetComponent<CanvasGroup>();
             locationPopupScript = GameObject.FindGameObjectWithTag("LocationPopup").GetComponent<LocationPopup>();
 

@@ -16,12 +16,20 @@ public class ShopList : MonoBehaviour {
     public CanvasGroup shopCanvasGroup;
 	protected bool hasRun;
     public GATE15 gate15Script;
+    public Settings settingsScript;
+
+    public AudioSource audSource;
+    public AudioClip buySound;
+    public AudioClip selectSound;
+
 
 
     // Use this for initialization
     void Start () {
         
         gmScript = GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
+        settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
+        audSource = GetComponent<AudioSource>();
         nrOfItems = gmScript.nrOfItems;
         itemArray = new DisguiseItem[nrOfItems];
         itemsBought = new List<string>();
@@ -90,6 +98,7 @@ public class ShopList : MonoBehaviour {
 
     public void ExitShop()
     {
+        settingsScript.PlayButtonSound(audSource);
         gmScript.SaveCurrentDisguise(currentItem); 
         for(int itemNr = 0; itemNr < nrOfItems; itemNr++)
         {
@@ -106,6 +115,7 @@ public class ShopList : MonoBehaviour {
 
     public void OpenShop()
     {
+        settingsScript.PlayButtonSound(audSource);
         gate15Script.ExitGate15();
         shopCanvasGroup.alpha = 1;
         shopCanvasGroup.interactable = true;

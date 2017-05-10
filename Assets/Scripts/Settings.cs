@@ -12,17 +12,17 @@ public class Settings : MonoBehaviour {
     public float volumeM;
     public Button infoButton;
     public Button websiteButton;
-    //public Button settingsButtonCanvas;
+    public Button settingsButtonCanvas;
     public AudioClip buttonSound;
     public CanvasGroup infoCanvas;
     protected AudioSource audSource;
 
-    //public Image imageSE;
-    //public Image imageM;
-    //public Sprite soundSE;
-    //public Sprite soundM;
-    //public Sprite muteSE;
-    //public Sprite muteM;
+    public Image imageSE;
+    public Image imageM;
+    public Sprite soundSE;
+    public Sprite soundM;
+    public Sprite muteSE;
+    public Sprite muteM;
 
     void Awake()
     {
@@ -46,26 +46,18 @@ public class Settings : MonoBehaviour {
     }
     
 
-    private void Update()
-    {
-        // Fix bug when going back to AntwerpMap2 --> find settingsButton in Canvas
-        //if (SceneManager.GetActiveScene().name == "AntwerpMap2")
-        //{
-        //    settingsButtonCanvas = GameObject.FindGameObjectWithTag("SettingsButton").GetComponent<Button>();
-        //    settingsButtonCanvas.onClick.AddListener(() => OpenSettings());
-        //}
-        //ChangeMuteSprite();
-    }
-
     public void ChangeVolumeSoundEffects(float newVolumeSE)
     {
         volumeSE = newVolumeSE/4;
+        ChangeMuteSprite();
         Debug.Log("SE: " + volumeSE);
+        
     }
 
     public void ChangeVolumeMusic(float newVolumeM)
     {
         volumeM = newVolumeM/4;
+        ChangeMuteSprite();
         Debug.Log("M: " + volumeM);
     }
 
@@ -105,26 +97,26 @@ public class Settings : MonoBehaviour {
         infoCanvas.interactable = false;
         infoCanvas.blocksRaycasts = false;
     }
-    
 
-    //public void ChangeMuteSprite()
-    //{
-    //    if(volumeSE == 0)
-    //    {
-    //        imageSE.sprite = muteSE;
-    //    }
-    //    else
-    //    {
-    //        imageSE.sprite = soundSE;
-    //    }
 
-    //    if(volumeM == 0)
-    //    {
-    //        imageM.sprite = muteSE;
-    //    }
-    //    else
-    //    {
-    //        imageM.sprite = soundM;
-    //    }
-    //}
+    public void ChangeMuteSprite()
+    {
+        if (volumeSE == 0)
+        {
+            imageSE.sprite = muteSE;
+        }
+        else
+        {
+            imageSE.sprite = soundSE;
+        }
+
+        if (volumeM == 0)
+        {
+            imageM.sprite = muteM;
+        }
+        else
+        {
+            imageM.sprite = soundM;
+        }
+    }
 }
