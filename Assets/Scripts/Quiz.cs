@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Quiz : MonoBehaviour {
 
@@ -33,12 +34,14 @@ public class Quiz : MonoBehaviour {
     protected PopupController popupScript;
 
 	protected GameMaster gmScript;
+	protected string currentLevel;
 
 
 	//@Stefan maybe add a "repeat the question" option
 
 	// Use this for initialization
 	void Start() {
+		currentLevel = SceneManager.GetActiveScene().name;
 		gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
 
 		if (gmScript.currentValue >= mininumValue) {
@@ -137,6 +140,7 @@ public class Quiz : MonoBehaviour {
 			OnEnable ();
 		} else {
 			popupScript.WinPopup();
+			sceneConScript.SendCurrentLevel(currentLevel, true);
 		}
     }
 
