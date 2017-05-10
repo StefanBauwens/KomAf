@@ -119,4 +119,6 @@ public class Settings : MonoBehaviour {
             imageM.sprite = soundM;
         }
     }
+
+    //habla
 }
