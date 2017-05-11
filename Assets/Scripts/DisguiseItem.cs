@@ -104,9 +104,8 @@ public class DisguiseItem : MonoBehaviour {
 
     public void CheckBuyButtonInteractable()
     {
-        //if(GameMaster.totalCoins > itemPrice)
-
-        if (shopScript.testCoins >= itemPrice && !itemBought)
+        //if (shopScript.testCoins >= itemPrice && !itemBought)
+        if(GameMaster.totalCoins > itemPrice && !itemBought)
         {
             buyButton.interactable = true;
         }
@@ -119,16 +118,17 @@ public class DisguiseItem : MonoBehaviour {
 
     public void BuyItem()
     {
-        //if(!itemBought && GameMaster.totalCoins > itemPrice)
-        if(!itemBought && shopScript.testCoins >= itemPrice)
+        //if (!itemBought && shopScript.testCoins >= itemPrice)
+        if(!itemBought && GameMaster.totalCoins > itemPrice)
         {
-            //GameMaster.totalCoins -= itemPrice;
             shopScript.audSource.PlayOneShot(shopScript.buySound, shopScript.settingsScript.volumeSE);
-            shopScript.testCoins -= itemPrice;
+            //shopScript.testCoins -= itemPrice;
+            GameMaster.totalCoins -= itemPrice;
             itemBought = true;
             shopScript.itemsBought.Add(this.ToString());
             buyButton.interactable = false;
             shopScript.RefreshShop();
+            
         }
     }
 

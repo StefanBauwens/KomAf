@@ -101,6 +101,7 @@ public class SceneController : MonoBehaviour {
             popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
             gmScript.GetGameObjectsFromScene();
             gmScript.SetCoinsCollectedInLevel();
+
         }
         else if (activeScene.name == AntwerpMap)
         {

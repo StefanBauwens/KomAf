@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ShopList : MonoBehaviour {
 
+    public Text totalCoinsText;
     public DisguiseItem[] itemArray;
 	protected List<DisguiseItem> itemList;
     public List<string> itemsBought;
@@ -49,8 +50,8 @@ public class ShopList : MonoBehaviour {
 
 	public void SetupShop()
     {
-        //totalCoinsShop.text = GameMaster.totalCoins.ToString();
-        totalCoinsShop.text = testCoins.ToString();   
+        //totalCoinsShop.text = testCoins.ToString();   
+        totalCoinsShop.text = GameMaster.totalCoins.ToString();
 
         for (int i = 0; i < nrOfItems; i++)
         {
@@ -93,8 +94,9 @@ public class ShopList : MonoBehaviour {
         {
             itemArray[j].CheckItemState();
         }
-
-        totalCoinsShop.text = testCoins.ToString();
+        totalCoinsShop.text = GameMaster.totalCoins.ToString();
+        totalCoinsText.text = GameMaster.totalCoins.ToString();
+        //totalCoinsShop.text = testCoins.ToString();
     }
 
     public void ExitShop()
@@ -109,6 +111,7 @@ public class ShopList : MonoBehaviour {
                 gmScript.SaveItemsBought(itemArray[itemNr].ToString(), itemNr);
             }    
         }
+        gmScript.SaveTotalCoins();
 
         shopCanvasGroup.alpha = 0;
         shopCanvasGroup.interactable = false;

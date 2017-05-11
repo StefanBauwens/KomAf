@@ -19,6 +19,8 @@ public class GameMaster : MonoBehaviour {
     public static int totalCoins;
     public Text totalCoinsText;
     public List<Vector3> collectedCoinsPos;
+    public int maxCoins;
+    public Text maxCoinsText;
     public int coinsCollectedInLevel;
     public int nrOfItems = 10;
 	public int currentValue;
@@ -77,6 +79,13 @@ public class GameMaster : MonoBehaviour {
     public void SaveTotalCoins()
     {
         PlayerPrefs.SetInt("totalCoins", totalCoins);
+    }
+
+    public void SetMaxCoins()
+    {
+        maxCoinsText = GameObject.FindGameObjectWithTag("MaxCoins").GetComponent<Text>();
+        maxCoinsText.text = maxCoins.ToString();
+        maxCoins = 0;
     }
 
     public void SaveUnlockedLevel(LevelPoint level)

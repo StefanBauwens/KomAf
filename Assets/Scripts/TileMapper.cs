@@ -15,6 +15,7 @@ public class TileMapper : MonoBehaviour {
     protected GameMaster gmScript;
     protected string level;
 
+
 	// Use this for initialization
 	void Start () {
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
@@ -52,6 +53,7 @@ public class TileMapper : MonoBehaviour {
 
                     if (newInstant.name == "coin")
                     {
+                        gmScript.maxCoins++;
                         if (gmScript.collectedCoinsPos.Contains(newInstant.transform.position))// coin already collected --> delete gameobject
                         {
                             Destroy(newInstant);
@@ -73,8 +75,15 @@ public class TileMapper : MonoBehaviour {
 
 					}
 			    }
+                
 			}
 		}
+        // after drawing done
+        if((SceneManager.GetActiveScene().name) != "AntwerpMap2") // hardcoded
+        {
+            gmScript.SetMaxCoins();
+        }
+        
 	}
 
     
