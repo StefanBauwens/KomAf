@@ -45,7 +45,7 @@ public class Player : MonoBehaviour {
         settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
 	}
 
-    void FixedUpdate()
+    void Update()
     {
 		if (!isSinglePaused) {
 			ChangeDirection ();

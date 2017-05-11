@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class LocationInfoKeeper : MonoBehaviour {
 
-    public TextAsset sintAnnastrandText;
-    public TextAsset zwemvijverBoekenbergText;
+    public TextAsset sintannastrandText;
+    public TextAsset zwemvijverboekenbergText;
     public TextAsset vlaeykensgangText;
+    public TextAsset kammenstraatText;
+    public TextAsset erfgoedbibliotheekText;
+    public TextAsset deruienText;
+    public TextAsset chinatownText;
 }
