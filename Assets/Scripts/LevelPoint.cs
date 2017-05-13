@@ -8,11 +8,11 @@ public class LevelPoint : StopPoint {
 
     public enum CurrentLevel
     {
-        SintAnnastrand, ZwemvijverBoekenberg, Vlaeykensgang, DeRuien
+		SintAnnastrand, ZwemvijverBoekenberg, Vlaeykensgang, DeRuien, Kammenstraat, ErfgoedBibliotheek, ChinaTown
     };
     public enum NextLevel
     {
-        SintAnnastrand, ZwemvijverBoekenberg, Vlaeykensgang, DeRuien
+		SintAnnastrand, ZwemvijverBoekenberg, Vlaeykensgang, DeRuien, Kammenstraat, ErfgoedBibliotheek, ChinaTown
     };
     public CurrentLevel currentLevel;
     public NextLevel nextLevel;

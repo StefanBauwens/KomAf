@@ -59,7 +59,7 @@ public class Navigator : MonoBehaviour {
 		colorArray = worldMap.Map.GetPixels ();
 		direction  = navigatorDirection.idle;
 		isMoving   = false;
-		this.gameObject.transform.position = new Vector3 (PlayerPrefs.GetInt ("xCoord", 40), PlayerPrefs.GetInt ("yCoord", 16), -1);
+		this.gameObject.transform.position = new Vector3 (PlayerPrefs.GetInt ("xCoord", 40), PlayerPrefs.GetInt ("yCoord", 32), -1);
 
 		x = (int)this.gameObject.transform.position.x;
 		y = (int)this.gameObject.transform.position.y;
@@ -346,7 +346,7 @@ public class Navigator : MonoBehaviour {
 
 		if (startLevel && direction == navigatorDirection.idle) {
 			startLevel = false;
-			if (hit.collider.gameObject.GetComponent<LevelPoint>().levelUnlocked) { 
+			if (hit.collider.gameObject.GetComponent<LevelPoint>() != null && hit.collider.gameObject.GetComponent<LevelPoint>().levelUnlocked) { 
 				hit.collider.gameObject.GetComponent<LevelPoint> ().HasClickedOnLevel (); //similiar to the effect of pressing a level button
 			}
 			PlayerPrefs.SetInt ("xCoord", x);
