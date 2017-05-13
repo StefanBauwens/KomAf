@@ -18,6 +18,7 @@ public class LevelPoint : StopPoint {
     public NextLevel nextLevel;
     public bool levelUnlocked;
     public int maxCoins;
+    protected int minValue;
     private Button levelButton;
     private SceneController sceneConScript;
     protected LocationInfoKeeper locationInfoScript;
@@ -33,7 +34,8 @@ public class LevelPoint : StopPoint {
     public void HasClickedOnLevel()
     {
         CheckMaxCoinsLevel();
-        sceneConScript.OpenLocationPopup(gameObject.name, maxCoins);
+        CheckMinValue();
+        sceneConScript.OpenLocationPopup(gameObject.name, maxCoins, minValue);
     }
 
     protected void CheckMaxCoinsLevel()
@@ -61,8 +63,35 @@ public class LevelPoint : StopPoint {
             case "ChinaTown":
                 maxCoins = locationInfoScript.maxCoinsChinatown;
                 break;
+        }   
+    }
+
+    protected void CheckMinValue()
+    {
+        switch (gameObject.name)
+        {
+            case "SintAnnastrand":
+                minValue = locationInfoScript.minValueSintannastrand;
+                break;
+            case "ZwemvijverBoekenberg":
+                minValue = locationInfoScript.minValueZwemvijverboekenberg;
+                break;
+            case "Vlaeykensgang":
+                minValue = locationInfoScript.minValueVlaeykensgang;
+                break;
+            case "DeRuien":
+                minValue = locationInfoScript.minValueDeruien;
+                break;
+            case "Kammenstraat":
+                minValue = locationInfoScript.minValueKammenstraat;
+                break;
+            case "ErfgoedBibliotheek":
+                minValue = locationInfoScript.minValueErfgoedbibliotheek;
+                break;
+            case "ChinaTown":
+                minValue = locationInfoScript.minValueChinatown;
+                break;
         }
-        
     }
 
 

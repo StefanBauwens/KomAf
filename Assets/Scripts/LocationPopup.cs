@@ -10,6 +10,7 @@ public class LocationPopup : MonoBehaviour {
     public Text locationNameText;
     public Text coinsCollectedText;
     public Text maxCoins;
+    public Text minValue;
     private CanvasGroup locationPopupCanvas;
     private Button resumeButton;
     private SceneController sceneConScript;

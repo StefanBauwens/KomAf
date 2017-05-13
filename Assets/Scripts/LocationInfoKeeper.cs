@@ -20,4 +20,12 @@ public class LocationInfoKeeper : MonoBehaviour {
     public int maxCoinsErfgoedbibliotheek;
     public int maxCoinsDeruien;
     public int maxCoinsChinatown;
+
+    public int minValueSintannastrand;
+    public int minValueZwemvijverboekenberg;
+    public int minValueVlaeykensgang;
+    public int minValueKammenstraat;
+    public int minValueErfgoedbibliotheek;
+    public int minValueDeruien;
+    public int minValueChinatown;
 }
