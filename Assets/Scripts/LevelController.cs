@@ -43,7 +43,7 @@ public class LevelController : MonoBehaviour {
 
     public void CheckLevelUnlocked()
     {
-        for (int i = 1; i < levels.Length; i++) // index = 1 --> MAS always unlocked
+        for (int i = 1; i < levels.Length; i++) // index = 1 --> Sint-Annastrand always unlocked
         {      
 			if (PlayerPrefs.GetString ("locked/unlocked" + levels [i].ToString (), "locked") == "unlocked") {
 				levels [i].levelUnlocked = true;

@@ -8,11 +8,11 @@ public class LevelPoint : StopPoint {
 
     public enum CurrentLevel
     {
-		SintAnnastrand, ZwemvijverBoekenberg, Vlaeykensgang, DeRuien, Kammenstraat, ErfgoedBibliotheek, ChinaTown
+		SintAnnastrand, Boekenbergpark, Vlaeykensgang, DeRuien, Kammenstraat, Erfgoedbibliotheek, Chinatown
     };
     public enum NextLevel
     {
-		SintAnnastrand, ZwemvijverBoekenberg, Vlaeykensgang, DeRuien, Kammenstraat, ErfgoedBibliotheek, ChinaTown
+		SintAnnastrand, Boekenbergpark, Vlaeykensgang, DeRuien, Kammenstraat, Erfgoedbibliotheek, Chinatown
     };
     public CurrentLevel currentLevel;
     public NextLevel nextLevel;
@@ -45,8 +45,8 @@ public class LevelPoint : StopPoint {
             case "SintAnnastrand":
                 maxCoins = locationInfoScript.maxCoinsSintannastrand;
                 break;
-            case "ZwemvijverBoekenberg":
-                maxCoins = locationInfoScript.maxCoinsZwemvijverboekenberg;
+            case "Boekenbergpark":
+                maxCoins = locationInfoScript.maxCoinsBoekenbergpark;
                 break;
             case "Vlaeykensgang":
                 maxCoins = locationInfoScript.maxCoinsVlaeykensgang;
@@ -57,10 +57,10 @@ public class LevelPoint : StopPoint {
             case "Kammenstraat":
                 maxCoins = locationInfoScript.maxCoinsKammenstraat;
                 break;
-            case "ErfgoedBibliotheek":
+            case "Erfgoedbibliotheek":
                 maxCoins = locationInfoScript.maxCoinsErfgoedbibliotheek;
                 break;
-            case "ChinaTown":
+            case "Chinatown":
                 maxCoins = locationInfoScript.maxCoinsChinatown;
                 break;
         }   
@@ -73,8 +73,8 @@ public class LevelPoint : StopPoint {
             case "SintAnnastrand":
                 minValue = locationInfoScript.minValueSintannastrand;
                 break;
-            case "ZwemvijverBoekenberg":
-                minValue = locationInfoScript.minValueZwemvijverboekenberg;
+            case "Boekenbergpark":
+                minValue = locationInfoScript.minValueBoekenbergpark;
                 break;
             case "Vlaeykensgang":
                 minValue = locationInfoScript.minValueVlaeykensgang;
@@ -85,10 +85,10 @@ public class LevelPoint : StopPoint {
             case "Kammenstraat":
                 minValue = locationInfoScript.minValueKammenstraat;
                 break;
-            case "ErfgoedBibliotheek":
+            case "Erfgoedbibliotheek":
                 minValue = locationInfoScript.minValueErfgoedbibliotheek;
                 break;
-            case "ChinaTown":
+            case "Chinatown":
                 minValue = locationInfoScript.minValueChinatown;
                 break;
         }

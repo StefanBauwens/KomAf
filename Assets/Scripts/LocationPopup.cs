@@ -33,29 +33,29 @@ public class LocationPopup : MonoBehaviour {
         {
             locationInfoText.text = locationInfoScript.sintannastrandText.text;
         }
-        else if(gmScript.pageCount >= 1 && locationName == "ZwemvijverBoekenberg")
+        else if(gmScript.pageCount >= 1 && locationName == "Erfgoedbibliotheek")
         {
-            locationInfoText.text = locationInfoScript.zwemvijverboekenbergText.text;
+            locationInfoText.text = locationInfoScript.erfgoedbibliotheekText.text;
         }
-        else if (gmScript.pageCount >= 2 && locationName == "Vlaeykensgang")
+        else if (gmScript.pageCount >= 2 && locationName == "Kammenstraat")
+        {
+            locationInfoText.text = locationInfoScript.kammenstraatText.text;
+        }
+        else if(gmScript.pageCount >= 3 && locationName == "Vlaeykensgang")
         {
             locationInfoText.text = locationInfoScript.vlaeykensgangText.text;
-        }
-        else if(gmScript.pageCount >= 3 && locationName == "ChinaTown")
-        {
-            locationInfoText.text = locationInfoScript.chinatownText.text;
         }
         else if (gmScript.pageCount >= 4 && locationName == "DeRuien")
         {
             locationInfoText.text = locationInfoScript.deruienText.text;
         }
-        else if (gmScript.pageCount >= 5 && locationName == "ErfgoedBibliotheek")
+        else if (gmScript.pageCount >= 5 && locationName == "Chinatown")
         {
-            locationInfoText.text = locationInfoScript.erfgoedbibliotheekText.text;
+            locationInfoText.text = locationInfoScript.chinatownText.text;
         }
-        else if (gmScript.pageCount >= 6 && locationName == "Kammenstraat")
+        else if (gmScript.pageCount >= 6 && locationName == "Boekenbergpark")
         {
-            locationInfoText.text = locationInfoScript.kammenstraatText.text;
+            locationInfoText.text = locationInfoScript.boekenbergparkText.text;
         }
         else
         {
