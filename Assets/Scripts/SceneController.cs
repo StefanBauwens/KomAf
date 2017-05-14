@@ -69,11 +69,11 @@ public class SceneController : MonoBehaviour {
     {
         audSource.PlayOneShot(buttonSound, settingsScript.volumeSE);
         locationPopupScript.locationName = locationName;
-        locationPopupScript.locationNameText.text = locationName;
-        locationPopupScript.CheckLocationInfo();
+        locationPopupScript.CheckLocationInfoText();
         locationPopupScript.coinsCollectedText.text = gmScript.GetCoinsCollectedInLevel(locationName).ToString();
         locationPopupScript.maxCoins.text = maxCoins.ToString();
         locationPopupScript.minValue.text = minValue.ToString();
+        locationPopupScript.locationNameText.text = locationPopupScript.ChangeLocationName(locationName);
         SetLocationPopupCanvasVisible(true);  
     }
 

@@ -6,26 +6,26 @@ using UnityEngine.UI;
 public class LocationInfoKeeper : MonoBehaviour {
 
     public TextAsset sintannastrandText;
-    public TextAsset zwemvijverboekenbergText;
-    public TextAsset vlaeykensgangText;
-    public TextAsset kammenstraatText;
     public TextAsset erfgoedbibliotheekText;
-    public TextAsset deruienText;
     public TextAsset chinatownText;
+    public TextAsset kammenstraatText;
+    public TextAsset vlaeykensgangText;
+    public TextAsset deruienText;
+    public TextAsset boekenbergparkText;
 
     public int maxCoinsSintannastrand;
-    public int maxCoinsZwemvijverboekenberg;
-    public int maxCoinsVlaeykensgang;
-    public int maxCoinsKammenstraat;
     public int maxCoinsErfgoedbibliotheek;
-    public int maxCoinsDeruien;
     public int maxCoinsChinatown;
+    public int maxCoinsKammenstraat;
+    public int maxCoinsVlaeykensgang;
+    public int maxCoinsDeruien;
+    public int maxCoinsBoekenbergpark;
 
     public int minValueSintannastrand;
-    public int minValueZwemvijverboekenberg;
-    public int minValueVlaeykensgang;
-    public int minValueKammenstraat;
     public int minValueErfgoedbibliotheek;
-    public int minValueDeruien;
     public int minValueChinatown;
+    public int minValueKammenstraat;  
+    public int minValueVlaeykensgang;
+    public int minValueDeruien;
+    public int minValueBoekenbergpark;
 }
