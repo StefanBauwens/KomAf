@@ -27,7 +27,7 @@ public class LocationPopup : MonoBehaviour {
         locationPopupCanvas = GetComponentInParent<CanvasGroup>();
     }
 
-    public void CheckLocationInfo()
+    public void CheckLocationInfoText()
     {
         if(locationName == "SintAnnastrand")
         {
@@ -60,6 +60,22 @@ public class LocationPopup : MonoBehaviour {
         else
         {
             locationInfoText.text = "Pagina van GATE15 brochure nog niet gevonden.";
+        }
+    }
+
+    public string ChangeLocationName(string locationName)
+    {
+        if (locationName == "SintAnnastrand")
+        {
+            return "Sint-Annastrand";
+        }
+        else if (locationName == "DeRuien")
+        {
+            return "De Ruien";
+        }
+        else
+        {
+            return locationName;
         }
     }
 

@@ -8,11 +8,11 @@ public class LevelPoint : StopPoint {
 
     public enum CurrentLevel
     {
-		SintAnnastrand, Boekenbergpark, Vlaeykensgang, DeRuien, Kammenstraat, Erfgoedbibliotheek, Chinatown
+		SintAnnastrand, Erfgoedbibliotheek, Chinatown, Kammenstraat, Vlaeykensgang, DeRuien, Boekenbergpark
     };
     public enum NextLevel
     {
-		SintAnnastrand, Boekenbergpark, Vlaeykensgang, DeRuien, Kammenstraat, Erfgoedbibliotheek, Chinatown
+        SintAnnastrand, Erfgoedbibliotheek, Chinatown, Kammenstraat, Vlaeykensgang, DeRuien, Boekenbergpark
     };
     public CurrentLevel currentLevel;
     public NextLevel nextLevel;
@@ -33,77 +33,42 @@ public class LevelPoint : StopPoint {
     //call this from stefan's script when navigator has reached this level instead of using a button
     public void HasClickedOnLevel()
     {
-        CheckMaxCoinsLevel();
-        CheckMinValue();
+        CheckLevelInfo();
         sceneConScript.OpenLocationPopup(gameObject.name, maxCoins, minValue);
     }
 
-    protected void CheckMaxCoinsLevel()
+    protected void CheckLevelInfo()
     {
         switch(gameObject.name)
         {
             case "SintAnnastrand":
                 maxCoins = locationInfoScript.maxCoinsSintannastrand;
-                break;
-            case "Boekenbergpark":
-                maxCoins = locationInfoScript.maxCoinsBoekenbergpark;
-                break;
-            case "Vlaeykensgang":
-                maxCoins = locationInfoScript.maxCoinsVlaeykensgang;
-                break;
-            case "DeRuien":
-                maxCoins = locationInfoScript.maxCoinsDeruien;
-                break;
-            case "Kammenstraat":
-                maxCoins = locationInfoScript.maxCoinsKammenstraat;
+                minValue = locationInfoScript.minValueSintannastrand;
                 break;
             case "Erfgoedbibliotheek":
                 maxCoins = locationInfoScript.maxCoinsErfgoedbibliotheek;
-                break;
-            case "Chinatown":
-                maxCoins = locationInfoScript.maxCoinsChinatown;
-                break;
-        }   
-    }
-
-    protected void CheckMinValue()
-    {
-        switch (gameObject.name)
-        {
-            case "SintAnnastrand":
-                minValue = locationInfoScript.minValueSintannastrand;
-                break;
-            case "Boekenbergpark":
-                minValue = locationInfoScript.minValueBoekenbergpark;
-                break;
-            case "Vlaeykensgang":
-                minValue = locationInfoScript.minValueVlaeykensgang;
-                break;
-            case "DeRuien":
-                minValue = locationInfoScript.minValueDeruien;
-                break;
-            case "Kammenstraat":
-                minValue = locationInfoScript.minValueKammenstraat;
-                break;
-            case "Erfgoedbibliotheek":
                 minValue = locationInfoScript.minValueErfgoedbibliotheek;
                 break;
             case "Chinatown":
+                maxCoins = locationInfoScript.maxCoinsChinatown;
                 minValue = locationInfoScript.minValueChinatown;
                 break;
-        }
+            case "Kammenstraat":
+                maxCoins = locationInfoScript.maxCoinsKammenstraat;
+                minValue = locationInfoScript.minValueKammenstraat;
+                break;
+            case "Vlaeykensgang":
+                maxCoins = locationInfoScript.maxCoinsVlaeykensgang;
+                minValue = locationInfoScript.minValueVlaeykensgang;
+                break;
+            case "DeRuien":
+                maxCoins = locationInfoScript.maxCoinsDeruien;
+                minValue = locationInfoScript.minValueDeruien;
+                break; 
+            case "Boekenbergpark":
+                maxCoins = locationInfoScript.maxCoinsBoekenbergpark;
+                minValue = locationInfoScript.minValueBoekenbergpark;
+                break;
+        }   
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
