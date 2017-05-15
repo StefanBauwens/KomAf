@@ -26,15 +26,19 @@ public class GPSLocator : MonoBehaviour {
 	public Vector2[] LevelsLatLong; //Array Levels and this array should be same long
 	public float kmToleranceToLevel = 0.05f; //50 meter
 
+
+	//public Button continueBtn;
+
 	//public Text debugger;
 
 	// Use this for initialization
 	public void Start () {
 		//Instance = this;
 		//DontDestroyOnLoad (this.transform.parent.gameObject);
-		StartCoroutine (StartLocationService ());
+		//StartCoroutine (StartLocationService ());
 		isBusy = true;
 		Time.timeScale = 1; //this is what caused the problem!!
+		//continueBtn.onClick.AddListener(OpenCloseGPSPopup);
 	}
 
 	void Update () {
@@ -46,6 +50,7 @@ public class GPSLocator : MonoBehaviour {
         
 		//Iterate over the latitudes & longitudes to see if player is in the neighborhood of the location
 		for (int i = 0; i < LevelsLatLong.Length; i++) {
+			Debug.Log (getDistanceFromLatLonInKm (LevelsLatLong [i].x, LevelsLatLong [i].y, latitude, longitude));
 			if (getDistanceFromLatLonInKm(LevelsLatLong[i].x, LevelsLatLong[i].y, latitude, longitude) <= kmToleranceToLevel) {
 				if (PlayerPrefs.GetInt(Levels [i] + "_secret", 0)==0) { //this makes that it only shows the message the first time.
                     //gpsText.text = Levels [i] + " secret unlocked!"; 
@@ -113,6 +118,7 @@ public class GPSLocator : MonoBehaviour {
 
     public void OpenCloseGPSPopup()
     {
+		gpsPopupCanvas.GetComponent<CanvasGroup> ().blocksRaycasts = !gpsPopupCanvas.GetComponent<CanvasGroup> ().blocksRaycasts;
         gpsPopupCanvas.GetComponent<EasyTween>().OpenCloseObjectAnimation();
     }
 
