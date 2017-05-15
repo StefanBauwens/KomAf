@@ -15,19 +15,11 @@ public class Boots : Powerup {
     public AudioClip jumpHigherSound;
     protected Settings settingsScript;
 
-	protected bool restart;
-
-	protected IEnumerator routine;
-
 	public Circle timer;
-	//protected Coroutine lastRoutine;
 
 	// Use this for initialization
 	void Start () {
-		routine = JumpHigher ();
-		restart = false;
-		//lastRoutine = null;
-		//newJumpHeight = 11f;
+
         renderer = GetComponent<Renderer>();
         collider = GetComponent<Collider2D>();
 		playerScript = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -41,7 +33,6 @@ public class Boots : Powerup {
 		if (timer == null) {
 			timer = GameObject.FindGameObjectWithTag ("Counter").GetComponentInChildren<Circle>();
 		}
-
 	}
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -49,18 +40,18 @@ public class Boots : Powerup {
         renderer.enabled = false; // object not visible for camera
         collider.enabled = false; // --> player can't interact with object
 		timer.StartTimer();
-		//StopAllCoroutines ();
-		StopCoroutine(routine);
-		StartCoroutine(routine);
+		StopCoroutine("JumpHigher");
+		StartCoroutine("JumpHigher");
 
 		audSource.PlayOneShot(jumpHigherSound, settingsScript.volumeSE);
     }
 
     IEnumerator JumpHigher()
     {
-		restart = false;
-        playerScript.jumpHeight = newJumpHeight;
-        yield return new WaitForSeconds(extraJumpTime);
+		for (int i = 0; i < extraJumpTime; i++) {
+        	playerScript.jumpHeight = newJumpHeight;
+			yield return new WaitForSeconds(1);
+		}
 
 		playerScript.jumpHeight = oldJumpHeight;
 		renderer.enabled = true;
