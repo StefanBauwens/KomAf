@@ -395,9 +395,15 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< Updated upstream
     m_Target: {x: 25.067179, y: 4.133299, z: 0}
     speed: 2
     m_Value: {x: 25.067179, y: 4.133299, z: 0}
+=======
+    m_Target: {x: 139.99733, y: 244.79347, z: 0}
+    speed: 2
+    m_Value: {x: 139.99733, y: 244.79347, z: 0}
+>>>>>>> Stashed changes
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -424,9 +430,15 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
+<<<<<<< Updated upstream
     m_Target: 23.393229
     speed: 2
     m_Value: 23.393229
+=======
+    m_Target: 2.990514
+    speed: 2
+    m_Value: 2.990514
+>>>>>>> Stashed changes
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -491,7 +503,11 @@ MonoBehaviour:
     height: 710
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< Updated upstream
     m_SelectedIDs: 2e260000
+=======
+    m_SelectedIDs: 4e260000
+>>>>>>> Stashed changes
     m_LastClickedID: 0
     m_ExpandedIDs: 2469ffffa087ffff9092ffffbea4ffff16dfffff90f3ffffdefbffff00000000
     m_RenameOverlay:
@@ -645,7 +661,11 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
+<<<<<<< Updated upstream
     m_ScrollPosition: {x: 0, y: 1740}
+=======
+    m_ScrollPosition: {x: 0, y: 747.5}
+>>>>>>> Stashed changes
     m_GridSize: 62
   m_DirectoriesAreaWidth: 110
 --- !u!114 &18
