@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class TileMapper : MonoBehaviour {
 	public GameObject[] gameObjects;
 	public string[] hexColours;
+	public int[] zValues;
 	public Texture2D Map;
 	public Texture2D SecretMap;
 
@@ -14,6 +15,7 @@ public class TileMapper : MonoBehaviour {
 	protected Color[] colorArray;
     protected GameMaster gmScript;
     protected string level;
+	protected int zValue;
 
 
 	// Use this for initialization
@@ -33,7 +35,7 @@ public class TileMapper : MonoBehaviour {
 		for (int i = 0; i < hexColours.Length; i++) {
 			ColorUtility.TryParseHtmlString ("#"+hexColours[i], out realColours[i]); //convert hex to colour
 		}
-			
+
 		colorArray = Map.GetPixels(); //faster than getpixel
 		for (int height = 0; height < Map.height; height++) { //draws the map
 			for (int width = 0; width < Map.width; width++) {
@@ -42,13 +44,14 @@ public class TileMapper : MonoBehaviour {
 				for (int i = 0; i < realColours.Length; i++) { //check every colour
 					if (colorArray [width + (height * Map.width)] == realColours[i]) {
 						tempObject = gameObjects[i];
+						zValue = zValues [i];
 						break;
 					}
 				}
 
 				if (tempObject != null)
                 { 
-                    GameObject newInstant = Instantiate(tempObject, new Vector2(width, height), Quaternion.identity);
+					GameObject newInstant = Instantiate(tempObject, new Vector3(width, height, zValue), Quaternion.identity);
                     newInstant.name = tempObject.name;
 
                     if (newInstant.name == "coin")
