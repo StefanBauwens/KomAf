@@ -7,8 +7,10 @@ public class TileMapper : MonoBehaviour {
 	public GameObject[] gameObjects;
 	public string[] hexColours;
 	public int[] zValues;
+	public GameObject[] backgroundObjects;
 	public Texture2D Map;
 	public Texture2D SecretMap;
+
 
     protected Color[] realColours;
 	protected GameObject tempObject;
@@ -16,6 +18,7 @@ public class TileMapper : MonoBehaviour {
     protected GameMaster gmScript;
     protected string level;
 	protected int zValue;
+	protected GameObject backgroundObject;
 
 
 	// Use this for initialization
@@ -45,12 +48,20 @@ public class TileMapper : MonoBehaviour {
 					if (colorArray [width + (height * Map.width)] == realColours[i]) {
 						tempObject = gameObjects[i];
 						zValue = zValues [i];
+						if (zValue != 0) {
+							backgroundObject = backgroundObjects [i];
+						}
 						break;
 					}
 				}
 
 				if (tempObject != null)
                 { 
+					if (zValue != 0) { // so if it's probably a landmark
+						GameObject newInstant2 = Instantiate(backgroundObject, new Vector3(width, height, 0), Quaternion.identity);
+						newInstant2.name = backgroundObject.name;
+					}
+
 					GameObject newInstant = Instantiate(tempObject, new Vector3(width, height, zValue), Quaternion.identity);
                     newInstant.name = tempObject.name;
 
