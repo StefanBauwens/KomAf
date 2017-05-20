@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: ef60003d6b75244ab9bca5ca9cf8781c
-timeCreated: 1489765907
+guid: 81331e729a57e4008a20710c7277c87c
+timeCreated: 1495293611
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
-  fontSize: 14
+  fontSize: 9
   forceTextureCase: -1
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Antwerpen
+  fontName: SunAntwerpen
   fontNames:
-  - Antwerpen
+  - SunAntwerpen
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 2
