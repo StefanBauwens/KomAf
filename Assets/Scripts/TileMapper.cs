@@ -31,6 +31,10 @@ public class TileMapper : MonoBehaviour {
 			GameObject bgObject = Instantiate(background, new Vector3(-0.5f,-0.5f,2), Quaternion.identity);
 			bgObject.name = background.name;
 		}
+		if (foreGround != null ) {
+			GameObject fgObject = Instantiate(foreGround, new Vector3(-0.5f,-0.5f,-2), Quaternion.identity);
+			fgObject.name = foreGround.name;
+		}
 
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
         if((SceneManager.GetActiveScene().name) != "AntwerpMap2") //hardcoded
