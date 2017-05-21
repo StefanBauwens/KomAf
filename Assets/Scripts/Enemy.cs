@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour {
 	protected Rigidbody2D rb;
 
 	public float moveSpeed = 2;
-	protected float waitForDeathPopupSeconds = 0.3f;
+	protected float waitForDeathPopupSeconds = 0.5f;
 	protected int collisionCount = 0;
 
 	public bool isGrounded;
