@@ -362,7 +362,6 @@ public class Navigator : MonoBehaviour {
 				targetPosition = new Vector3 (targetPosition.x+addTox, targetPosition.y+addToy, targetPosition.z);
 				isMoving = false;
 				direction = navigatorDirection.idle;
-				//Debug.Log ("this happensdsdsd");
 			}
 		}
 	}

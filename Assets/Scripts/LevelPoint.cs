@@ -8,11 +8,11 @@ public class LevelPoint : StopPoint {
 
     public enum CurrentLevel
     {
-		SintAnnastrand, Erfgoedbibliotheek, Chinatown, Kammenstraat, Vlaeykensgang, DeRuien, Boekenbergpark
+		SintAnnastrand, Erfgoedbibliotheek, Chinatown, Kammenstraat, Vlaeykensgang, DeRuien, Boekenbergpark, ufoplace
     };
     public enum NextLevel
     {
-        SintAnnastrand, Erfgoedbibliotheek, Chinatown, Kammenstraat, Vlaeykensgang, DeRuien, Boekenbergpark
+        SintAnnastrand, Erfgoedbibliotheek, Chinatown, Kammenstraat, Vlaeykensgang, DeRuien, Boekenbergpark, ufoplace
     };
     public CurrentLevel currentLevel;
     public NextLevel nextLevel;
@@ -33,8 +33,13 @@ public class LevelPoint : StopPoint {
     //call this from stefan's script when navigator has reached this level instead of using a button
     public void HasClickedOnLevel()
     {
-        CheckLevelInfo();
-        sceneConScript.OpenLocationPopup(gameObject.name, maxCoins, minValue);
+		if (this.currentLevel != CurrentLevel.ufoplace) {
+			CheckLevelInfo ();
+			sceneConScript.OpenLocationPopup (gameObject.name, maxCoins, minValue);
+		} else {
+			//DISPLAY WIN POPUP You have found your ufo bla bla
+		}
+        
     }
 
     protected void CheckLevelInfo()
