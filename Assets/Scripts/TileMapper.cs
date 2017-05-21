@@ -11,6 +11,9 @@ public class TileMapper : MonoBehaviour {
 	public Texture2D Map;
 	public Texture2D SecretMap;
 
+	public GameObject background;
+	public GameObject foreGround;
+
 
     protected Color[] realColours;
 	protected GameObject tempObject;
@@ -18,11 +21,17 @@ public class TileMapper : MonoBehaviour {
     protected GameMaster gmScript;
     protected string level;
 	protected int zValue;
-	protected GameObject backgroundObject;
+	protected GameObject backgroundObject; //for antwermap
+
 
 
 	// Use this for initialization
 	void Start () {
+		if (background != null ) {
+			GameObject bgObject = Instantiate(background, new Vector3(-0.5f,-0.5f,2), Quaternion.identity);
+			bgObject.name = background.name;
+		}
+
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
         if((SceneManager.GetActiveScene().name) != "AntwerpMap2") //hardcoded
         {
