@@ -18,14 +18,23 @@ public class LevelPoint : StopPoint {
     public NextLevel nextLevel;
     public bool levelUnlocked;
     public int maxCoins;
+	public bool winPoint = false;
+
+	protected GameObject winCanvas;
+
     protected int minValue;
     private Button levelButton;
     private SceneController sceneConScript;
     protected LocationInfoKeeper locationInfoScript;
+
     
 
 	// Use this for initialization
 	void Start () {
+		if (winPoint) {
+			winCanvas = GameObject.FindGameObjectWithTag ("winCanvas");
+		}
+
         sceneConScript = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
         locationInfoScript = GameObject.FindGameObjectWithTag("LocationInfoKeeper").GetComponent<LocationInfoKeeper>();
     }
@@ -38,6 +47,9 @@ public class LevelPoint : StopPoint {
 			sceneConScript.OpenLocationPopup (gameObject.name, maxCoins, minValue);
 		} else {
 			//DISPLAY WIN POPUP You have found your ufo bla bla
+			winCanvas.GetComponent<CanvasGroup>().interactable = true;
+			winCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
+			winCanvas.GetComponent<CanvasGroup> ().alpha = 1f;
 		}
         
     }

@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/ChinaTown.unity
+=======
+- path: Assets/Scenes/AntwerpMap2.unity
+>>>>>>> 77b8e4826379e07de195e4348fdc76beafee2f26
   isLoaded: 1
   isActive: 1
