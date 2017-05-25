@@ -59,6 +59,11 @@ public class GameMaster : MonoBehaviour {
         winCoinText.text = coinsCollectedInLevel.ToString();
     }
 
+    public void UpdatePauseMenuCoinText(Text pauseMenu)
+    {
+        pauseMenu.text = coinsCollectedInLevel.ToString();
+    }
+
     public void SaveCoins(string level)
     {
         PlayerPrefs.SetInt("coinsCollectedInLevel"+ level, coinsCollectedInLevel);

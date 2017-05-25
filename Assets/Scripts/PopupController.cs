@@ -17,6 +17,7 @@ public class PopupController : MonoBehaviour {
     private AudioClip gameOverSound;
     private AudioClip winSound;
     protected Settings settingsScript;
+    public Text pauseMenuCoinsText;
 
     void Start()
     {
@@ -84,6 +85,7 @@ public class PopupController : MonoBehaviour {
         audSource.PlayOneShot(buttonSound, settingsScript.volumeSE);
         playerScript.isPaused = true;
         Time.timeScale = 0;
+        gmScript.UpdatePauseMenuCoinText(pauseMenuCoinsText);
         SetPopupVisible(pauseCanvas, true);
     }
 

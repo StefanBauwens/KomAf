@@ -11,7 +11,7 @@ public class ShopList : MonoBehaviour {
     public List<string> itemsBought;
     public string currentItem;
 	public int currentValue; //value of current item
-    public Text totalCoinsShop;
+    //public Text totalCoinsShop;
     public int testCoins;
     private GameMaster gmScript;
     private int nrOfItems;
@@ -19,6 +19,8 @@ public class ShopList : MonoBehaviour {
 	protected bool hasRun;
     public GATE15 gate15Script;
     public Settings settingsScript;
+    public Sprite buttonLongDisabled;
+    public Sprite buttonLongEnabled;
 
     public AudioSource audSource;
     public AudioClip buySound;
@@ -51,7 +53,7 @@ public class ShopList : MonoBehaviour {
 	public void SetupShop()
     {
         //totalCoinsShop.text = testCoins.ToString();   
-        totalCoinsShop.text = GameMaster.totalCoins.ToString();
+        //totalCoinsShop.text = GameMaster.totalCoins.ToString();
 
         for (int i = 0; i < nrOfItems; i++)
         {
@@ -94,7 +96,7 @@ public class ShopList : MonoBehaviour {
         {
             itemArray[j].CheckItemState();
         }
-        totalCoinsShop.text = GameMaster.totalCoins.ToString();
+        //totalCoinsShop.text = GameMaster.totalCoins.ToString();
         totalCoinsText.text = GameMaster.totalCoins.ToString();
         //totalCoinsShop.text = testCoins.ToString();
     }
