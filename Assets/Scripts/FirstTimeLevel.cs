@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FirstTimeLevel : MonoBehaviour {
 
-    public CanvasGroup firstTimeLevel;
+    protected CanvasGroup firstTimeLevel;
 
     public AudioSource audSource;
     protected Settings settingsScript;
@@ -13,6 +13,7 @@ public class FirstTimeLevel : MonoBehaviour {
     // Use this for initialization
     void Start () {
         settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
+        firstTimeLevel = this.GetComponent<CanvasGroup>();
     }
 
     public void OpenFirstTimeLevel()
