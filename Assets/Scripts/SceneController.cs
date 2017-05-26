@@ -16,7 +16,7 @@ public class SceneController : MonoBehaviour {
     protected string tempLevel;
     CanvasGroup locationPopupCanvas;
     LevelKeeper levelKeeper;
-    private bool tempLevelFinished;
+    protected bool tempLevelFinished;
     public string AntwerpMap;
     protected PopupController popupScript;
     protected Settings settingsScript;
@@ -34,6 +34,7 @@ public class SceneController : MonoBehaviour {
         }
         
         audSource = GetComponent<AudioSource>();
+        
     }
 
     public void RestartLevel()
@@ -100,6 +101,7 @@ public class SceneController : MonoBehaviour {
         {
             settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
             popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
+
             gmScript.GetGameObjectsFromScene();
             gmScript.SetCoinsCollectedInLevel();
 
