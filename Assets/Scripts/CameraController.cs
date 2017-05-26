@@ -16,9 +16,11 @@ public class CameraController : MonoBehaviour {
 
 	public float speedCamera = 0.03f;
 	protected float speedBackToNormal = 1f;
+	protected float cameraHeight;
 
     // Use this for initialization
     void Start () {
+		cameraHeight = 3f;
         playerScript = player.GetComponent<Player>();
     }
 
@@ -26,7 +28,7 @@ public class CameraController : MonoBehaviour {
     {
         
         float posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x + addToX, ref velocity.x, smoothTimeX);
-        float posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y + addToY, ref velocity.y, smoothTimeY);
+		float posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y + addToY + cameraHeight, ref velocity.y, smoothTimeY);
 
         transform.position = new Vector3(posX, posY, -11);
 
