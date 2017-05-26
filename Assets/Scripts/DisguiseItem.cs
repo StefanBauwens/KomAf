@@ -28,10 +28,13 @@ public class DisguiseItem : MonoBehaviour {
     public int itemPrice;
     public int itemValue;
 
+    protected Color appelBlauw;
+
 	//protected bool hasRun;
 
 	// Use this for initialization
 	void Start () {
+        ColorUtility.TryParseHtmlString("#148a93", out appelBlauw);
         shopScript = GetComponentInParent<ShopList>();
         buyButton = buyButtonObject.GetComponent<Button>();
         selectButton = selectButtonObject.GetComponent<Button>();
@@ -66,13 +69,20 @@ public class DisguiseItem : MonoBehaviour {
 
     public void CheckItemBought()
     {
-        if(itemBought)
+        Text bButtonText = buyButton.GetComponentInChildren<Text>();
+        if (itemBought)
         {
-            buyButton.GetComponentInChildren<Text>().text = "Gekocht";
+            
+            bButtonText.text = "Gekocht";
+            bButtonText.color = Color.white;
+            buyButton.image.sprite = shopScript.buttonLongDisabled;
         }
         else
         {
-            buyButton.GetComponentInChildren<Text>().text = "Kopen";
+            bButtonText.text = "Kopen";
+            //bButtonText.color = appelBlauw;
+            bButtonText.color = appelBlauw;
+            buyButton.image.sprite = shopScript.buttonLongEnabled;
         }
         
         CheckBuyButtonInteractable();
@@ -80,24 +90,31 @@ public class DisguiseItem : MonoBehaviour {
 
     public void CheckItemSelected()
     {
-        if(itemBought && this.ToString() != shopScript.currentItem)
+        Text sButtonText = selectButton.GetComponentInChildren<Text>();
+        if (itemBought && this.ToString() != shopScript.currentItem)
         {
-            selectButton.GetComponentInChildren<Text>().text = "Selecteren";
+            sButtonText.text = "Selecteren";
             selectImage.sprite = deselectSprite;
+            sButtonText.color = appelBlauw;
+            selectButton.image.sprite = shopScript.buttonLongEnabled;
             selectButton.interactable = true;
             itemSelected = false;
         }
         else if (this.ToString() == shopScript.currentItem)
         {
-            selectButton.GetComponentInChildren<Text>().text = "Geselecteerd";
+            sButtonText.text = "Geselecteerd";
             selectImage.sprite = selectSprite;
             selectButton.interactable = false;
+            sButtonText.color = Color.white;
+            selectButton.image.sprite = shopScript.buttonLongDisabled;
             itemSelected = true;
         }
         else
         {
-            selectButton.GetComponentInChildren<Text>().text = "Niet in bezit";
+            sButtonText.text = "Niet in bezit";
+            sButtonText.color = Color.white;
             selectImage.sprite = deselectSprite;
+            selectButton.image.sprite = shopScript.buttonLongDisabled;
             selectButton.interactable = false;
         }
     }
