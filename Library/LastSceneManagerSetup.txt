@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Vlaeykensgang.unity
-=======
 - path: Assets/Scenes/ChinaTown.unity
->>>>>>> 37da47f50e5590cdc7c158dba2389be8f4640255
   isLoaded: 1
   isActive: 1
