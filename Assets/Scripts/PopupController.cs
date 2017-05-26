@@ -112,4 +112,19 @@ public class PopupController : MonoBehaviour {
             popup.blocksRaycasts = false;
         }
     }
+
+    public void OpenFirstTimeLevel(CanvasGroup ftLevel)
+    {
+        playerScript.isPaused = true;
+        Time.timeScale = 0;
+        SetPopupVisible(ftLevel, true);
+    }
+
+    public void CloseFirstTimeLevel(CanvasGroup ftLevel)
+    {
+        audSource.PlayOneShot(buttonSound, settingsScript.volumeSE);
+        SetPopupVisible(ftLevel, false);
+        Time.timeScale = 1;
+        playerScript.isPaused = false;
+    }
 }

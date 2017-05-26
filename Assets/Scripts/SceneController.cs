@@ -20,7 +20,6 @@ public class SceneController : MonoBehaviour {
     public string AntwerpMap;
     protected PopupController popupScript;
     protected Settings settingsScript;
-    protected FirstTimeLevel ftLevelScript;
 
     void Awake()
     {
@@ -65,16 +64,6 @@ public class SceneController : MonoBehaviour {
         audSource.PlayOneShot(buttonSound, settingsScript.volumeSE);
         SetLocationPopupCanvasVisible(false);
         SceneManager.LoadScene(sceneName);
-
-        //if (sceneName == "SintAnnastrand")
-        //{
-        //    ftLevelScript = GameObject.FindGameObjectWithTag("FirstTimeLevel").GetComponent<FirstTimeLevel>();
-        //    if (ftLevelScript)
-        //    {
-        //        Debug.Log("beneden");
-        //    }
-        //    ftLevelScript.OpenFirstTimeLevel();
-        //}
     }
 
     public void OpenLocationPopup(string locationName, int maxCoins, int minValue)
@@ -112,15 +101,6 @@ public class SceneController : MonoBehaviour {
         {
             settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
             popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
-            if (activeScene.name == "SintAnnastrand")
-            {
-                ftLevelScript = GameObject.FindGameObjectWithTag("FirstTimeLevel").GetComponent<FirstTimeLevel>();
-                if (ftLevelScript)
-                {
-                    Debug.Log("found script");
-                }
-                ftLevelScript.OpenFirstTimeLevel();
-            }
 
             gmScript.GetGameObjectsFromScene();
             gmScript.SetCoinsCollectedInLevel();

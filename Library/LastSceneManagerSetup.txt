@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/AntwerpMap2.unity
-=======
-- path: Assets/Scenes/SintAnnastrand.unity
->>>>>>> c4ca72fdaf1d5853854898ec888adb2e0a5c1af5
   isLoaded: 1
   isActive: 1
