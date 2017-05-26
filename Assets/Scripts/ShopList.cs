@@ -19,6 +19,7 @@ public class ShopList : MonoBehaviour {
 	protected bool hasRun;
     public GATE15 gate15Script;
     public Settings settingsScript;
+    public FirstTimeController ftConScript;
     public Sprite buttonLongDisabled;
     public Sprite buttonLongEnabled;
 
@@ -33,6 +34,7 @@ public class ShopList : MonoBehaviour {
         
         gmScript = GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
         settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
+        ftConScript = GameObject.FindGameObjectWithTag("FirstTimeController").GetComponent<FirstTimeController>();
         audSource = GetComponent<AudioSource>();
         nrOfItems = gmScript.nrOfItems;
         itemArray = new DisguiseItem[nrOfItems];
@@ -122,6 +124,7 @@ public class ShopList : MonoBehaviour {
 
     public void OpenShop()
     {
+        ftConScript.OpenShopPanelCanvas();
         settingsScript.PlayButtonSound(audSource);
         gate15Script.ExitGate15();
         shopCanvasGroup.alpha = 1;

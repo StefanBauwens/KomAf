@@ -50,7 +50,7 @@ public class GPSLocator : MonoBehaviour {
         
 		//Iterate over the latitudes & longitudes to see if player is in the neighborhood of the location
 		for (int i = 0; i < LevelsLatLong.Length; i++) {
-			Debug.Log (getDistanceFromLatLonInKm (LevelsLatLong [i].x, LevelsLatLong [i].y, latitude, longitude));
+			//Debug.Log (getDistanceFromLatLonInKm (LevelsLatLong [i].x, LevelsLatLong [i].y, latitude, longitude));
 			if (getDistanceFromLatLonInKm(LevelsLatLong[i].x, LevelsLatLong[i].y, latitude, longitude) <= kmToleranceToLevel) {
 				if (PlayerPrefs.GetInt(Levels [i] + "_secret", 0)==0) { //this makes that it only shows the message the first time.
                     //gpsText.text = Levels [i] + " secret unlocked!"; 
