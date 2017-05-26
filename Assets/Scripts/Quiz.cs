@@ -127,7 +127,7 @@ public class Quiz : MonoBehaviour {
     protected IEnumerator AnswerRight()
     {
 		isBusyReplying = true;
-		string [] temp = {"Correct"}; //deliberatly didn't choose "you may pass now, in case it asks again another question
+		string [] temp = {"Inderdaad"}; //deliberatly didn't choose "you may pass now, in case it asks again another question
 		StartCoroutine (TypeSentence (temp));
 		while (isBusy) {
 			yield return new WaitForSeconds(1);
@@ -147,7 +147,7 @@ public class Quiz : MonoBehaviour {
     protected IEnumerator AnswerWrong()
     {
 		isBusyReplying = true;
-		string [] temp = {"That's too suspicious, you are the alien!"};
+		string [] temp = {"Dat klopt niet! Jij bent de alien!"};
 		StartCoroutine (TypeSentence (temp));
 		while (isBusy) { //this waits for the popup to be done speaking
 			yield return new WaitForSeconds(1);
