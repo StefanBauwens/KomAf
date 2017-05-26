@@ -9,7 +9,6 @@ public class FirstTimeController : MonoBehaviour {
     public CanvasGroup firstTimeCanvas;
     public CanvasGroup firstTimeGate15;
     public CanvasGroup firstTimeLocationPopup;
-    public CanvasGroup firstTimeLevel;
     public CanvasGroup shopPanelCanvas;
     public CanvasGroup pricePanelCanvas;
     public CanvasGroup valuePanelCanvas;
@@ -82,14 +81,19 @@ public class FirstTimeController : MonoBehaviour {
         CloseCanvas(valuePanelCanvas);
     }
 
-    public void OpenFirstTimeLevel()
-    {
-        if(GetOpenedCanvas(firstTimeLevel.ToString()) == "notOpened")
-        {
-            OpenCanvas(firstTimeLevel);
-            SaveOpenedCanvas(firstTimeLevel);
-        }
-    }
+    //public void OpenFirstTimeLevel()
+    //{
+    //    if(GetOpenedCanvas(firstTimeLevel.ToString()) == "notOpened")
+    //    {
+    //        OpenCanvas(firstTimeLevel);
+    //        SaveOpenedCanvas(firstTimeLevel);
+    //    }
+    //}
+
+    //public void CloseFirstTimeLevel()
+    //{
+    //    CloseCanvas(firstTimeLevel);
+    //}
 
     void SaveOpenedCanvas(CanvasGroup canvasName)
     {
