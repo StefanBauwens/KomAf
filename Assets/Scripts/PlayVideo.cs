@@ -6,7 +6,7 @@ public class PlayVideo : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Handheld.PlayFullScreenMovie ("test.mp4", Color.black, FullScreenMovieControlMode.CancelOnInput);
+		Handheld.PlayFullScreenMovie ("test.mp4", Color.black, FullScreenMovieControlMode.Full); //FullScreenMovieControlMode.CancelOnInput);
 	}
 	
 	// Update is called once per frame
