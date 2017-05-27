@@ -10,6 +10,7 @@ public class PopupController : MonoBehaviour {
 	public CanvasGroup gameOverCanvasDeath;
     public CanvasGroup winCanvas;
     public CanvasGroup pauseCanvas;
+    public MusicController musicConScript;
     private GameMaster gmScript;
     private AudioSource audSource;
     public AudioClip[] sounds;
@@ -18,6 +19,7 @@ public class PopupController : MonoBehaviour {
     private AudioClip winSound;
     protected Settings settingsScript;
     public Text pauseMenuCoinsText;
+    bool winSoundPlaying;
 
     void Start()
     {
@@ -43,6 +45,7 @@ public class PopupController : MonoBehaviour {
 
     public void WinPopup()
     {
+        musicConScript.StopBackgroundMusic();
         if (audSource)
         {
             audSource.PlayOneShot(winSound, settingsScript.volumeSE);
