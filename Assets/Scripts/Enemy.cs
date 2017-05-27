@@ -12,13 +12,16 @@ public class Enemy : MonoBehaviour {
 	public float moveSpeed = 2;
 	protected float waitForDeathPopupSeconds = 0.5f;
 	protected int collisionCount = 0;
+	protected int noEnemies; //used to disable enemies being harmful
 
 	public bool isGrounded;
+
 
     protected PopupController popupScript;
 
 	// Use this for initialization
 	void Start () {
+		noEnemies = PlayerPrefs.GetInt ("noEnemies", 0);
 		isWalkingRight = true;
 		//anim = gameObject.GetComponent<Animator> ();
 		rb 	 = gameObject.GetComponent<Rigidbody2D> ();
@@ -37,7 +40,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject.name == "Player") {
+		if (coll.gameObject.name == "Player" && noEnemies == 0) { 
 			//wait a second
 			StartCoroutine(ShowDeathScreen());
 		}

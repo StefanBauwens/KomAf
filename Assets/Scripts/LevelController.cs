@@ -83,6 +83,13 @@ public class LevelController : MonoBehaviour {
         }
     }
 
+	public void UnlockAllLevels()
+	{
+		for (int i = 0; i < levels.Length; i++) {
+			UnlockNextLevel (levels [i].nextLevel);
+		}
+	}
+
     public void MakeLevelButtonInteractable(LevelPoint level)
     {
 		if (level.GetComponent<Image> () != null) {
