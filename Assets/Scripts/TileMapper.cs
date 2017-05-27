@@ -98,7 +98,7 @@ public class TileMapper : MonoBehaviour {
                 else
                 {
 					if (colorArray [width + (height * Map.width)] != new Color(1f,1f,1f)) {
-						Debug.Log (colorArray [width + (height * Map.width)]);
+						//Debug.Log (colorArray [width + (height * Map.width)]);
 
 					}
 			    }

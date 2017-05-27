@@ -27,6 +27,7 @@ public class FirstTimeController : MonoBehaviour {
     {
         if(GetOpenedCanvas(firstTimeCanvas.ToString()) == "notOpened")
         {
+			Handheld.PlayFullScreenMovie ("intro.mp4", Color.black, FullScreenMovieControlMode.Full); 
             OpenCanvas(firstTimeCanvas);
             SaveOpenedCanvas(firstTimeCanvas);
         }

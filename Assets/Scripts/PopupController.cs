@@ -10,6 +10,7 @@ public class PopupController : MonoBehaviour {
 	public CanvasGroup gameOverCanvasDeath;
     public CanvasGroup winCanvas;
     public CanvasGroup pauseCanvas;
+    public MusicController musicConScript;
     private GameMaster gmScript;
     private AudioSource audSource;
     public AudioClip[] sounds;
@@ -18,6 +19,7 @@ public class PopupController : MonoBehaviour {
     private AudioClip winSound;
     protected Settings settingsScript;
     public Text pauseMenuCoinsText;
+    bool winSoundPlaying;
 
     void Start()
     {
@@ -43,6 +45,7 @@ public class PopupController : MonoBehaviour {
 
     public void WinPopup()
     {
+        musicConScript.StopBackgroundMusic();
         if (audSource)
         {
             audSource.PlayOneShot(winSound, settingsScript.volumeSE);
@@ -111,5 +114,20 @@ public class PopupController : MonoBehaviour {
             popup.interactable = false;
             popup.blocksRaycasts = false;
         }
+    }
+
+    public void OpenFirstTimeLevel(CanvasGroup ftLevel)
+    {
+        playerScript.isPaused = true;
+        Time.timeScale = 0;
+        SetPopupVisible(ftLevel, true);
+    }
+
+    public void CloseFirstTimeLevel(CanvasGroup ftLevel)
+    {
+        audSource.PlayOneShot(buttonSound, settingsScript.volumeSE);
+        SetPopupVisible(ftLevel, false);
+        Time.timeScale = 1;
+        playerScript.isPaused = false;
     }
 }
