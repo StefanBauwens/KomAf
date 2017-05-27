@@ -16,6 +16,7 @@ public class Settings : MonoBehaviour {
     public AudioClip buttonSound;
     public CanvasGroup infoCanvas;
     protected AudioSource audSource;
+	protected Navigator playerMap;
 
     public Image imageSE;
     public Image imageM;
@@ -40,6 +41,7 @@ public class Settings : MonoBehaviour {
 
     private void Start()
     {
+		playerMap = GameObject.FindGameObjectWithTag ("navigator").GetComponent<Navigator> ();
         audSource = GetComponent<AudioSource>();     
         volumeSE = 0.5f;
         volumeM = 0.5f;
@@ -63,6 +65,7 @@ public class Settings : MonoBehaviour {
 
     public void OpenSettings()
     {
+		playerMap.popupsOpen = true;
         PlayButtonSound(audSource);
         settingsCanvasGroup.alpha = 1;
         settingsCanvasGroup.interactable = true;
@@ -71,6 +74,7 @@ public class Settings : MonoBehaviour {
 
     public void CloseSettings()
     {
+		playerMap.popupsOpen = false;
         PlayButtonSound(audSource);
         settingsCanvasGroup.alpha = 0;
         settingsCanvasGroup.interactable = false;
@@ -84,6 +88,7 @@ public class Settings : MonoBehaviour {
 
     public void OpenInfoCanvas()
     {
+		playerMap.popupsOpen = true;
         PlayButtonSound(audSource);
         infoCanvas.alpha = 1;
         infoCanvas.interactable = true;
@@ -92,6 +97,7 @@ public class Settings : MonoBehaviour {
 
     public void CloseInfoCanvas()
     {
+		playerMap.popupsOpen = false;
         PlayButtonSound(audSource);
         infoCanvas.alpha = 0;
         infoCanvas.interactable = false;

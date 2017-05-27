@@ -46,8 +46,11 @@ public class Navigator : MonoBehaviour {
 	public LevelPoint[] levels;
 	protected bool reverseDirection;
 
+	public bool popupsOpen;
+
 	// Use this for initialization
 	void Start () {
+		popupsOpen = false;
 		directionsToGo = new List<navigatorDirection> ();
 		path		   = new List<navigatorDirection> ();
 		pathLocations  = new List<Vector3> ();
@@ -80,7 +83,7 @@ public class Navigator : MonoBehaviour {
 		while (levels.Length==0) {
 			levels = FindObjectsOfType(typeof(LevelPoint)) as LevelPoint[];
 		}
-		if (Input.touchCount>0) {
+		if (Input.touchCount>0 && !popupsOpen) {
 			Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			hit = Physics2D.Raycast(pos, Vector2.zero);
 			if (hit != null && hit.collider != null && direction==navigatorDirection.idle && path.Count==0) {

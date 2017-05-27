@@ -15,9 +15,11 @@ public class FirstTimeController : MonoBehaviour {
 
     public AudioSource audSource;
     protected Settings settingsScript;
+	protected Navigator playerMap;
 
 	// Use this for initialization
 	void Start () {
+		playerMap = GameObject.FindGameObjectWithTag ("navigator").GetComponent<Navigator> ();
         settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
         OpenFirstTimeCanvas();
     }
@@ -109,6 +111,7 @@ public class FirstTimeController : MonoBehaviour {
 
     void OpenCanvas(CanvasGroup openCanvas)
     {
+		playerMap.popupsOpen = true;
         settingsScript.PlayButtonSound(audSource);
         openCanvas.alpha = 1;
         openCanvas.interactable = true;
@@ -117,6 +120,7 @@ public class FirstTimeController : MonoBehaviour {
 
     void CloseCanvas(CanvasGroup closeCanvas)
     {
+		playerMap.popupsOpen = false;
         settingsScript.PlayButtonSound(audSource);
         closeCanvas.alpha = 0;
         closeCanvas.interactable = false;
