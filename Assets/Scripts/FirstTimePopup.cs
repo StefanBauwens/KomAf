@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FirstTimePopup : MonoBehaviour {
 
+	//THIS SCRIPT IS OBSOLETE
+
 	public Button closeBtn;
     public CanvasGroup firstTimeCanvas;
 	// Use this for initialization

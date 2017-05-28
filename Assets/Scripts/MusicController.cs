@@ -26,16 +26,13 @@ public class MusicController : MonoBehaviour {
 
     void PlayBackgroundMusic()
     {
-        Debug.Log(SceneManager.GetActiveScene().name);
         if(SceneManager.GetActiveScene().name == antwerpMap)
         {
-            Debug.Log("play antwerpmap");
             audSource.clip = musicAntwerpmap;
             audSource.Play();
         }
         else
         {
-            Debug.Log("play level");
             audSource.clip = musicLevel;
             audSource.Play();
         }

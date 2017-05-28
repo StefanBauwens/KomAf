@@ -58,6 +58,20 @@ public class SceneController : MonoBehaviour {
 		SceneManager.LoadScene(AntwerpMap); 
     }
 
+	public void unlockAllLevelsAndRefresh()
+	{
+		//make enemies not harmful:
+		if (PlayerPrefs.GetInt ("noEnemies", 0) == 0 ) {
+			PlayerPrefs.SetInt ("noEnemies", 1);
+			PlayerPrefs.Save ();
+			levelConScript.UnlockAllLevels ();
+		} else {
+			PlayerPrefs.DeleteAll ();
+		}
+
+		RestartLevel ();
+	}
+
 
     public void LoadLevelByName(string sceneName)
     {

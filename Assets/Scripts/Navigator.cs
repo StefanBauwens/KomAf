@@ -46,8 +46,11 @@ public class Navigator : MonoBehaviour {
 	public LevelPoint[] levels;
 	protected bool reverseDirection;
 
+	public bool popupsOpen;
+
 	// Use this for initialization
 	void Start () {
+		popupsOpen = false;
 		directionsToGo = new List<navigatorDirection> ();
 		path		   = new List<navigatorDirection> ();
 		pathLocations  = new List<Vector3> ();
@@ -59,7 +62,7 @@ public class Navigator : MonoBehaviour {
 		colorArray = worldMap.Map.GetPixels ();
 		direction  = navigatorDirection.idle;
 		isMoving   = false;
-		this.gameObject.transform.position = new Vector3 (PlayerPrefs.GetInt ("xCoord", 49), PlayerPrefs.GetInt ("yCoord", 41), -1);
+		this.gameObject.transform.position = new Vector3 (PlayerPrefs.GetInt ("xCoordinate", 49), PlayerPrefs.GetInt ("yCoordinate", 41), -1);
 
 		x = (int)this.gameObject.transform.position.x;
 		y = (int)this.gameObject.transform.position.y;
@@ -80,7 +83,7 @@ public class Navigator : MonoBehaviour {
 		while (levels.Length==0) {
 			levels = FindObjectsOfType(typeof(LevelPoint)) as LevelPoint[];
 		}
-		if (Input.touchCount>0) {
+		if (Input.touchCount>0 && !popupsOpen) {
 			Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			hit = Physics2D.Raycast(pos, Vector2.zero);
 			if (hit != null && hit.collider != null && direction==navigatorDirection.idle && path.Count==0) {
@@ -349,8 +352,8 @@ public class Navigator : MonoBehaviour {
 			if (hit.collider.gameObject.GetComponent<LevelPoint>() != null && hit.collider.gameObject.GetComponent<LevelPoint>().levelUnlocked) { 
 				hit.collider.gameObject.GetComponent<LevelPoint> ().HasClickedOnLevel (); //similiar to the effect of pressing a level button
 			}
-			PlayerPrefs.SetInt ("xCoord", x);
-			PlayerPrefs.SetInt ("yCoord", y);
+			PlayerPrefs.SetInt ("xCoordinate", x);
+			PlayerPrefs.SetInt ("yCoordinate", y);
 		}
 
 	}

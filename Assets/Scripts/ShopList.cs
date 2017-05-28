@@ -27,11 +27,13 @@ public class ShopList : MonoBehaviour {
     public AudioClip buySound;
     public AudioClip selectSound;
 
+	protected Navigator playerMap;
+
 
 
     // Use this for initialization
     void Start () {
-        
+		playerMap = GameObject.FindGameObjectWithTag ("navigator").GetComponent<Navigator> ();
         gmScript = GameObject.FindWithTag("GameMaster").GetComponent<GameMaster>();
         settingsScript = GameObject.FindGameObjectWithTag("SettingsCanvas").GetComponent<Settings>();
         ftConScript = GameObject.FindGameObjectWithTag("FirstTimeController").GetComponent<FirstTimeController>();
@@ -105,6 +107,7 @@ public class ShopList : MonoBehaviour {
 
     public void ExitShop()
     {
+		playerMap.popupsOpen = false;
         settingsScript.PlayButtonSound(audSource);
         gmScript.SaveCurrentDisguise(currentItem); 
 		gmScript.SaveCurrentDisguiseValue (currentValue);
@@ -124,9 +127,11 @@ public class ShopList : MonoBehaviour {
 
     public void OpenShop()
     {
+		playerMap.popupsOpen = true;
         ftConScript.OpenShopPanelCanvas();
         settingsScript.PlayButtonSound(audSource);
         gate15Script.ExitGate15();
+		playerMap.popupsOpen = true;
         shopCanvasGroup.alpha = 1;
         shopCanvasGroup.interactable = true;
         shopCanvasGroup.blocksRaycasts = true; 
