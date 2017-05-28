@@ -127,7 +127,7 @@ public class Quiz : MonoBehaviour {
     protected IEnumerator AnswerRight()
     {
 		isBusyReplying = true;
-		string [] temp = {"Inderdaad"}; //deliberatly didn't choose "you may pass now, in case it asks again another question
+		string [] temp = {"Dat klopt!"}; //deliberatly didn't choose "you may pass now, in case it asks again another question
 		StartCoroutine (TypeSentence (temp));
 		while (isBusy) {
 			yield return new WaitForSeconds(1);
