@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boots : Powerup {
+public class Boots : MonoBehaviour {
 
     Player playerScript;
     public float newJumpHeight = 11f;

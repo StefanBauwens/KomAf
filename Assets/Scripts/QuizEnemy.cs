@@ -28,8 +28,6 @@ public class QuizEnemy : MonoBehaviour {
 			player.GetComponent<Player> ().isSinglePaused = true;
 			mCamera.GetComponent<CameraController> ().speedCamera = 0;
 			quiz.SetActive(true);
-			//GameObject quiz = Instantiate (quizPrefab);
-			//quiz.transform.SetParent(loadCanvas.transform,false);
 		}
 	}
 }

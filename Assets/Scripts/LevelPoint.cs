@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LevelPoint : StopPoint {
+public class LevelPoint : MonoBehaviour {
 
     public enum CurrentLevel
     {
@@ -46,7 +46,6 @@ public class LevelPoint : StopPoint {
 			CheckLevelInfo ();
 			sceneConScript.OpenLocationPopup (gameObject.name, maxCoins, minValue);
 		} else {
-			//DISPLAY WIN POPUP You have found your ufo bla bla
 			winCanvas.GetComponent<CanvasGroup>().interactable = true;
 			winCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
 			winCanvas.GetComponent<CanvasGroup> ().alpha = 1f;

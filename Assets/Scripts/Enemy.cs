@@ -5,8 +5,7 @@ using System.Threading;
 
 public class Enemy : MonoBehaviour {
 
-	//protected Animator anim;
-	public bool isWalkingRight; //change back to protected after debugging!
+	public bool isWalkingRight;
 	protected Rigidbody2D rb;
 
 	public float moveSpeed = 2;
@@ -23,7 +22,6 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 		noEnemies = PlayerPrefs.GetInt ("noEnemies", 0);
 		isWalkingRight = true;
-		//anim = gameObject.GetComponent<Animator> ();
 		rb 	 = gameObject.GetComponent<Rigidbody2D> ();
         popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
 		isGrounded = true;
@@ -44,9 +42,6 @@ public class Enemy : MonoBehaviour {
 			//wait a second
 			StartCoroutine(ShowDeathScreen());
 		}
-		/*if (coll.gameObject.name =="Enemy") {
-			Reverse();
-		}*/
 	}
 
 	public void Reverse()

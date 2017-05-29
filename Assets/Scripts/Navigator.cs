@@ -17,7 +17,7 @@ public class Navigator : MonoBehaviour {
 
 	public TileMapper worldMap;
 
-	protected int x, y, xx, yy;// prevxx, prevyy;
+	protected int x, y, xx, yy;
 	public navigatorDirection direction;
 	public bool isMoving;
 	protected Color[] colorArray;
@@ -72,9 +72,6 @@ public class Navigator : MonoBehaviour {
 		roadColor  = new Color (1, 0, 0);
 		grassColor = new Color (0, 0, 0);
 		startLevel = false;
-
-		//this might not work if this runs BEFORE the start of tilemapper:
-		//levels = FindObjectsOfType(typeof(LevelPoint)) as LevelPoint[];
 
 		reverseDirection = false;
 	}
@@ -184,20 +181,6 @@ public class Navigator : MonoBehaviour {
 						path.Clear ();
 						pathLocations.Clear ();
 					}
-						
-					//The following removes the navigator from going back and forth: Is no longer neccesary with the code under it, but still fancy
-
-					/*for (int i = 0; i < (path.Count)&&path.Count>1;i++) {
-						if (i==0) {
-							i = 1;
-						}
-						if (path [i] == (navigatorDirection)(((int)path [i - 1] + 2) % 4)) {
-							path.RemoveAt (i - 1);
-							path.RemoveAt (i - 1);
-							i -= 2;
-						}
-					}*/
-
 
 					//The following checks the list of calculated positions and sees if the same position is found twice or more in the list
 					//If so, this means that the player will somewhere be going in circles. So we eliminate all the positions betweeen these

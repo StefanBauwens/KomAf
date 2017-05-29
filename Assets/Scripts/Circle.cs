@@ -10,9 +10,7 @@ public class Circle : MonoBehaviour
 	protected float waitTime;
 
 	protected GameObject player;
-	//protected bool restart; //if restart is true then it meanse player hit another "jumphigher" obect and timer has to start again
 	RectTransform myRectTransform;
-	//myRectTransform.localPosition += Vector3.right;
 
 	void Start()
 	{
@@ -29,8 +27,6 @@ public class Circle : MonoBehaviour
 	void Update()
 	{
 		myRectTransform.localPosition = Camera.main.WorldToScreenPoint (player.transform.position) - new Vector3(Camera.main.pixelWidth/2, Camera.main.pixelHeight/2.5f, 0);
-
-		//this.gameObject.transform.position = player.transform.position;
 	}
 
 	IEnumerator CountDown()
@@ -48,7 +44,6 @@ public class Circle : MonoBehaviour
 	{
 		this.gameObject.GetComponent<Image> ().enabled = true;
 		Timer.fillAmount = 1;
-		//restart = true;
 		StopCoroutine("CountDown");
 		StartCoroutine ("CountDown");
 	}

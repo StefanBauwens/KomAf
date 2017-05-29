@@ -42,14 +42,6 @@ public class DisguiseItem : MonoBehaviour {
         ItemSetup();
     }
 
-	/*void Update()
-	{
-		if (!hasRun) {
-			hasRun = true;
-			ItemSetup ();
-		}
-	}*/
-
     public void ItemSetup()
     {
         disguiseImage.sprite = itemSprite;
@@ -57,8 +49,6 @@ public class DisguiseItem : MonoBehaviour {
         disguiseDescription.text = itemDescription;
         disguisePrice.text = itemPrice.ToString();
         disguiseValue.text = itemValue.ToString();
-        //shopScript.SetupShop(this);
-        //CheckItemState();
     }
 
     public void CheckItemState()
@@ -80,7 +70,6 @@ public class DisguiseItem : MonoBehaviour {
         else
         {
             bButtonText.text = "Kopen";
-            //bButtonText.color = appelBlauw;
             bButtonText.color = appelBlauw;
             buyButton.image.sprite = shopScript.buttonLongEnabled;
         }
@@ -121,8 +110,7 @@ public class DisguiseItem : MonoBehaviour {
 
     public void CheckBuyButtonInteractable()
     {
-        //if (shopScript.testCoins >= itemPrice && !itemBought)
-        if(GameMaster.totalCoins > itemPrice && !itemBought)
+        if(GameMaster.totalCoins >= itemPrice && !itemBought)
         {
             buyButton.interactable = true;
         }
@@ -135,8 +123,7 @@ public class DisguiseItem : MonoBehaviour {
 
     public void BuyItem()
     {
-        //if (!itemBought && shopScript.testCoins >= itemPrice)
-        if(!itemBought && GameMaster.totalCoins > itemPrice)
+        if(!itemBought && GameMaster.totalCoins >= itemPrice)
         {
             shopScript.audSource.PlayOneShot(shopScript.buySound, shopScript.settingsScript.volumeSE);
             //shopScript.testCoins -= itemPrice;

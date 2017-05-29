@@ -67,12 +67,12 @@ public class GameMaster : MonoBehaviour {
     public void SaveCoins(string level)
     {
         PlayerPrefs.SetInt("coinsCollectedInLevel"+ level, coinsCollectedInLevel);
-        Debug.Log(coinsCollectedInLevel + " coins saved in level: " + level);
+        //Debug.Log(coinsCollectedInLevel + " coins saved in level: " + level);
     }
 
     public void UpdateTotalCoins(string level)
     {
-        Debug.Log("coinscollectedinlevel: " + coinsCollectedInLevel + " coins from save file: " + GetCoinsCollectedInLevel(level));
+        //Debug.Log("coinscollectedinlevel: " + coinsCollectedInLevel + " coins from save file: " + GetCoinsCollectedInLevel(level));
         if (coinsCollectedInLevel > GetCoinsCollectedInLevel(level))
         {
             totalCoins -= GetCoinsCollectedInLevel(level);

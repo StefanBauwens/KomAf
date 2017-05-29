@@ -9,11 +9,6 @@ public class Popup : MonoBehaviour {
 	void Start () {
 		thisCanvas = this.gameObject;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void Close()
 	{

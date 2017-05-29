@@ -13,11 +13,6 @@ public class LightChanger : MonoBehaviour {
 		iterator = -1;
 		StartCoroutine (ChangeColor());
 	}
-	
-	// Update is called once per frame
-	void Update () { 
-		
-	}
 
 	protected IEnumerator ChangeColor()
 	{

@@ -97,7 +97,6 @@ public class LevelController : MonoBehaviour {
 		} else {
 			level.GetComponent<SpriteRenderer>().sprite = unlockSprite;
 		}
-        //level.GetComponent<Button>().interactable = true;
     }
 
 	public void MakeLevelNotInteractable(LevelPoint level)

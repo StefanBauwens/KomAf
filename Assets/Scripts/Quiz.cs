@@ -36,9 +36,6 @@ public class Quiz : MonoBehaviour {
 	protected GameMaster gmScript;
 	protected string currentLevel;
 
-
-	//@Stefan maybe add a "repeat the question" option
-
 	// Use this for initialization
 	void Start() {
 		currentLevel = SceneManager.GetActiveScene().name;
@@ -95,9 +92,6 @@ public class Quiz : MonoBehaviour {
 			popupScript = GameObject.FindGameObjectWithTag("PopupController").GetComponent<PopupController>();
 		}
 
-		/*if (Input.GetMouseButtonDown(0) && isBusy) {
-			skipText = true;
-		}*/
 		if (Input.touchCount>0 && isBusy && !isBusyReplying) {
 			skipText = true;
 		}
@@ -108,12 +102,10 @@ public class Quiz : MonoBehaviour {
 	protected void ButtonClick(int nrOfButton)
 	{
 		if ((easy && nrOfButton == correctElementEasy) || (!easy && nrOfButton == correctElementHard)) {
-			//popupText.text = "THAT's CORRECT!!";
 			skipText = false;
             StartCoroutine(AnswerRight());
 
 		} else {
-			//popupText.text = "Wrong...";
 			skipText = false;
             StartCoroutine(AnswerWrong());
 		}	
@@ -127,7 +119,7 @@ public class Quiz : MonoBehaviour {
     protected IEnumerator AnswerRight()
     {
 		isBusyReplying = true;
-		string [] temp = {"Dat klopt!"}; //deliberatly didn't choose "you may pass now, in case it asks again another question
+		string [] temp = {"Dat klopt!"};
 		StartCoroutine (TypeSentence (temp));
 		while (isBusy) {
 			yield return new WaitForSeconds(1);
