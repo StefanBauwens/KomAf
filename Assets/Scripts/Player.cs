@@ -35,7 +35,6 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		isSinglePaused = false;
-		//jumpHeight = 8f;
         Time.timeScale = 1;
         audSource = gameObject.GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -52,7 +51,6 @@ public class Player : MonoBehaviour {
 			isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, groundSprite); // detect if player collides with ground
 			anim.SetBool ("isGrounded", isGrounded);
 
-			CheckIsGrounded ();
 			CheckJump ();
 			CheckAgainstObject ();
 		} else {
@@ -72,15 +70,6 @@ public class Player : MonoBehaviour {
         }  
     }
 
-
-    void CheckIsGrounded()
-    {
-        if (isGrounded)
-        {
-            //doubleJumped = false;
-        }
-    }
-
     void CheckJump()
     {
 		if (!isPaused) {
@@ -89,12 +78,6 @@ public class Player : MonoBehaviour {
 				Jump();
                 audSource.PlayOneShot(jumpSound, settingsScript.volumeSE);
             }
-			/*if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space)) && !isGrounded && !doubleJumped)
-			{
-				Jump();
-                jumpSound.Play();
-                doubleJumped = true;
-			}*/
 		}
     }
 

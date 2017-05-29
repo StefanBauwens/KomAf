@@ -12,8 +12,7 @@ public class EnemyFrontCheck : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D coll) {
-		if (/*coll.name != "Enemy" &&*/ coll.tag == "Obstacle" && timer == 0) {
-			//Debug.Log ("hitting");
+		if (coll.tag == "Obstacle" && timer == 0) {
 			timer = 4;
 			this.transform.parent.gameObject.GetComponent<Enemy>().Reverse ();
 		}

@@ -10,8 +10,6 @@ public class StartScreen : MonoBehaviour {
 	void Update () {
 		if (Input.touches.Length>0) {
 			SceneManager.LoadScene (LevelToLoad);
-			
-			//Debug.Log ("You tapped");
 		}
 	}
 }

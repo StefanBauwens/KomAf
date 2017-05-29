@@ -126,4 +126,9 @@ public class Settings : MonoBehaviour {
         }
     }
 
+	public void OpenWebsite()
+	{
+		Application.OpenURL("https://komaf.thomas.verhelst.mtantwerp.eu/");
+	}
+
 }

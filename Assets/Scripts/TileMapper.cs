@@ -37,7 +37,7 @@ public class TileMapper : MonoBehaviour {
 		}
 
         gmScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
-        if((SceneManager.GetActiveScene().name) != "AntwerpMap2") //hardcoded
+        if((SceneManager.GetActiveScene().name) != "AntwerpMap2")
         {
             level = SceneManager.GetActiveScene().name;
             gmScript.GetCollectedCoinPositions(level);
@@ -95,18 +95,10 @@ public class TileMapper : MonoBehaviour {
                         }
                     }
                 }
-                else
-                {
-					if (colorArray [width + (height * Map.width)] != new Color(1f,1f,1f)) {
-						//Debug.Log (colorArray [width + (height * Map.width)]);
-
-					}
-			    }
-                
 			}
 		}
         // after drawing done
-        if((SceneManager.GetActiveScene().name) != "AntwerpMap2") // hardcoded
+        if((SceneManager.GetActiveScene().name) != "AntwerpMap2")
         {
             gmScript.SetMaxCoins();
         }

@@ -11,7 +11,6 @@ public class ObstacleCheck : MonoBehaviour {
         if (collision.CompareTag("Obstacle") || collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             player.isAgainstObject = true;
-			//Debug.Log ("Isagainst");
         }
     }
 
