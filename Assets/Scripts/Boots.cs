@@ -31,7 +31,7 @@ public class Boots : MonoBehaviour {
 	void Update()
 	{
 		if (timer == null) {
-			timer = GameObject.FindGameObjectWithTag ("Counter").GetComponentInChildren<Circle>();
+			timer = GameObject.FindGameObjectWithTag ("PopupController").GetComponentInChildren<Circle>();
 		}
 	}
 
