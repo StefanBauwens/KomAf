@@ -11,22 +11,22 @@ public class Circle : MonoBehaviour
 
 	protected GameObject player;
 	RectTransform myRectTransform;
+	//protected Vector3 originalRectPos;
 
 	void Start()
 	{
-		//restart = false;
 		waitTime = 0.1f;
 		timeToDelay = waitTime / seconds;
 		player = GameObject.FindGameObjectWithTag ("Player"); //gets the player
 		myRectTransform = GetComponent<RectTransform>();
 		Timer.fillAmount = 0;
 		this.gameObject.GetComponent<Image> ().enabled = false;
-		//StartTimer ();
+		//originalRectPos = myRectTransform.localPosition;
 	}
 
 	void Update()
 	{
-		myRectTransform.localPosition = Camera.main.WorldToScreenPoint (player.transform.position) - new Vector3(Camera.main.pixelWidth/2, Camera.main.pixelHeight/2.5f, 0);
+		myRectTransform.localPosition = Camera.main.WorldToScreenPoint (player.transform.position) - new Vector3(Camera.main.pixelWidth/2, Camera.main.pixelHeight/3f, 0);
 	}
 
 	IEnumerator CountDown()
