@@ -75,6 +75,12 @@ public class GPSLocator : MonoBehaviour {
 		yield break;
 	}
 
+	public void enableFakeLocation()
+	{
+		latitude = LevelsLatLong [0].x;
+		longitude = LevelsLatLong [0].y;
+	}
+
 
 	float getDistanceFromLatLonInKm(float lat1,float lon1,float lat2, float lon2) {
 		int R = 6371; //Radius of the earth in km
