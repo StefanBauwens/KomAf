@@ -62,7 +62,7 @@ public class Navigator : MonoBehaviour {
 		colorArray = worldMap.Map.GetPixels ();
 		direction  = navigatorDirection.idle;
 		isMoving   = false;
-		this.gameObject.transform.position = new Vector3 (PlayerPrefs.GetInt ("xCoordinate", 49), PlayerPrefs.GetInt ("yCoordinate", 41), -1);
+		this.gameObject.transform.position = new Vector3 (PlayerPrefs.GetInt ("xCoordinate", 48), PlayerPrefs.GetInt ("yCoordinate", 49), -1);
 
 		x = (int)this.gameObject.transform.position.x;
 		y = (int)this.gameObject.transform.position.y;

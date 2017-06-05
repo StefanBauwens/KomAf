@@ -14,7 +14,7 @@ public class SceneController : MonoBehaviour {
     LocationPopup locationPopupScript;
     EndOfLevel endOfLevel;
     protected string tempLevel;
-    CanvasGroup locationPopupCanvas;
+    public CanvasGroup locationPopupCanvas;
     LevelKeeper levelKeeper;
     protected bool tempLevelFinished;
     public string AntwerpMap;

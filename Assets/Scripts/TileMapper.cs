@@ -14,6 +14,8 @@ public class TileMapper : MonoBehaviour {
 	public GameObject background;
 	public GameObject foreGround;
 
+    public GameObject shadow;
+
 
     protected Color[] realColours;
 	protected GameObject tempObject;
@@ -77,6 +79,10 @@ public class TileMapper : MonoBehaviour {
 
 					GameObject newInstant = Instantiate(tempObject, new Vector3(width, height, zValue), Quaternion.identity);
                     newInstant.name = tempObject.name;
+                    if (shadow != null && newInstant.name!="coin" && newInstant.name!="Page" && newInstant.name!="jumpHigher" && newInstant.name!="Invisible" && newInstant.name!="watertop" && newInstant.name!="waterblock" && !newInstant.GetComponent<Enemy>()) //lastminute added, sorry for being hardcoded
+                    {
+                        Instantiate(shadow, new Vector3(width, height, 1.5f), Quaternion.identity);
+                    }
 
                     if (newInstant.name == "coin")
                     {

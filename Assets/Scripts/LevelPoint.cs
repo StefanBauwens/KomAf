@@ -44,7 +44,10 @@ public class LevelPoint : MonoBehaviour {
     {
 		if (this.currentLevel != CurrentLevel.ufoplace) {
 			CheckLevelInfo ();
-			sceneConScript.OpenLocationPopup (gameObject.name, maxCoins, minValue);
+            if (!sceneConScript.locationPopupCanvas.interactable)
+            {
+                sceneConScript.OpenLocationPopup(gameObject.name, maxCoins, minValue);
+            }			
 		} else {
 			winCanvas.GetComponent<CanvasGroup>().interactable = true;
 			winCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;

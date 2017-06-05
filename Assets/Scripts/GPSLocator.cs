@@ -77,8 +77,8 @@ public class GPSLocator : MonoBehaviour {
 
 	public void enableFakeLocation()
 	{
-		latitude = LevelsLatLong [0].x;
-		longitude = LevelsLatLong [0].y;
+		latitude = LevelsLatLong [6].x;
+		longitude = LevelsLatLong [6].y;
 	}
 
 
