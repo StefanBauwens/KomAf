@@ -57,6 +57,7 @@ public class PopupController : MonoBehaviour {
 
     public void GameOverPopUp()
     {
+        musicConScript.StopBackgroundMusic();
         if (audSource)
         {
             audSource.PlayOneShot(gameOverSound, settingsScript.volumeSE);
@@ -71,7 +72,8 @@ public class PopupController : MonoBehaviour {
 
 	public void GameOverPopUpDeath() //shows the popup for when the player touches an enemy
 	{
-		if (audSource)
+        musicConScript.StopBackgroundMusic();
+        if (audSource)
 		{
 			audSource.PlayOneShot(gameOverSound, settingsScript.volumeSE);
 		}

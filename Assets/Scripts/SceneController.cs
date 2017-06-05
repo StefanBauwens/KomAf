@@ -55,7 +55,7 @@ public class SceneController : MonoBehaviour {
             // code lines that run before AntwerpMap is loaded completely
             gmScript.GetPageCount();
         }
-		SceneManager.LoadScene(AntwerpMap); 
+        SceneManager.LoadScene(AntwerpMap); 
     }
 
 	public void unlockAllLevelsAndRefresh()

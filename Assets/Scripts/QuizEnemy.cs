@@ -16,7 +16,9 @@ public class QuizEnemy : MonoBehaviour {
 		hasStarted = false;
 		quiz = GameObject.FindGameObjectWithTag ("Quiz"); //gets the quiz
 		quiz.SetActive(false);
-		player = GameObject.FindGameObjectWithTag ("Player"); //gets the player
+        quiz.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+
+        player = GameObject.FindGameObjectWithTag ("Player"); //gets the player
 		mCamera = GameObject.FindGameObjectWithTag("MainCamera"); 
 
 	}

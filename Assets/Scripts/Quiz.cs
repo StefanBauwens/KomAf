@@ -131,7 +131,9 @@ public class Quiz : MonoBehaviour {
 			Start2 ();
 			OnEnable ();
 		} else {
-			popupScript.WinPopup();
+            this.gameObject.transform.parent.gameObject.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+
+            popupScript.WinPopup();
 			sceneConScript.SendCurrentLevel(currentLevel, true);
 		}
     }
@@ -144,7 +146,10 @@ public class Quiz : MonoBehaviour {
 		while (isBusy) { //this waits for the popup to be done speaking
 			yield return new WaitForSeconds(1);
 		}
-		isBusyReplying = false;
+        this.gameObject.transform.parent.gameObject.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+
+
+        isBusyReplying = false;
         popupScript.GameOverPopUpDeath();
     }
 
