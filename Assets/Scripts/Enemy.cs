@@ -38,7 +38,10 @@ public class Enemy : MonoBehaviour {
 			isWalkingRight = !isWalkingRight;
 			transform.Rotate(new Vector3(0,180,0)); //flip the enemy
 		}
-        followSign.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1.7f, -2.5f);
+        if(followSign != null)
+        {
+            followSign.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1.7f, -2.5f);
+        }  
 
     }
 
