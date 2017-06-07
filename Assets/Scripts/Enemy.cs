@@ -64,5 +64,6 @@ public class Enemy : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(waitForDeathPopupSeconds);
 		popupScript.GameOverPopUpDeath ();
+        Destroy(followSign);
 	}
 }
