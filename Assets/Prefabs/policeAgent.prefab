@@ -274,6 +274,8 @@ MonoBehaviour:
   isWalkingRight: 0
   moveSpeed: 1.5
   isGrounded: 0
+  warningSign: {fileID: 1824660138198436, guid: 76249829f8e2d944d88b562bc6a38c17,
+    type: 2}
 --- !u!212 &212939544693696964
 SpriteRenderer:
   m_ObjectHideFlags: 1

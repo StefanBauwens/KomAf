@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour {
 	protected int noEnemies; //used to disable enemies being harmful
 
 	public bool isGrounded;
+    public GameObject warningSign;
+    //public GameObject warningSignBlue;
+    protected GameObject followSign;
 
 
     protected PopupController popupScript;
@@ -35,12 +38,19 @@ public class Enemy : MonoBehaviour {
 			isWalkingRight = !isWalkingRight;
 			transform.Rotate(new Vector3(0,180,0)); //flip the enemy
 		}
-	}
+        followSign.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1.7f, -2.5f);
+
+    }
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject.name == "Player" && noEnemies == 0) { 
-			//wait a second
-			StartCoroutine(ShowDeathScreen());
+		if (coll.gameObject.name == "Player" && noEnemies == 0) {
+            //wait a second
+            if (followSign == null)
+            {
+                followSign = Instantiate(warningSign, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1.7f, -2.5f), Quaternion.identity);
+            }
+
+            StartCoroutine(ShowDeathScreen());
 		}
 	}
 
