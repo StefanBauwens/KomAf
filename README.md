@@ -11,6 +11,8 @@ Therefore we came up with the idea of making the protagonist an alien, so that t
 There are police everywhere looking for him, so he has to go through these special places in Antwerp without being noticed.<br>
 There is also a shop where the alien can buy disguise so that he will be less recognisable.</p>
 <br>
+By Cindy Ho & Stefan Bauwens
+<br>
 <p>Youtube link(no sound): https://www.youtube.com/watch?v=O0CmCkRjF2U</p>
 <a href="https://www.youtube.com/watch?v=O0CmCkRjF2U" target="_blank">
 <img src="https://user-images.githubusercontent.com/22680257/30483301-bff699f6-9a26-11e7-89c9-e565808e2359.png" 
